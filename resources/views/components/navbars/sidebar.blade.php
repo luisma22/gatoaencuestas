@@ -55,8 +55,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white {{ Route::currentRouteName() == 'billing' ? ' active bg-gradient-primary' : '' }}  "
-                    href="{{ route('billing') }}">
+                <a class="nav-link text-white {{ Route::currentRouteName() == 'encuestas' ? ' active bg-gradient-primary' : '' }}  "
+                    href="{{ route('encuestas') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">receipt_long</i>
                     </div>

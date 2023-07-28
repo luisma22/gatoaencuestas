@@ -14,10 +14,10 @@ class EncuestaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('encuestas')->insert([
+        /*DB::table('encuestas')->insert([
             'nombre' => Str::random(10),
             'descripcion' => Str::random(10),
             'habilitado' => 1
-        ]);
+        ]);*/
     }
 }

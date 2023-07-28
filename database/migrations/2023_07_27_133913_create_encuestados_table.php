@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('encuestados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('encuesta_id')->constrained();
             $table->text('respuestas');
+            $table->unsignedBigInteger('encuesta_id');
+            $table->foreign('encuesta_id')->references('id')->on('encuestas');
             $table->timestamps();
         });
     }

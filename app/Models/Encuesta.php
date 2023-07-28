@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\belongsToMany;
 class Encuesta extends Model
 {
     use HasFactory;
-    protected $table = "encuestas";
+
     public function preguntas() {
-        return $this->hasMany(Pregunta::class);
+        return $this->belongsToMany(Pregunta::class);
     }
+    protected $fillable = ['nombre', 'descripcion','habilitado'];
 }

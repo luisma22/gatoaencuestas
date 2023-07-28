@@ -14,11 +14,11 @@ class PreguntaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('preguntas')->insert([
+        /*DB::table('preguntas')->insert([
             'encuesta_id' => 1,
             'pregunta' => Str::random(10),
             'tipo' => 1,
             'opciones' => Str::random(10)
-        ]);
+        ]);*/
     }
 }

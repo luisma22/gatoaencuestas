@@ -54,9 +54,11 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    
     @livewireStyles
 </head>
 <body class="g-sidenav-show {{ Route::currentRouteName() == 'rtl' ? 'rtl' : '' }} {{ Route::currentRouteName() == 'register' || Route::currentRouteName() == 'static-sign-up'  ? '' : 'bg-gray-200' }}">
@@ -68,6 +70,10 @@
 <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="{{ asset('assets') }}/js/plugins/smooth-scrollbar.min.js"></script>
 @stack('js')
+<script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"></script>
 <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -80,8 +86,18 @@
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
+<!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 @livewireScripts
+<script type="text/javascript">
+    window.addEventListener('encuestas', event => {
+        $(".modal-backdrop")[0].remove();
+        $('#exampleModal').modal('hide');
+    });
+    window.addEventListener('hidden.bs.modal', function (event) {
+        $(document.body).attr('style', '');
+    });
+    //$("#dark-version").click();
+</script>
 </body>
 </html>

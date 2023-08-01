@@ -11,11 +11,17 @@ class Encuestas extends Component
     public $descripcion;
     public $editar = false;
     public $encuestaEditable;
+    public $texto_modal = "Crear Encuesta";
+    public $vertodo= false;
     public function mount() {
     }
     public function render()
     {
-        $this->encuestas = Encuesta::orderBy('id', 'desc')->get();
+        if($this->vertodo) {
+            $this->encuestas = Encuesta::orderBy('id', 'desc')->get();
+        } else {
+            $this->encuestas = Encuesta::orderBy('id', 'desc')->where('habilitado', 1)->get();
+        }
         return view('livewire.encuestas');
     }
 
@@ -27,6 +33,7 @@ class Encuestas extends Component
             'habilitado' => 1
         ]);
         $this->limpiar();
+        $this->dispatchBrowserEvent('encuestas'); 
     }
 
     public function limpiar() {
@@ -40,6 +47,7 @@ class Encuestas extends Component
     }
 
     public function editar(Encuesta $encuesta) {
+        $this->texto_modal = "Actualizar Encuesta";
         $this->editar = true;
         $this->encuestaEditable = $encuesta;
         $this->nombre = $encuesta->nombre;
@@ -52,12 +60,13 @@ class Encuestas extends Component
         $this->encuestaEditable->descripcion = $this->descripcion;
         $this->encuestaEditable->save();
         $this->cancelar();
-        //session()->flash('message','Profile successfully updated.');
+        $this->limpiar();
+        $this->dispatchBrowserEvent('encuestas'); 
     }
 
     public function eliminar(Encuesta $encuesta) {
-        $encuesta->delete();
-        $this->limpiar();
+        $encuesta->habilitado = 0;
+        $encuesta->save();
     }
     public function rules()
     { 
@@ -66,5 +75,13 @@ class Encuestas extends Component
             'descripcion' => 'required|min:12'
         ];
     }
-    
+
+    public function ver() {
+        $this->vertodo = !$this->vertodo;
+    }
+
+    public function restaurar(Encuesta $encuesta) {
+        $encuesta->habilitado = 1;
+        $encuesta->save();
+    }
 }

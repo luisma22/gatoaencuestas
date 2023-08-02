@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 ms-3 mt-4">
+                    <div class="col-8 ms-3 mt-4 col-sm-6">
                         <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             <i class="material-icons text-sm">add</i>Nueva Encuesta
                         </button>
@@ -54,7 +54,6 @@
                             <i class="material-icons">restore</i>
                         </button>
                     @endif
-                    
                 </div>
             </div>
         </div>

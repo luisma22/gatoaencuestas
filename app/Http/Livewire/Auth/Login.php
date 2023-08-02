@@ -24,7 +24,7 @@ class Login extends Component
 
     public function mount() {
       
-        $this->fill(['email' => 'admin@material.com', 'password' => 'secret']);    
+        $this->fill(['email' => 'sasdas@gmail.com', 'password' => '12345678']);    
     }
     
     public function store()

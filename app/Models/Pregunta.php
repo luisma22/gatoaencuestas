@@ -12,4 +12,5 @@ class Pregunta extends Model
     public function encuestas() {
         return $this->belongsToMany(Encuesta::class);
     }
+    protected $fillable = ['id', 'pregunta'];
 }

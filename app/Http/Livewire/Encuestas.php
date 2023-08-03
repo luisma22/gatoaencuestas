@@ -115,4 +115,8 @@ class Encuestas extends Component
         );
         $this->preguntas_encuesta = Encuesta::find($this->encuestaEditable->id)->preguntas;
     }
+
+    public function activar() {
+        $this->dispatchBrowserEvent('popover-activar');
+    }
 }

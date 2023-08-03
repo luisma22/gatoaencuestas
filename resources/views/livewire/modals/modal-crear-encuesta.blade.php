@@ -58,10 +58,10 @@
                           $i++;
                         @endphp
                         @endforeach
-                      @endif    
-                      <button type="button" class="btn btn-sm btn-secondary" 
-                        data-bs-trigger="hover click" 
-                        data-bs-toggle="popover" 
+                      @endif
+                      <button type="button" class="btn btn-sm btn-secondary"
+                        data-bs-trigger="hover" 
+                        data-bs-toggle="popover1" 
                         data-bs-html="true" 
                         data-bs-title="PREGUNTA" 
                         data-bs-container="body"

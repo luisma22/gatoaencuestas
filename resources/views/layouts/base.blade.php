@@ -91,10 +91,12 @@
 <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.2.0/dist/livewire-sortable.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript">
+$(document).ready(function() {
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
     })
+
     window.addEventListener('encuestas', event => {
         $(".modal-backdrop")[0].remove();
         $('#exampleModal').modal('hide');
@@ -102,6 +104,14 @@
     window.addEventListener('hidden.bs.modal', function (event) {
         $(document.body).attr('style', '');
     });
+    window.addEventListener('inserted.bs.popover', function (event) {
+        console.log("holas");
+        /*var popoverTriggerList1 = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover1"]'))
+        var popoverList1 = popoverTriggerList1.map(function (popoverTriggerEl1) {
+        return new bootstrap.Popover(popoverTriggerEl1)
+        });*/
+    });
+});
     //$("#dark-version").click();
 </script>
 </body>

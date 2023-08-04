@@ -1,0 +1,127 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use Illuminate\Support\Str;
+use App\Models\Pregunta;
+
+class Preguntas extends Component
+{
+    public $preguntas = [];
+    public $search = '';
+    public $texto_modal = "Crear Pregunta";
+    public $editar = false;
+    public $pregunta = '';
+    public $tipo = 1;
+    public $preguntaEditable;
+    public $vertodo = false;
+    public $preguntas_opciones = ['', '',''];
+    public $todaslaspreguntas = [];
+    public $opciones_id = [];
+
+    public function render()
+    {
+        if($this->vertodo) {
+            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->get();
+        } else {
+            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('habilitado', 1)->get();
+        }
+        $this->dispatchBrowserEvent('popoverremove'); 
+        return view('livewire.preguntas');
+    }
+
+    public function crear() {
+        $this->validate();
+        if ($this->tipo == 1 || $this->tipo == 2) {
+            $this->preguntas_opciones = [];
+        }
+        $pregunta = Pregunta::create([
+            'pregunta' => $this->pregunta,
+            'tipo' => $this->tipo,
+            'habilitado' => 1,
+            'opciones' => json_encode($this->preguntas_opciones)
+        ]);
+        $this->limpiar();
+        $this->dispatchBrowserEvent('preguntas'); 
+    }
+
+    public function limpiar() {
+        $this->preguntas_opciones = ['', '',''];
+        $this->opciones_id= [];
+        $this->pregunta = '';
+        $this->tipo = 1;
+        $this->texto_modal = "Crear Pregunta";
+    }
+
+    public function cancelar() {
+        $this->limpiar();
+        $this->editar = false;
+    }
+
+    public function editar(Pregunta $pregunta) {
+        $this->texto_modal = "Actualizar Pregunta";
+        $this->editar = true;
+        $this->preguntaEditable = $pregunta;
+        $this->pregunta = $pregunta->pregunta;
+        $this->tipo = $pregunta->tipo;
+        $this->preguntas_opciones = json_decode($pregunta->opciones);
+        $this->opciones_id = [];
+    }
+
+    public function actualizar() {
+        $this->validate();
+        $this->preguntaEditable->pregunta = $this->pregunta;
+        $this->preguntaEditable->tipo = $this->tipo;
+        $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones);
+        $this->preguntaEditable->save();
+        $this->cancelar();
+        $this->limpiar();
+        $this->dispatchBrowserEvent('preguntas'); 
+    }
+
+    public function quitar($id) {
+        $this->preguntas_opciones = array_filter($this->preguntas_opciones, function($valor) use ($id) {
+            return $valor != $id;
+        }, ARRAY_FILTER_USE_KEY);
+    }
+
+    public function updateTaskOrder($lists) {
+        $auxiliar_collection = [];
+        foreach($lists as $list) {
+            $id = (int)$list["value"];
+            foreach ($this->preguntas_opciones as $key => $pregunta) {
+                if ($id == $key) {
+                    $auxiliar_collection[] = $pregunta;
+                    break;
+                }
+            }
+        }
+        $this->preguntas_opciones = $auxiliar_collection;
+    }
+
+    public function rules()
+    { 
+        return [
+            'pregunta' => 'required|min:12'
+        ];
+    }
+
+    public function add() {
+        $this->preguntas_opciones[] = "";
+    }
+
+    public function eliminar(Pregunta $pregunta) {
+        $pregunta->habilitado = 0;
+        $pregunta->save();
+    }
+
+    public function restaurar(Pregunta $pregunta) {
+        $pregunta->habilitado = 1;
+        $pregunta->save();
+    }
+
+    public function ver() {
+        $this->vertodo = !$this->vertodo;
+    }
+}

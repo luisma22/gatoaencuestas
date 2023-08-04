@@ -20,7 +20,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.png">
     <title>
-        Material Dashboard 2 by Creative Tim & UPDIVISION
+        Gato Encuestas
     </title>
 
     <!-- Metas -->
@@ -96,20 +96,23 @@ $(document).ready(function() {
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
     })
-
     window.addEventListener('encuestas', event => {
         $(".modal-backdrop")[0].remove();
         $('#exampleModal').modal('hide');
+        $('#verEncuesta').modal('dispose');
+    });
+    window.addEventListener('preguntas', event => {
+        $(".modal-backdrop")[0].remove();
+        $('#exampleModal').modal('hide');
+    });
+    window.addEventListener('popoverremove', event => {
+        popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+        });
     });
     window.addEventListener('hidden.bs.modal', function (event) {
         $(document.body).attr('style', '');
-    });
-    window.addEventListener('inserted.bs.popover', function (event) {
-        console.log("holas");
-        /*var popoverTriggerList1 = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover1"]'))
-        var popoverList1 = popoverTriggerList1.map(function (popoverTriggerEl1) {
-        return new bootstrap.Popover(popoverTriggerEl1)
-        });*/
     });
 });
     //$("#dark-version").click();

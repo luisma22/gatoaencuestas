@@ -1,5 +1,6 @@
 <div class="container-fluid py-4">
     @include('livewire.modals.modal-crear-encuesta')
+    @include('livewire.modals.modal-ver-encuesta')
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -16,7 +17,7 @@
                         </button>
                     </div>
                     <div lass="col-3 ms-3 mt-4">
-                        <div class="form-check form-switch ms-3">
+                        <div class="form-check form-switch ms-3 mt-3 me-4">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
                             <label class="form-check-label" for="flexSwitchCheckChecked">Ver todas las encuestas</label>
                           </div>
@@ -48,6 +49,9 @@
                         </button>
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="eliminar({{ $encuesta }})">
                             <i class="material-icons">delete</i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-link m-0" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
+                            <i class="material-icons">format_list_numbered</i>
                         </button>
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">

@@ -34,6 +34,9 @@
                     <div
                         class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                         <i class="material-icons opacity-10">assignment</i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                           Preguntas {{ $encuesta->preguntas->count() }}
+                        </span>
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">{{ $encuesta->nombre }}</p>

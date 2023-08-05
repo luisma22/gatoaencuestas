@@ -6,7 +6,7 @@
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                     <div class="bg-gradient-dark shadow-dark border-radius-lg pt-4 pb-3">
                         <h6 class="text-white mx-3"><strong>Preguntas</h6>
-                            <span>{{ session('message') }}</span>
+                        <span>{{ session('message') }}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -37,7 +37,20 @@
                 <div class="card-header p-3 pt-2">
                     <div
                         class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                        <i class="material-icons opacity-10">assignment</i>
+                        <i class="material-icons opacity-10">edit_note</i>
+                        @if ($pregunta->tipo == 1)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                Si/No
+                            </span>
+                        @elseif ($pregunta->tipo == 2)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                Llenado
+                            </span>
+                        @else
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
+                                Seleccion {{ count(json_decode($pregunta->opciones)) }}
+                            </span>
+                        @endif
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize">{{ $pregunta->pregunta }}</p>

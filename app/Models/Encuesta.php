@@ -10,7 +10,7 @@ class Encuesta extends Model
     use HasFactory;
 
     public function preguntas() {
-        return $this->belongsToMany(Pregunta::class);
+        return $this->belongsToMany(Pregunta::class)->orderByPivot('id');
     }
     protected $fillable = ['nombre', 'descripcion','habilitado'];
 }

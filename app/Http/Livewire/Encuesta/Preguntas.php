@@ -16,6 +16,7 @@ class Preguntas extends Component
     }
 
     public function add($id) {
+        $this->search = '';
         $this->emit('add', $id);
     }
 }

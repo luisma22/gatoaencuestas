@@ -15,19 +15,28 @@
         </div>
         <div class="modal-body">
             <form>
-                <div class="form-floating">
-                  <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput">
-                  <label class="form-label" for="floatingInput">Nombre</label>
-                    @error('nombre')
-                    <p class='text-danger inputerror'>{{ $message }} </p>
-                    @enderror
+              <div class="row">
+                <div class="col-10">
+                  <div class="form-floating">
+                    <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput" wire:click = "seleccionar('nombre')">
+                    <label class="form-label" for="floatingInput">Nombre</label>
+                      @error('nombre')
+                      <p class='text-danger inputerror'>{{ $message }} </p>
+                      @enderror
+                  </div>
+                  <div class="form-floating mt-1">
+                    <textarea wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
+                      @error('descripcion')
+                      <p class='text-danger inputerror'>{{ $message }} </p>
+                      @enderror
+                  </div>
                 </div>
-                <div class="form-floating mt-1">
-                  <textarea wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" id="floatingText"></textarea>
-                    @error('descripcion')
-                    <p class='text-danger inputerror'>{{ $message }} </p>
-                    @enderror
+                <div class="col-2">
+                  <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz()">
+                    <i class="material-icons text-sm">mic</i>
+                  </button>
                 </div>
+              </div>
             </form>
             <hr>
             <div class="row">

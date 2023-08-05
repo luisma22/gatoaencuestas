@@ -19,7 +19,11 @@ class Preguntas extends Component
     public $preguntas_opciones = ['', '',''];
     public $todaslaspreguntas = [];
     public $opciones_id = [];
-
+    protected $listeners = ["quitar_vox" => "quitar_vox"];
+    public $vozactivada = false;
+    public $estilo_microfono = "-dark";
+    public $seleccionado = "";
+    
     public function render()
     {
         if($this->vertodo) {
@@ -51,7 +55,10 @@ class Preguntas extends Component
         $this->opciones_id= [];
         $this->pregunta = '';
         $this->tipo = 1;
+        $this->dispatchBrowserEvent('voz_disabled');
         $this->texto_modal = "Crear Pregunta";
+        $this->estilo_microfono = "-dark";
+        $this->vozactivada = false;
     }
 
     public function cancelar() {
@@ -123,5 +130,30 @@ class Preguntas extends Component
 
     public function ver() {
         $this->vertodo = !$this->vertodo;
+    }
+
+    public function voz() {
+        if (!$this->vozactivada) {
+            $this->estilo_microfono = "-danger";
+            $this->dispatchBrowserEvent('voz');
+            $this->vozactivada = true;
+        }
+    }
+
+    public function quitar_vox($texto) {
+        $this->estilo_microfono = "-dark";
+        $this->vozactivada = false;
+        if (strpos($this->seleccionado, '.') === false) {
+            $variable = $this->seleccionado;
+            $this->$variable = $texto;
+        } else {
+            $opciones = explode(".", $this->seleccionado);
+            $variable = $opciones[0];
+            $this->$variable[intval($opciones[1])] = $texto;
+        }
+    }
+
+    public function seleccionar($seleccionado) {
+        $this->seleccionado = $seleccionado;
     }
 }

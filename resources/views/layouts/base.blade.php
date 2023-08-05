@@ -114,6 +114,31 @@ $(document).ready(function() {
     window.addEventListener('hidden.bs.modal', function (event) {
         $(document.body).attr('style', '');
     });
+
+    var elemento = "";
+    var recognition = new webkitSpeechRecognition();
+    recognition.continuous = true;
+    recognition.lang = "es";
+    recognition.interimResults = false;
+ 
+    window.addEventListener('voz', function (event) {
+        recognition.start();
+    });
+
+    window.addEventListener('voz_disabled', function (event) {
+        recognition.stop();
+    });
+
+    recognition.onresult = function (event) {
+        finalResult = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+            if (event.results[i].isFinal) {
+                finalResult = event.results[i][0].transcript;
+                window.Livewire.emit('quitar_vox', finalResult);
+                recognition.stop();
+            }
+        }
+    };
 });
     //$("#dark-version").click();
 </script>

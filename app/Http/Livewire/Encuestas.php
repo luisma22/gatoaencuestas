@@ -20,7 +20,10 @@ class Encuestas extends Component
     public $preguntas_id = [];
     public $tipos = [1 => "Si/No", 2 => "Multiple Seleccion", 3 => "Completado"];
     public $encuesta_ver;
-    protected $listeners = ["add" => "add"];
+    protected $listeners = ["add" => "add", "quitar_vox" => "quitar_vox"];
+    public $vozactivada = false;
+    public $estilo_microfono = "-dark";
+    public $seleccionado = "";
     public function mount() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
     }
@@ -58,6 +61,9 @@ class Encuestas extends Component
         $this->nombre = '';
         $this->descripcion = '';
         $this->texto_modal = "Crear Encuesta";
+        $this->dispatchBrowserEvent('voz_disabled');
+        $this->estilo_microfono = "-dark";
+        $this->vozactivada = false;
     }
 
     public function cancelar() {
@@ -176,5 +182,30 @@ class Encuestas extends Component
     public function verEncuesta(Encuesta $encuesta) {
         $this->texto_modal = "Ver Encuesta";
         $this->encuesta_ver = $encuesta;
+    }
+
+    public function voz() {
+        if (!$this->vozactivada) {
+            $this->estilo_microfono = "-danger";
+            $this->dispatchBrowserEvent('voz');
+            $this->vozactivada = true;
+        }
+    }
+
+    public function quitar_vox($texto) {
+        $this->estilo_microfono = "-dark";
+        $this->vozactivada = false;
+        if (strpos($this->seleccionado, '.') === false) {
+            $variable = $this->seleccionado;
+            $this->$variable = $texto;
+        } else {
+            $opciones = explode(".", $this->seleccionado);
+            $variable = $opciones[0];
+            $this->$variable[intval($opciones[1])] = $texto;
+        }
+    }
+
+    public function seleccionar($seleccionado) {
+        $this->seleccionado = $seleccionado;
     }
 }

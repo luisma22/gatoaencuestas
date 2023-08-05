@@ -19,7 +19,8 @@ class PreguntaFactory extends Factory
         return [
             'pregunta' => Str::random(30),
             'tipo' => 1,
-            'opciones' => Str::random(50),
+            'opciones' => json_encode([]),
+            'habilitado' => 1
         ];
     }
 }

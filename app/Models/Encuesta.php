@@ -12,5 +12,5 @@ class Encuesta extends Model
     public function preguntas() {
         return $this->belongsToMany(Pregunta::class)->orderByPivot('id');
     }
-    protected $fillable = ['nombre', 'descripcion','habilitado'];
+    protected $fillable = ['nombre', 'descripcion','habilitado', 'user_id'];
 }

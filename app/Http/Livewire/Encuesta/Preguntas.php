@@ -10,7 +10,7 @@ class Preguntas extends Component
     public $search = '';
     public function render()
     {
-        $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->get();
+        $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->get();
         $this->dispatchBrowserEvent('popoverremove'); 
         return view('livewire.encuesta.preguntas');
     }

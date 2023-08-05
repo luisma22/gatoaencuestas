@@ -30,9 +30,9 @@ class Encuestas extends Component
     public function render()
     {
         if($this->vertodo) {
-            $this->encuestas = Encuesta::orderBy('id', 'desc')->get();
+            $this->encuestas = Encuesta::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->get();
         } else {
-            $this->encuestas = Encuesta::orderBy('id', 'desc')->where('habilitado', 1)->get();
+            $this->encuestas = Encuesta::orderBy('id', 'desc')->where('habilitado', 1)->where('user_id', auth()->user()->id)->get();
         }
 
         return view('livewire.encuestas');
@@ -43,7 +43,8 @@ class Encuestas extends Component
         $encuesta = Encuesta::create([
             'nombre' => $this->nombre,
             'descripcion' => $this->descripcion,
-            'habilitado' => 1
+            'habilitado' => 1,
+            'user_id' => auth()->user()->id
         ]);
         if (count($this->preguntas_id) > 0) {
             $encuesta->preguntas()->attach(

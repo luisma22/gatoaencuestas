@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('pregunta');
             $table->integer('tipo');
             $table->text('opciones');
+            $table->boolean('habilitado');
+            $table->unsignedBigInteger('user_id')->default(1);
             $table->timestamps();
         });
     }

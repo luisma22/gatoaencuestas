@@ -27,9 +27,9 @@ class Preguntas extends Component
     public function render()
     {
         if($this->vertodo) {
-            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->get();
+            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->get();
         } else {
-            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('habilitado', 1)->get();
+            $this->preguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('habilitado', 1)->where('user_id', auth()->user()->id)->get();
         }
         $this->dispatchBrowserEvent('popoverremove'); 
         return view('livewire.preguntas');
@@ -44,7 +44,8 @@ class Preguntas extends Component
             'pregunta' => $this->pregunta,
             'tipo' => $this->tipo,
             'habilitado' => 1,
-            'opciones' => json_encode($this->preguntas_opciones)
+            'opciones' => json_encode($this->preguntas_opciones),
+            'user_id' => auth()->user()->id
         ]);
         $this->limpiar();
         $this->dispatchBrowserEvent('preguntas'); 

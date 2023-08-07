@@ -47,17 +47,20 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer pt-1">
                     @if ($encuesta->habilitado)
-                        <button type="button" class="btn btn-success btn-link m-0" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $encuesta }})" data-original-title="" title="">
+                        <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $encuesta }})" data-original-title="" title="">
                             <i class="material-icons">edit_note</i>
                         </button>
-                        <button type="button" class="btn btn-danger btn-link m-0" wire:click="eliminar({{ $encuesta }})">
+                        <button type="button" class="btn btn-danger btn-link mb-1" wire:click="eliminar({{ $encuesta }})">
                             <i class="material-icons">delete</i>
                         </button>
-                        <button type="button" class="btn btn-info btn-link m-0" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
+                        <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
                             <i class="material-icons">format_list_numbered</i>
                         </button>
-                        <button type="button" class="btn btn-dark btn-link m-0" wire:click="iniciarEncuesta({{ $encuesta }})">
+                        <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
                             <i class="material-icons">rule</i>
+                        </button>
+                        <button type="button" class="btn btn-dark btn-link mb-1">
+                            <i class="material-icons">stacked_bar_chart</i>
                         </button>
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">

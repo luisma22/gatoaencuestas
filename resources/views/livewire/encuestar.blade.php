@@ -1,4 +1,9 @@
 <div class="container-fluid py-4">
+    <div class="text-end">
+        <button type="button" class="btn btn-dark btn-link" wire:click="irAEncuestas()">
+            Volver a Encuestas <i class="material-icons">reply_all</i>
+        </button>
+    </div>
     <div id="carouselExampleCaptions" class="carousel slide h-70" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-indicators">
           @foreach ($todas_las_preguntas as $key => $pregunta)

@@ -72,4 +72,8 @@ class Encuestar extends Component
         $this->llenarEncuestaParametros();
     }
 
+    public function irAEncuestas() {
+        return redirect()->route('encuestas');
+    }
+
 }

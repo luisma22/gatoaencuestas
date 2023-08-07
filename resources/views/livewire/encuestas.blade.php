@@ -56,6 +56,9 @@
                         <button type="button" class="btn btn-info btn-link m-0" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
                             <i class="material-icons">format_list_numbered</i>
                         </button>
+                        <button type="button" class="btn btn-dark btn-link m-0" wire:click="iniciarEncuesta({{ $encuesta }})">
+                            <i class="material-icons">rule</i>
+                        </button>
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">
                             <i class="material-icons">restore</i>

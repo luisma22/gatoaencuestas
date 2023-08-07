@@ -17,9 +17,9 @@
             <form>
               <div class="row">
                 <div class="col-10">
-                  <div class="form-floating">
-                    <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput" wire:click = "seleccionar('nombre')">
-                    <label class="form-label" for="floatingInput">Nombre</label>
+                  <div class="form-floating mb-3">
+                    <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput" wire:click = "seleccionar('nombre')" name="floatingInput">
+                    <label for="floatingInput">Nombre</label>
                       @error('nombre')
                       <p class='text-danger inputerror'>{{ $message }} </p>
                       @enderror

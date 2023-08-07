@@ -209,4 +209,8 @@ class Encuestas extends Component
     public function seleccionar($seleccionado) {
         $this->seleccionado = $seleccionado;
     }
+
+    public function iniciarEncuesta(Encuesta $encuesta) {
+        return redirect()->route('encuestar', [$encuesta]);
+    }
 }

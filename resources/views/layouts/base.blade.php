@@ -139,6 +139,11 @@ $(document).ready(function() {
             }
         }
     };
+    $(".speech").click(function() {
+        var pregunta_id = $(this).attr('data-id');
+        recognition.stop();
+        recognition.start();
+    }) 
 });
     //$("#dark-version").click();
 </script>

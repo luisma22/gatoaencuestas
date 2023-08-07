@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Encuestados extends Model
 {
     use HasFactory;
+    protected $fillable = ['respuestas', 'encuesta_id'];
     public function encuesta() {
         return $this->belongsTo(Encuesta::class);
     }

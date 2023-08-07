@@ -53,7 +53,7 @@ class Encuestas extends Component
         }
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
         $this->limpiar();
-        $this->dispatchBrowserEvent('encuestas'); 
+        $this->dispatchBrowserEvent('encuestas', 'creada'); 
     }
 
     public function limpiar() {
@@ -90,12 +90,13 @@ class Encuestas extends Component
         $this->encuestaEditable->save();
         $this->cancelar();
         $this->limpiar();
-        $this->dispatchBrowserEvent('encuestas'); 
+        $this->dispatchBrowserEvent('encuestas', 'actualizada'); 
     }
 
     public function eliminar(Encuesta $encuesta) {
         $encuesta->habilitado = 0;
         $encuesta->save();
+        $this->dispatchBrowserEvent('eliminar', 'encuesta'); 
     }
     public function rules()
     { 
@@ -112,6 +113,7 @@ class Encuestas extends Component
     public function restaurar(Encuesta $encuesta) {
         $encuesta->habilitado = 1;
         $encuesta->save();
+        $this->dispatchBrowserEvent('restaurar', 'encuesta'); 
     }
 
     public function updateTaskOrder($lists) {

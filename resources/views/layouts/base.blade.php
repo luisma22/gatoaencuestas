@@ -89,6 +89,8 @@
 <script src="{{ asset('assets') }}/js/material-dashboard.min.js?v=3.0.0"></script>
 @livewireScripts
 <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.2.0/dist/livewire-sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript">
 $(document).ready(function() {
@@ -100,11 +102,42 @@ $(document).ready(function() {
         $(".modal-backdrop")[0].remove();
         $('#exampleModal').modal('hide');
         $('#verEncuesta').modal('dispose');
+        Swal.fire({
+            icon: 'success',
+            title: 'La encuesta fue ' + event.detail +  ' exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
     });
     window.addEventListener('preguntas', event => {
         $(".modal-backdrop")[0].remove();
         $('#exampleModal').modal('hide');
+        Swal.fire({
+            icon: 'success',
+            title: 'La pregunta fue ' + event.detail +  ' exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
     });
+
+    window.addEventListener('eliminar', event => {
+        Swal.fire({
+            icon: 'success',
+            title: 'La '+ event.detail +' fue elimninada exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+
+    window.addEventListener('restaurar', event => {
+        Swal.fire({
+            icon: 'success',
+            title: 'La '+ event.detail +' fue restaurada exitosamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
+
     window.addEventListener('popoverremove', event => {
         popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
@@ -115,8 +148,9 @@ $(document).ready(function() {
         $(document.body).attr('style', '');
     });
 
-    var elemento = "";
+    var pregunta_id = -1;
     var recognition = new webkitSpeechRecognition();
+    var boton = 1;
     recognition.continuous = true;
     recognition.lang = "es";
     recognition.interimResults = false;
@@ -129,23 +163,38 @@ $(document).ready(function() {
         recognition.stop();
     });
 
+    window.addEventListener('finalizar_encuesta', function (event) {
+        Swal.fire({
+        icon: 'success',
+        title: 'La encuesta termino exitosamente',
+        showConfirmButton: false,
+        timer: 1500
+        });
+    });
+
     recognition.onresult = function (event) {
         finalResult = '';
         for (var i = event.resultIndex; i < event.results.length; ++i) {
             if (event.results[i].isFinal) {
                 finalResult = event.results[i][0].transcript;
-                window.Livewire.emit('quitar_vox', finalResult);
+                if (pregunta_id != -1) {
+                    $(boton).removeClass("btn-danger").addClass("btn-dark");
+                    $("#textarea"+pregunta_id).val(finalResult);
+                } else {
+                    window.Livewire.emit('quitar_vox', finalResult);
+                }
                 recognition.stop();
             }
         }
     };
     $(".speech").click(function() {
-        var pregunta_id = $(this).attr('data-id');
-        recognition.stop();
+        pregunta_id = parseInt($(this).attr('data-id'));
+        $(this).removeClass("btn-dark").addClass("btn-danger");
+        boton = this;
         recognition.start();
     }) 
 });
-    //$("#dark-version").click();
+
 </script>
 </body>
 </html>

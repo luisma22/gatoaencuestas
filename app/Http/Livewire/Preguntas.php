@@ -48,7 +48,7 @@ class Preguntas extends Component
             'user_id' => auth()->user()->id
         ]);
         $this->limpiar();
-        $this->dispatchBrowserEvent('preguntas'); 
+        $this->dispatchBrowserEvent('preguntas', 'creada'); 
     }
 
     public function limpiar() {
@@ -85,7 +85,7 @@ class Preguntas extends Component
         $this->preguntaEditable->save();
         $this->cancelar();
         $this->limpiar();
-        $this->dispatchBrowserEvent('preguntas'); 
+        $this->dispatchBrowserEvent('preguntas', 'actualizada'); 
     }
 
     public function quitar($id) {
@@ -122,11 +122,13 @@ class Preguntas extends Component
     public function eliminar(Pregunta $pregunta) {
         $pregunta->habilitado = 0;
         $pregunta->save();
+        $this->dispatchBrowserEvent('eliminar', 'pregunta'); 
     }
 
     public function restaurar(Pregunta $pregunta) {
         $pregunta->habilitado = 1;
         $pregunta->save();
+        $this->dispatchBrowserEvent('restaurar', 'pregunta'); 
     }
 
     public function ver() {

@@ -1,7 +1,4 @@
 <div class="container-fluid py-4">
-    <button type="button" class="btn btn-danger btn-link m-0" wire:click="ver()">
-        <i class="material-icons">restore</i>
-    </button>
     <div id="carouselExampleCaptions" class="carousel slide h-70" data-bs-ride="carousel" data-bs-interval="false">
         <div class="carousel-indicators">
           @foreach ($todas_las_preguntas as $key => $pregunta)
@@ -19,6 +16,7 @@
                 @else
                 <div class="carousel-item">
                 @endif
+                <div class="pb-8">&nbsp;</div>
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-6 pb-10">
@@ -37,10 +35,9 @@
                             </div>
                             @elseif ($pregunta->tipo == 2)
                                 <div class="form-check">
-                                    <button type="button" class="btn btn{{ $estilo_microfono }} mb-0 speech" data-id = {{ $pregunta->id }} id="voz_opciones">
+                                    <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id = {{ $pregunta->id }} id="voz_opciones">
                                         <i class="material-icons text-sm">mic</i>
                                     </button>
-                                    <input type="hidden" value="{{ $pregunta->id }}" id="textarea{{ $pregunta->id }}">
                                     <textarea wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>
                                 </div>
                             @else
@@ -59,6 +56,11 @@
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Pregunta {{ ($key + 1) }}</h5>
                         <p class="text-dark">{{ $pregunta->pregunta }}</p>
+                        @if ($cantidad_preguntas == ($key + 1))
+                            <button type="button" class="btn btn-dark btn-link m-0" wire:click="finalizarEncuesta()">
+                                Finalizar encuesta <i class="material-icons">label_important</i>
+                            </button>
+                        @endif
                     </div>
                 </div>
             @endforeach

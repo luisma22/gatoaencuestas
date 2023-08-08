@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use Livewire\Component;
+use App\Models\Encuesta;
+use App\Models\Encuestados;
+
+class Estadisticas extends Component
+{
+    protected $queryString = ['id'];
+    public $encuesta_id;
+    public $encuesta;
+    public $respuestas_preguntas = [];
+    public $todas_las_preguntas;
+    public $nombre_pregunta = [];
+    public $cantidad_preguntas = 0;
+    public $todas_las_respuestas;
+    public $encuestados = 0;
+
+    public function mount($id) {
+        $this->encuesta_id = $id;
+        $this->encuesta = Encuesta::find($this->encuesta_id);
+        $this->todas_las_preguntas = $this->encuesta->preguntas;
+        $this->cantidad_preguntas = count($this->todas_las_preguntas);
+        $this->llenarEncuestaParametrosEstadistica();
+        $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
+        $this->encuestados = count($this->todas_las_respuestas);
+        $this->llenarResultadosEncuesta();
+        //dd($this->u);  
+    }
+
+    public function render()
+    {
+        //dd($this->respuestas_preguntas);
+        return view('livewire.estadisticas');
+    }
+
+    function llenarEncuestaParametrosEstadistica() {
+        foreach ($this->todas_las_preguntas as $pregunta) {
+            $this->nombre_pregunta[$pregunta->id] = $pregunta->pregunta;
+            if ($pregunta->tipo == 1) {
+                $this->respuestas_preguntas[$pregunta->id]['true'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['false'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
+            } elseif ($pregunta->tipo == 2) {
+                $this->respuestas_preguntas[$pregunta->id]['vacio'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['lleno'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
+            } else {
+                foreach (json_decode($pregunta->opciones) as $key => $valor) {
+                    $this->respuestas_preguntas[$pregunta->id][$valor] = 0;
+                }
+                $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
+            }
+        }
+    }
+
+    private function llenarResultadosEncuesta() {
+        foreach ($this->todas_las_respuestas as $respuesta) {
+            foreach (json_decode($respuesta->respuestas) as $key => $resp) {
+                $convertido=(array)$resp;
+                if ($resp->tipo == "1") {
+                    $this->respuestas_preguntas[$key][$convertido[0]]++; 
+                } elseif ($resp->tipo == "2") {
+                    if ($convertido[0] == "") {
+                        $this->respuestas_preguntas[$key]['vacio']++; 
+                    } else {
+                        $this->respuestas_preguntas[$key]['lleno']++; 
+                    }
+                } else {
+                    foreach($resp as $key2 => $res) {
+                        if ($res == false || $res == "" || $key2 == "tipo") {
+                            continue;
+                        } else {
+                            $this->respuestas_preguntas[$key][$res]++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

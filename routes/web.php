@@ -15,6 +15,7 @@ use App\Http\Livewire\RTL;
 use App\Http\Livewire\Encuestas;
 use App\Http\Livewire\Preguntas;
 use App\Http\Livewire\Encuestar;
+use App\Http\Livewire\Estadisticas;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Tables;
@@ -59,5 +60,5 @@ Route::get('static-sign-up', StaticSignUp::class)->name('static-sign-up');
 Route::get('encuestas', Encuestas::class)->name('encuestas');
 Route::get('preguntas', Preguntas::class)->name('preguntas');
 Route::get('encuestar/{id}', Encuestar::class)->name('encuestar');
-
+Route::get('estadisticas/{id}', Estadisticas::class)->name('estadisticas');
 });

@@ -59,7 +59,7 @@
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
                             <i class="material-icons">rule</i>
                         </button>
-                        <button type="button" class="btn btn-dark btn-link mb-1">
+                        <button type="button" class="btn btn-dark btn-link mb-1" wire:click="estadisticas({{ $encuesta }})">
                             <i class="material-icons">stacked_bar_chart</i>
                         </button>
                     @else

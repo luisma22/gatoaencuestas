@@ -215,4 +215,8 @@ class Encuestas extends Component
     public function iniciarEncuesta(Encuesta $encuesta) {
         return redirect()->route('encuestar', [$encuesta]);
     }
+
+    public function estadisticas(Encuesta $encuesta) {
+        return redirect()->route('estadisticas', [$encuesta]);
+    }
 }

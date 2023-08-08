@@ -27,13 +27,13 @@
                         <div class="col-6 pb-10">
                             @if ($pregunta->tipo == 1)
                             <div class="form-check">
-                                <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="radio" value="true" name="opcion{{ $pregunta->id }}" id="opcion{{ $pregunta->id }}">
+                                <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="radio" value="Si" name="opcion{{ $pregunta->id }}" id="opcion{{ $pregunta->id }}">
                                 <label class="form-check-label" for="opcion{{ $pregunta->id }}">
                                 Si
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" value="false" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}">
+                                <input class="form-check-input" type="radio" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" value="No" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}">
                                 <label class="form-check-label" for="opcion_{{ $pregunta->id }}">
                                 No
                             </label>

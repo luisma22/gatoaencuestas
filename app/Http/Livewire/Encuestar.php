@@ -32,7 +32,7 @@ class Encuestar extends Component
     function llenarEncuestaParametros() {
         foreach ($this->todas_las_preguntas as $pregunta) {
             if ($pregunta->tipo == 1) {
-                $this->encuesta_completa[$pregunta->id] = ["false", "tipo" => $pregunta->tipo];
+                $this->encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];
             } elseif ($pregunta->tipo == 2) {
                 $this->encuesta_completa[$pregunta->id] = ['', "tipo" => $pregunta->tipo];
             } else {

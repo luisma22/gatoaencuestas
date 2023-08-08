@@ -40,8 +40,8 @@ class Estadisticas extends Component
         foreach ($this->todas_las_preguntas as $pregunta) {
             $this->nombre_pregunta[$pregunta->id] = $pregunta->pregunta;
             if ($pregunta->tipo == 1) {
-                $this->respuestas_preguntas[$pregunta->id]['true'] = 0;
-                $this->respuestas_preguntas[$pregunta->id]['false'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['Si'] = 0;
+                $this->respuestas_preguntas[$pregunta->id]['No'] = 0;
                 $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
             } elseif ($pregunta->tipo == 2) {
                 $this->respuestas_preguntas[$pregunta->id]['vacio'] = 0;
@@ -69,8 +69,8 @@ class Estadisticas extends Component
                         $this->respuestas_preguntas[$key]['lleno']++; 
                     }
                 } else {
-                    foreach($resp as $key2 => $res) {
-                        if ($res == false || $res == "" || $key2 == "tipo") {
+                    foreach($convertido as $key2 => $res) {
+                        if ($res == false || $res == "" || $key2 == "tipo" || !array_key_exists($res, $this->respuestas_preguntas[$key])) {
                             continue;
                         } else {
                             $this->respuestas_preguntas[$key][$res]++;
@@ -79,5 +79,9 @@ class Estadisticas extends Component
                 }
             }
         }
+    }
+
+    public function irAEncuestas() {
+        return redirect()->route('encuestas');
     }
 }

@@ -87,7 +87,9 @@
                     data: valores,
                     backgroundColor: [
                         "#4b77a9",
-                        "#5f255f"
+                        "#5f255f",
+                        "#5cd55f",
+                        "#5ab55f"
                     ],
                     borderColor: "#fff"
                 }];

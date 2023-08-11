@@ -65,12 +65,13 @@ class Encuestar extends Component
     }
 
     public function finalizarEncuesta() {
-        Encuestados::create([
+        $encuestados = Encuestados::create([
             'respuestas' => json_encode($this->encuesta_completa),
             'encuesta_id' => $this->encuesta_id
         ]);
         $this->dispatchBrowserEvent('finalizar_encuesta');
         $this->llenarEncuestaParametros();
+        return redirect()->route('encuestapdf.pdf', [$this->encuesta, $encuestados]);
     }
 
     public function irAEncuestas() {

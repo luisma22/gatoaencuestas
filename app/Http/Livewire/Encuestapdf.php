@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Encuesta;
+use App\Models\Encuestados;
 use PDF;
 
 class Encuestapdf extends Component
@@ -15,9 +16,12 @@ class Encuestapdf extends Component
         return view('livewire.encuestapdf');
     }
 
-    public function pdf($id) {
+    public function pdf($id, $id2) {
         $encuesta = Encuesta::find($id);
-        $pdf = PDF::loadView('livewire.encuestapdf', ['encuesta' => $encuesta]);
-        return $pdf->download('invoice.pdf');
+        $preguntas = $encuesta->preguntas;
+        $respuestas = json_decode(Encuestados::find($id2)->respuestas, true);
+        PDF::setOption(['adminUsername' => 'gatuna', 'password' => 'gatuna123']);
+        $pdf = PDF::loadView('livewire.encuestapdf', ['preguntas' => $preguntas, 'respuestas' => $respuestas, 'encuesta' => $encuesta]);
+        return $pdf->download($encuesta->nombre.'_encuesta_'.$id2.'.pdf');
     }
 }

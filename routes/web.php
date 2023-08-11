@@ -62,5 +62,5 @@ Route::get('encuestas', Encuestas::class)->name('encuestas');
 Route::get('preguntas', Preguntas::class)->name('preguntas');
 Route::get('encuestar/{id}', Encuestar::class)->name('encuestar');
 Route::get('estadisticas/{id}', Estadisticas::class)->name('estadisticas');
-Route::get('encuestapdf/{id}', [Encuestapdf::class, 'pdf'])->name('encuestapdf.pdf');
+Route::get('encuestapdf/{id}/{id2}', [Encuestapdf::class, 'pdf'])->name('encuestapdf.pdf');
 });

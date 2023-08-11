@@ -219,4 +219,9 @@ class Encuestas extends Component
     public function estadisticas(Encuesta $encuesta) {
         return redirect()->route('estadisticas', [$encuesta]);
     }
+
+    public function pdf(Encuesta $encuesta) {
+        return redirect()->route('encuestapdf.pdf', [$encuesta]);
+    }
+
 }

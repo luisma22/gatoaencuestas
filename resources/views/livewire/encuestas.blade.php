@@ -62,6 +62,9 @@
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="estadisticas({{ $encuesta }})">
                             <i class="material-icons">stacked_bar_chart</i>
                         </button>
+                        <button type="button" class="btn btn-dark btn-link mb-1" wire:click="pdf({{ $encuesta }})">
+                            <i class="material-icons">stacked_bar_chart</i>
+                        </button>
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">
                             <i class="material-icons">restore</i>

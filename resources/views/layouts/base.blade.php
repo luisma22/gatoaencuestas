@@ -179,6 +179,7 @@ $(document).ready(function() {
                 if (pregunta_id != -1) {
                     $(boton).removeClass("btn-danger").addClass("btn-dark");
                     $("#textarea"+pregunta_id).val(finalResult);
+                    $("#textarea"+pregunta_id).focus();
                 } else {
                     window.Livewire.emit('quitar_vox', finalResult);
                 }

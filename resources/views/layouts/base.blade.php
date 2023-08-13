@@ -23,27 +23,6 @@
         Gato Encuestas
     </title>
 
-    <!-- Metas -->
-    @if (env('IS_DEMO'))
-        <meta name="keywords" content="creative tim, updivision, material, html dashboard, laravel, livewire, laravel livewire, alpine.js, html css dashboard laravel, material dashboard laravel, livewire material dashboard, material admin, livewire dashboard, livewire admin, web dashboard, bootstrap 5 dashboard laravel, bootstrap 5, css3 dashboard, bootstrap 5 admin laravel, material dashboard bootstrap 5 laravel, frontend, responsive bootstrap 5 dashboard, material dashboard, material laravel bootstrap 5 dashboard" />
-        <meta name="description" content="Dozens of handcrafted UI components, Laravel authentication, register & profile editing, Livewire & Alpine.js" />
-        <meta itemprop="name" content="Material Dashboard 2 Laravel Livewire by Creative Tim & UPDIVISION" />
-        <meta itemprop="description" content="Dozens of handcrafted UI components, Laravel authentication, register & profile editing, Livewire & Alpine.js" />
-        <meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/600/original/material-dashboard-laravel-livewire.jpg" />
-        <meta name="twitter:card" content="product" />
-        <meta name="twitter:site" content="@creativetim" />
-        <meta name="twitter:title" content="Material Dashboard 2 Laravel Livewire by Creative Tim & UPDIVISION" />
-        <meta name="twitter:description" content="Dozens of handcrafted UI components, Laravel authentication, register & profile editing, Livewire & Alpine.js" />
-        <meta name="twitter:creator" content="@creativetim" />
-        <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/600/original/material-dashboard-laravel-livewire.jpg" />
-        <meta property="fb:app_id" content="655968634437471" />
-        <meta property="og:title" content="Material Dashboard 2 Laravel Livewire by Creative Tim & UPDIVISION" />
-        <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://www.creative-tim.com/live/material-dashboard-laravel-livewire" />
-        <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/600/original/material-dashboard-laravel-livewire.jpg" />
-        <meta property="og:description" content="Dozens of handcrafted UI components, Laravel authentication, register & profile editing, Livewire & Alpine.js" />
-        <meta property="og:site_name" content="Creative Tim" />
-    @endif
     <!--     Fonts and icons     -->
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
@@ -90,6 +69,8 @@
 @livewireScripts
 <script src="https://unpkg.com/@nextapps-be/livewire-sortablejs@0.2.0/dist/livewire-sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha512-qZvrmS2ekKPF2mSznTQsxqPgnpkI4DNTlrdUmTzrDgektczlKNRRhy5X5AAOnx5S09ydFYWWNSfcEqDTTHgtNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
 <script type="text/javascript">
 $(document).ready(function() {
@@ -192,8 +173,57 @@ $(document).ready(function() {
         $(this).removeClass("btn-dark").addClass("btn-danger");
         boton = this;
         recognition.start();
-    }) 
-});
+    });
+
+    $('#downloadPdf').click(function(event) {
+        var cantidad = parseInt(document.getElementById("cantidad_reportes").value);
+        var cantidad_preguntas = parseInt(document.getElementById("cantidad_preguntas").value);
+        var nombre = document.getElementById("nombre_encuesta").value;
+        if (document.getElementById("reporte_0")) {
+            var inicio = 0;
+            var doc = new jspdf.jsPDF();
+            if (cantidad > 0) {
+                llenarEncuestasPDF(inicio, cantidad, doc, cantidad_preguntas, nombre);
+            }
+        } else {
+            if (cantidad > 0) {
+                Swal.fire({
+                icon: 'info',
+                title: 'Seleccione vista PDF para poder usar esta funcionalidad',
+                showConfirmButton: true
+                });
+            } else {
+                Swal.fire({
+                icon: 'info',
+                title: 'No hay encuestas echas porfavor realice encuestas para poder usar esta funcionalidad',
+                showConfirmButton: true
+                });
+            }
+        }
+    });
+    function llenarEncuestasPDF(inicio, cantidad, objeto, cantidad_preguntas, nombre) {
+        var control_inicio = inicio;
+        try {
+            if (inicio < cantidad) {
+                html2canvas(document.getElementById("reporte_" + inicio)).then(function(canvas) {
+                    var img = canvas.toDataURL("image/png");
+                    if (cantidad_preguntas > 3 || cantidad_preguntas == 2) {
+                        objeto.addImage(img,'PNG',5 ,0 , 200, 300);
+                    } else {
+                        objeto.addImage(img,'PNG',5 ,0 , 200, 150);
+                    }
+                    if ((control_inicio + 1) < cantidad) {
+                        objeto.addPage("a4");
+                    }
+                    llenarEncuestasPDF(inicio + 1, cantidad, objeto, cantidad_preguntas -3, nombre)
+                });
+            } else {
+                objeto.save(nombre+'_estadisticaPDF.pdf');
+            }
+        } catch(e) {
+        }
+    }
+}); 
 
 </script>
 </body>

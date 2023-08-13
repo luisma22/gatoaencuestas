@@ -92,15 +92,14 @@ label, .form-label {;
                   @elseif ($pregunta->tipo == 2)
                      <p class="texto-llenado pb-0 text-justify">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
                   @else
-                     <div class="form-check ps-0 pe-0">
-                        @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
+                     @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
+                        <div class="form-check pb-0">
                               <input class="form-check-input" type="checkbox" value="{{ $opcion }}" id="check_{{ $pregunta->id }}_{{ $key2 }}" @if ($respuestas[$pregunta->id][$key2] != "" || $respuestas[$pregunta->id][$key2] != false) checked @endif>
                               <label class="form-check-label" for="check_{{ $pregunta->id }}_{{ $key2 }}">
                                  {{ $opcion }}
                               </label>
-                              <br>
-                        @endforeach
-                     </div>
+                        </div>
+                     @endforeach
                   @endif
             </div>
          </div>

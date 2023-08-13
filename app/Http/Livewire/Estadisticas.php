@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Encuesta;
 use App\Models\Encuestados;
+use PDF;
 
 class Estadisticas extends Component
 {
@@ -17,22 +18,15 @@ class Estadisticas extends Component
     public $cantidad_preguntas = 0;
     public $todas_las_respuestas;
     public $encuestados = 0;
-
+    public $is_pdf = false;
+    public $valor_col_grid_pdf = 1;
+    public $cantidad_resportes = 0;
     public function mount($id) {
-        $this->encuesta_id = $id;
-        $this->encuesta = Encuesta::find($this->encuesta_id);
-        $this->todas_las_preguntas = $this->encuesta->preguntas;
-        $this->cantidad_preguntas = count($this->todas_las_preguntas);
-        $this->llenarEncuestaParametrosEstadistica();
-        $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
-        $this->encuestados = count($this->todas_las_respuestas);
-        $this->llenarResultadosEncuesta();
-        //dd($this->u);  
+        $this->iniciarDatos($id);
     }
 
     public function render()
     {
-        //dd($this->respuestas_preguntas);
         return view('livewire.estadisticas');
     }
 
@@ -84,4 +78,23 @@ class Estadisticas extends Component
     public function irAEncuestas() {
         return redirect()->route('encuestas');
     }
+
+    public function iniciarDatos($id) {
+        $this->encuesta_id = $id;
+        $this->encuesta = Encuesta::find($this->encuesta_id);
+        $this->todas_las_preguntas = $this->encuesta->preguntas;
+        $this->cantidad_preguntas = count($this->todas_las_preguntas);
+        $this->llenarEncuestaParametrosEstadistica();
+        $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
+        $this->encuestados = count($this->todas_las_respuestas);
+        $this->llenarResultadosEncuesta();
+        $this->cantidad_reportes = ceil($this->cantidad_preguntas/3);
+    }
+
+    public function ver() {
+        $this->is_pdf = (!$this->is_pdf) ? true: false;
+        $this->dispatchBrowserEvent('para_pdf');
+        $this->valor_col_grid_pdf = (!$this->is_pdf) ? 1: 2;
+    }
+    
 }

@@ -58,6 +58,9 @@
                         </button>
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
                             <i class="material-icons">rule</i>
+                            <span class="position-absolute top-5 start-85 badge rounded-pill bg-info zindex-tooltip">
+                                {{ $encuesta->encuestados->count() }}
+                             </span>
                         </button>
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="estadisticas({{ $encuesta }})">
                             <i class="material-icons">stacked_bar_chart</i>

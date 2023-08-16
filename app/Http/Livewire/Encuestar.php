@@ -66,10 +66,23 @@ class Encuestar extends Component
     }
 
     public function finalizarEncuesta() {
-        if ($this->ip == '') {
-            if (auth()->user() == null) {
-                $this->ip = $_SERVER["REMOTE_ADDR"];
+        $ipnoexiste = false;
+        $ip = $_SERVER["REMOTE_ADDR"];
+        if (auth()->user() == null) {
+            if ($this->encuesta->ips == null || $this->encuesta->ips == "") {
+                $ipnoexiste = false;
+                $this->encuesta->ips = $this->encuesta->ips.",".$ip;
+                $this->encuesta->save();
+            } else {
+                if (strpos($this->encuesta->ips, $ip) !== false) {
+                    $ipnoexiste = true;
+                } else {
+                    $this->encuesta->ips = $this->encuesta->ips.",".$ip;
+                    $this->encuesta->save();
+                }
             }
+        }
+        if (!$ipnoexiste) {
             $encuestados = Encuestados::create([
                 'respuestas' => json_encode($this->encuesta_completa),
                 'encuesta_id' => $this->encuesta_id

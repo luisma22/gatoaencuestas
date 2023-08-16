@@ -10,6 +10,7 @@
             </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
+    @if (auth()->user()!= null) 
     <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item mt-3">
@@ -93,4 +94,5 @@
             </li>
         </ul>
     </div>
+    @endif
 </aside>

@@ -99,6 +99,15 @@ $(document).ready(function() {
             timer: 1500
         });
     });
+    
+    window.addEventListener('terminar_encuesta', event => {
+        Swal.fire({
+            icon: 'info',
+            title: 'Usted ya lleno esta encuesta gracias por su ayuda',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    });
 
     window.addEventListener('eliminar', event => {
         Swal.fire({
@@ -181,7 +190,10 @@ $(document).ready(function() {
         var nombre = document.getElementById("nombre_encuesta").value;
         if (document.getElementById("reporte_0")) {
             var inicio = 0;
-            var doc = new jspdf.jsPDF();
+            var doc = new jspdf.jsPDF({format: 'letter'});
+            doc.setFontSize(12);
+            doc.setFont('Comic Sans');
+            doc.setTextColor(123, 128, 154);
             if (cantidad > 0) {
                 llenarEncuestasPDF(inicio, cantidad, doc, cantidad_preguntas, nombre);
             }
@@ -207,13 +219,15 @@ $(document).ready(function() {
             if (inicio < cantidad) {
                 html2canvas(document.getElementById("reporte_" + inicio)).then(function(canvas) {
                     var img = canvas.toDataURL("image/png");
-                    if (cantidad_preguntas > 3 || cantidad_preguntas == 2) {
-                        objeto.addImage(img,'PNG',5 ,0 , 200, 300);
+                    if (cantidad_preguntas >= 3 || cantidad_preguntas == 2) {
+                        objeto.addImage(img,'PNG',8 ,0 , 200, 285);
                     } else {
-                        objeto.addImage(img,'PNG',5 ,0 , 200, 150);
+                        objeto.addImage(img,'PNG',8 ,0 , 200, 130);
                     }
+                    objeto.text(8, 55, "Daniela Miranda Rocha", null, 90);
+                    objeto.text(205, 210, "Instituto Tecnologico INFOCAL", null, -90);
                     if ((control_inicio + 1) < cantidad) {
-                        objeto.addPage("a4");
+                        objeto.addPage("letter");
                     }
                     llenarEncuestasPDF(inicio + 1, cantidad, objeto, cantidad_preguntas -3, nombre)
                 });

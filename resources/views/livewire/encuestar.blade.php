@@ -1,8 +1,10 @@
 <div class="container-fluid py-4">
     <div class="text-end">
-        <button type="button" class="btn btn-dark btn-link" wire:click="irAEncuestas()">
-            Volver a Encuestas <i class="material-icons">reply_all</i>
-        </button>
+        @if (auth()->user()!= null) 
+            <button type="button" class="btn btn-dark btn-link" wire:click="irAEncuestas()">
+                Volver a Encuestas <i class="material-icons">reply_all</i>
+            </button>
+        @endif
     </div>
     <div class="mt-5 text-center text-uppercase">
         <h6>

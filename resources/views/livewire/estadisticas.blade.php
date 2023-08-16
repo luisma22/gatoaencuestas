@@ -32,7 +32,7 @@
                             <div class="row">
                             <div class="mt-3 mb-4 text-center text-uppercase">
                                 <h6>
-                                    {{ $encuesta->nombre }}
+                                   Estadisticas {{ $encuesta->nombre }}
                                 </h6>
                             </div>
                     @endif
@@ -113,7 +113,13 @@
                 ctx = document.getElementById("chart-canvas" + preguntaj).getContext("2d");
                 for(var key in preguntasj[preguntaj]) {
                     if (key != "tipo") {
-                        labels.push(key);
+                        if (key == "vacio") {
+                            labels.push("Sin Respuesta");
+                        } else if (key == "lleno") {
+                            labels.push("Con Respuesta");
+                        } else {
+                            labels.push(key);
+                        }
                         valores.push(preguntasj[preguntaj][key]);
                     }
                 }

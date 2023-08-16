@@ -17,6 +17,7 @@ class Encuestar extends Component
     public $estilo_microfono = "-dark";
     public $id_opcion = '';
     public $cantidad_preguntas = 0;
+    public $ip = '';
     public function mount($id) {
        $this->encuesta_id = $id;
        $this->encuesta = Encuesta::find($this->encuesta_id);
@@ -65,13 +66,25 @@ class Encuestar extends Component
     }
 
     public function finalizarEncuesta() {
-        $encuestados = Encuestados::create([
-            'respuestas' => json_encode($this->encuesta_completa),
-            'encuesta_id' => $this->encuesta_id
-        ]);
-        $this->dispatchBrowserEvent('finalizar_encuesta');
-        $this->llenarEncuestaParametros();
-        return redirect()->route('encuestapdf.pdf', [$this->encuesta, $encuestados]);
+        if ($this->ip == '') {
+            if (auth()->user() == null) {
+                $this->ip = $_SERVER["REMOTE_ADDR"];
+            }
+            $encuestados = Encuestados::create([
+                'respuestas' => json_encode($this->encuesta_completa),
+                'encuesta_id' => $this->encuesta_id
+            ]);
+            $this->dispatchBrowserEvent('finalizar_encuesta');
+            $this->llenarEncuestaParametros();
+            if (auth()->user() != null) {
+                return redirect()->route('encuestapdf.pdf', [$this->encuesta, $encuestados]);
+            } else {
+                return redirect()->route('encuestapdfinfo.pdf', [$this->encuesta, $encuestados]);
+            }
+        } else {
+            $this->dispatchBrowserEvent('terminar_encuesta');
+            return redirect('/sign-in');
+        }
     }
 
     public function irAEncuestas() {

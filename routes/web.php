@@ -45,7 +45,8 @@ Route::get('reset-password/{id}', ResetPassword::class)->middleware('signed')->n
 
 Route::get('sign-up', Register::class)->middleware('guest')->name('register');
 Route::get('sign-in', Login::class)->middleware('guest')->name('login');
-
+Route::get('encuestarinfo/{id}', Encuestar::class)->middleware('guest')->name('encuestar');
+Route::get('encuestapdfinfo/{id}/{id2}', [Encuestapdf::class, 'pdf'])->middleware('guest')->name('encuestapdfinfo.pdf');
 Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
 Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
 

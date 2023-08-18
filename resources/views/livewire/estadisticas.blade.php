@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($is_pdf && (($key+4)%3 == 0 || ($key+1) == count($todas_las_respuestas)))
+                        @if ($is_pdf && (($key+4)%3 == 0 || ($key+1) == $cantidad_preguntas))
                             </div></div> 
                         @endif
                     @endforeach

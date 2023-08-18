@@ -227,7 +227,7 @@ $(document).ready(function() {
             if (inicio < cantidad) {
                 html2canvas(document.getElementById("reporte_" + inicio)).then(function(canvas) {
                     var img = canvas.toDataURL("image/png");
-                    if (cantidad_preguntas >= 3 || cantidad_preguntas == 2) {
+                    if (cantidad_preguntas >= 2 || cantidad_preguntas == 2) {
                         objeto.addImage(img,'PNG',8 ,0 , 200, 285);
                     } else {
                         objeto.addImage(img,'PNG',8 ,0 , 200, 130);

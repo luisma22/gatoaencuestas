@@ -9,8 +9,8 @@ use Illuminate\Support\Collection;
 
 class Encuestas extends Component
 {
-    public $nombre;
-    public $descripcion;
+    public $nombre = '';
+    public $descripcion = '';
     public $editar = false;
     public $encuestaEditable;
     public $texto_modal = "Crear Encuesta";
@@ -24,6 +24,8 @@ class Encuestas extends Component
     public $vozactivada = false;
     public $estilo_microfono = "-dark";
     public $seleccionado = "";
+    public $canvasoff = false;
+    public $texto_modal_off = "Modo Desplegable";
     public function mount() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
     }
@@ -218,5 +220,14 @@ class Encuestas extends Component
 
     public function estadisticas(Encuesta $encuesta) {
         return redirect()->route('estadisticas', [$encuesta]);
+    }
+
+    public function offormodal() {
+        $this->canvasoff = !$this->canvasoff;
+        if ($this->canvasoff) {
+            $this->texto_modal_off = "Modo Modal";
+        } else {
+            $this->texto_modal_off = "Modo Desplegable";
+        }
     }
 }

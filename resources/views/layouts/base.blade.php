@@ -79,9 +79,13 @@ $(document).ready(function() {
     return new bootstrap.Popover(popoverTriggerEl)
     })
     window.addEventListener('encuestas', event => {
-        $(".modal-backdrop")[0].remove();
+        if ($(".modal-backdrop").length) {
+            $(".modal-backdrop")[0].remove();
+        }
         $('#exampleModal').modal('hide');
         $('#verEncuesta').modal('dispose');
+        $('#offcanvasExample').offcanvas('hide');
+        $('#offcanvasExample1').offcanvas('hide');
         Swal.fire({
             icon: 'success',
             title: 'La encuesta fue ' + event.detail +  ' exitosamente',
@@ -90,8 +94,11 @@ $(document).ready(function() {
         });
     });
     window.addEventListener('preguntas', event => {
-        $(".modal-backdrop")[0].remove();
+        if ($(".modal-backdrop").length) {
+            $(".modal-backdrop")[0].remove();
+        }
         $('#exampleModal').modal('hide');
+        $('#offcanvasExample').offcanvas('hide');
         Swal.fire({
             icon: 'success',
             title: 'La pregunta fue ' + event.detail +  ' exitosamente',

@@ -12,7 +12,7 @@ class Encuestar extends Component
     public $encuesta_id;
     public $encuesta;
     public $encuesta_completa = [];
-    public $todas_las_preguntas;
+    public $todas_las_preguntas = [];
     public $vozactivada = false;
     public $estilo_microfono = "-dark";
     public $id_opcion = '';
@@ -21,9 +21,11 @@ class Encuestar extends Component
     public function mount($id) {
        $this->encuesta_id = $id;
        $this->encuesta = Encuesta::find($this->encuesta_id);
-       $this->todas_las_preguntas = $this->encuesta->preguntas;
-       $this->cantidad_preguntas = count($this->todas_las_preguntas);
-       $this->llenarEncuestaParametros();
+       if ($this->encuesta != null) {
+           $this->todas_las_preguntas = $this->encuesta->preguntas;
+           $this->cantidad_preguntas = count($this->todas_las_preguntas);
+           $this->llenarEncuestaParametros();
+       }
     }
     public function render()
     {
@@ -96,7 +98,7 @@ class Encuestar extends Component
             }
         } else {
             $this->dispatchBrowserEvent('terminar_encuesta');
-            return redirect('/sign-in');
+            return redirect('/gracias');
         }
     }
 

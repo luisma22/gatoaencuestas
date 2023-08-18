@@ -23,6 +23,7 @@ class Preguntas extends Component
     public $vozactivada = false;
     public $estilo_microfono = "-dark";
     public $seleccionado = "";
+    public $canvasoff = false;
     
     public function render()
     {

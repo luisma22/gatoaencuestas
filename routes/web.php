@@ -17,6 +17,7 @@ use App\Http\Livewire\Preguntas;
 use App\Http\Livewire\Encuestar;
 use App\Http\Livewire\Estadisticas;
 use App\Http\Livewire\Encuestapdf;
+use App\Http\Livewire\Gracias;
 use App\Http\Livewire\StaticSignIn;
 use App\Http\Livewire\StaticSignUp;
 use App\Http\Livewire\Tables;
@@ -48,6 +49,7 @@ Route::get('sign-in', Login::class)->middleware('guest')->name('login');
 Route::get('encuestarinfo/{id}', Encuestar::class)->middleware('guest')->name('encuestar');
 Route::get('encuestapdfinfo/{id}/{id2}', [Encuestapdf::class, 'pdf'])->middleware('guest')->name('encuestapdfinfo.pdf');
 Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
+Route::get('gracias', Gracias::class)->name('gracias');
 Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
 
 Route::group(['middleware' => 'auth'], function () {

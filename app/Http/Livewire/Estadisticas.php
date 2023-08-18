@@ -20,7 +20,7 @@ class Estadisticas extends Component
     public $encuestados = 0;
     public $is_pdf = false;
     public $valor_col_grid_pdf = 1;
-    public $cantidad_resportes = 0;
+    public $cantidad_reportes = 0;
     public function mount($id) {
         $this->iniciarDatos($id);
     }
@@ -82,13 +82,15 @@ class Estadisticas extends Component
     public function iniciarDatos($id) {
         $this->encuesta_id = $id;
         $this->encuesta = Encuesta::find($this->encuesta_id);
-        $this->todas_las_preguntas = $this->encuesta->preguntas;
-        $this->cantidad_preguntas = count($this->todas_las_preguntas);
-        $this->llenarEncuestaParametrosEstadistica();
-        $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
-        $this->encuestados = count($this->todas_las_respuestas);
-        $this->llenarResultadosEncuesta();
-        $this->cantidad_reportes = ceil($this->cantidad_preguntas/3);
+        if ($this->encuesta != null) {
+            $this->todas_las_preguntas = $this->encuesta->preguntas;
+            $this->cantidad_preguntas = count($this->todas_las_preguntas);
+            $this->llenarEncuestaParametrosEstadistica();
+            $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
+            $this->encuestados = count($this->todas_las_respuestas);
+            $this->llenarResultadosEncuesta();
+            $this->cantidad_reportes = ceil($this->cantidad_preguntas/3);
+        }
     }
 
     public function ver() {

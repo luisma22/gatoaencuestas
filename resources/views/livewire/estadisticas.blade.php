@@ -5,6 +5,7 @@
                 <button type="button" class="btn btn-dark btn-link text-end" wire:click="irAEncuestas()">
                     Volver a Encuestas <i class="material-icons">reply_all</i>
                 </button>
+                @if ($encuesta != null)
                 <button type="button" class="btn btn-dark btn-link text-start" id="downloadPdf">
                     PDF <i class="material-icons">picture_as_pdf</i>
                 </button>
@@ -15,60 +16,69 @@
                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
                     <label class="form-check-label" for="flexSwitchCheckChecked">Vista PDF</label>
                 </div>
+                @endif
             </div>
         </div>
-        @if (count($todas_las_respuestas) > 0)
-            @if (!$is_pdf)
-                <div class="mb-5 text-center text-uppercase">
+        @if ($encuesta != null)
+            @if (count($todas_las_respuestas) > 0)
+                @if (!$is_pdf)
+                    <div class="mb-5 text-center text-uppercase">
+                        <h6>
+                            {{ $encuesta->nombre }}
+                        </h6>
+                    </div>
+                @endif
+                <div class="row">
+                    @foreach ($todas_las_preguntas as $key => $respuesta)
+                        @if ($is_pdf && $key%3 == 0)
+                            <div id="reporte_{{ $key/3 }}">
+                                <div class="row">
+                                <div class="mt-3 mb-4 text-center text-uppercase">
+                                    <h6>
+                                    Estadisticas {{ $encuesta->nombre }}
+                                    </h6>
+                                </div>
+                        @endif
+                        @if (count(json_decode($respuesta->opciones)) > 2)
+                            <div class="col-xl-12 col-sm-12 mb-xl-0 mb-5">
+                        @else
+                            <div class="col-xl-{{ (3 * pow(2,$valor_col_grid_pdf)) }} col-sm-{{(6 * $valor_col_grid_pdf) }} mb-xl-0 mb-5">
+                        @endif
+                            <div class="card z-index-2 ">
+                                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                                    <div class="bg-gradient-success border-radius-lg py-3 pe-1">
+                                        <div class="chart">
+                                            <canvas id = "chart-canvas{{ $respuesta->id }}" class="chart-canvas{{ $respuesta->id }}" height="150"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body pb-0 pt-1">
+                                    <h6 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
+                                    <p class="text-sm ">{{ $respuesta->pregunta}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @if ($is_pdf && (($key+4)%3 == 0 || ($key+1) == count($todas_las_respuestas)))
+                            </div></div> 
+                        @endif
+                    @endforeach
+                </div>
+            @else 
+                <div class="mb-2 text-center text-uppercase">
                     <h6>
                         {{ $encuesta->nombre }}
                     </h6>
                 </div>
-            @endif
-            <div class="row">
-                @foreach ($todas_las_preguntas as $key => $respuesta)
-                    @if ($is_pdf && $key%3 == 0)
-                        <div id="reporte_{{ $key/3 }}">
-                            <div class="row">
-                            <div class="mt-3 mb-4 text-center text-uppercase">
-                                <h6>
-                                   Estadisticas {{ $encuesta->nombre }}
-                                </h6>
-                            </div>
-                    @endif
-                    @if (count(json_decode($respuesta->opciones)) > 2)
-                        <div class="col-xl-12 col-sm-12 mb-xl-0 mb-5">
-                    @else
-                        <div class="col-xl-{{ (3 * pow(2,$valor_col_grid_pdf)) }} col-sm-{{(6 * $valor_col_grid_pdf) }} mb-xl-0 mb-5">
-                    @endif
-                        <div class="card z-index-2 ">
-                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
-                                <div class="bg-gradient-success border-radius-lg py-3 pe-1">
-                                    <div class="chart">
-                                        <canvas id = "chart-canvas{{ $respuesta->id }}" class="chart-canvas{{ $respuesta->id }}" height="150"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body pb-0 pt-1">
-                                <h6 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
-                                <p class="text-sm ">{{ $respuesta->pregunta}}</p>
-                            </div>
-                        </div>
+                <div class="col-12 text-center">
+                    <div class="alert alert-dark">
+                        <strong class="text-light"><i class="material-icons">info</i> No hay Estadisticas porque no se realizaron encuestas.</strong>
                     </div>
-                    @if ($is_pdf && (($key+4)%3 == 0 || ($key+1) == count($todas_las_respuestas)))
-                        </div></div> 
-                    @endif
-                @endforeach
-            </div>
-        @else 
-            <div class="mb-2 text-center text-uppercase">
-                <h6>
-                    {{ $encuesta->nombre }}
-                </h6>
-            </div>
+                </div>
+            @endif
+        @else
             <div class="col-12 text-center">
                 <div class="alert alert-dark">
-                    <strong class="text-light"><i class="material-icons">info</i> No hay Estadisticas porque no se realizaron encuestas.</strong>
+                    <strong class="text-light"><i class="material-icons">info</i> No hay Estadisticas porque esta encuesta no existe.</strong>
                 </div>
             </div>
         @endif

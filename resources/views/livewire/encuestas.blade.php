@@ -1,6 +1,11 @@
 <div class="container-fluid py-4">
-    @include('livewire.modals.modal-crear-encuesta')
-    @include('livewire.modals.modal-ver-encuesta')
+    @if ($canvasoff)
+        @include('livewire.modals.modal-crear-encuesta')
+        @include('livewire.modals.modal-ver-encuesta')
+    @else
+        @include('livewire.canvasoff.canvasoff-crear-encuesta')
+        @include('livewire.canvasoff.canvasoff-ver-encuestas')
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -12,15 +17,25 @@
                 </div>
                 <div class="row">
                     <div class="col-8 ms-3 mt-4 col-sm-6">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="material-icons text-sm">add</i>Nueva Encuesta
-                        </button>
+                        @if ($canvasoff)
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="material-icons text-sm">add</i>Nueva Encuesta
+                            </button>
+                        @else
+                            <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+                                <i class="material-icons text-sm">add</i>Nueva Encuesta
+                            </button>
+                        @endif
                     </div>
-                    <div lass="col-3 ms-3 mt-4">
-                        <div class="form-check form-switch ms-3 mt-3 me-4">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
-                            <label class="form-check-label" for="flexSwitchCheckChecked">Ver todas las encuestas</label>
-                          </div>
+                    <div lass="col-xl-12 col-lg-12 col-md-12">
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="form-check form-switch ms-3 mt-3 me-4">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
+                                    <label class="form-check-label" for="flexSwitchCheckChecked">Ver todas las encuestas</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -47,15 +62,27 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer pt-1">
                     @if ($encuesta->habilitado)
-                        <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $encuesta }})" data-original-title="" title="">
-                            <i class="material-icons">edit_note</i>
-                        </button>
+                        @if ($canvasoff)
+                            <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $encuesta }})" data-original-title="" title="">
+                                <i class="material-icons">edit_note</i>
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" wire:click="editar({{ $encuesta }})" data-original-title="" title="">
+                                <i class="material-icons">edit_note</i>
+                            </button>
+                        @endif
                         <button type="button" class="btn btn-danger btn-link mb-1" wire:click="eliminar({{ $encuesta }})">
                             <i class="material-icons">delete</i>
                         </button>
-                        <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
-                            <i class="material-icons">format_list_numbered</i>
-                        </button>
+                        @if ($canvasoff)
+                            <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
+                                <i class="material-icons">format_list_numbered</i>
+                            </button>
+                        @else
+                            <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample1" wire:click="verEncuesta({{ $encuesta }})" data-original-title="" title="">
+                                <i class="material-icons">format_list_numbered</i>
+                            </button>
+                        @endif
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
                             <i class="material-icons">rule</i>
                             <span class="position-absolute top-5 start-85 badge rounded-pill bg-info zindex-tooltip">

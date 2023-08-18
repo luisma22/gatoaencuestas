@@ -1,5 +1,9 @@
 <div class="container-fluid py-4">
-    @include('livewire.modals.modal-crear-pregunta')
+    @if ($canvasoff)
+        @include('livewire.modals.modal-crear-pregunta')
+    @else
+        @include('livewire.canvasoff.canvasoff-crear-pregunta')
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card my-4">
@@ -11,9 +15,15 @@
                 </div>
                 <div class="row">
                     <div class="col-12 ms-3 mt-4 col-sm-12">
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            <i class="material-icons text-sm">add</i>Nueva Pregunta
-                        </button>
+                        @if ($canvasoff)
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="material-icons text-sm">add</i>Nueva Pregunta
+                            </button>
+                        @else
+                            <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
+                                <i class="material-icons text-sm">add</i>Nueva Pregunta
+                            </button>
+                        @endif
                     </div>
                     <div lass="col-12 ms-3 mt-4">
                         <div class="row">
@@ -60,9 +70,15 @@
                 <hr class="dark horizontal my-0">
                 <div class="card-footer pt-1">
                     @if ($pregunta->habilitado)
+                        @if ($canvasoff)
                         <button type="button" class="btn btn-success btn-link m-0" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
                             <i class="material-icons">edit_note</i>
                         </button>
+                        @else
+                            <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
+                                <i class="material-icons">edit_note</i>
+                            </button>
+                        @endif
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="eliminar({{ $pregunta }})">
                             <i class="material-icons">delete</i>
                         </button>

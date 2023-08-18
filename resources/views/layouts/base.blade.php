@@ -194,6 +194,7 @@ $(document).ready(function() {
     $('#downloadPdf').click(function(event) {
         var cantidad = parseInt(document.getElementById("cantidad_reportes").value);
         var cantidad_preguntas = parseInt(document.getElementById("cantidad_preguntas").value);
+        var cantidad_encuestado = parseInt(document.getElementById("encuestados").value);
         var nombre = document.getElementById("nombre_encuesta").value;
         if (document.getElementById("reporte_0")) {
             var inicio = 0;
@@ -205,7 +206,7 @@ $(document).ready(function() {
                 llenarEncuestasPDF(inicio, cantidad, doc, cantidad_preguntas, nombre);
             }
         } else {
-            if (cantidad > 0) {
+            if (cantidad_encuestado > 0) {
                 Swal.fire({
                 icon: 'info',
                 title: 'Seleccione vista PDF para poder usar esta funcionalidad',

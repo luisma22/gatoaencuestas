@@ -18,7 +18,7 @@
                 {{ $encuesta->nombre }}
             </h6>
         </div>
-        
+        @if ($cantidad_preguntas > 0)
         <div id="carouselExampleCaptions" class="carousel slide h-70" data-bs-ride="carousel" data-bs-interval="false">
             <div class="carousel-indicators">
               @foreach ($todas_las_preguntas as $key => $pregunta)
@@ -94,5 +94,12 @@
               <span class="visually-hidden">Next</span>
             </button>
           </div>
+        @else
+            <div class="col-12 text-center">
+                <div class="alert alert-dark">
+                    <strong class="text-light"><i class="material-icons">info</i> No hay preguntas para realizar esta encuesta.</strong>
+                </div>
+            </div>
+        @endif
     @endif
 </div>

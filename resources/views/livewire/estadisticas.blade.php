@@ -6,16 +6,17 @@
                     Volver a Encuestas <i class="material-icons">reply_all</i>
                 </button>
                 @if ($encuesta != null)
-                <button type="button" class="btn btn-dark btn-link text-start" id="downloadPdf">
-                    PDF <i class="material-icons">picture_as_pdf</i>
-                </button>
-                <input type="hidden" value="{{ $cantidad_reportes }}" id="cantidad_reportes">
-                <input type="hidden" value="{{ $cantidad_preguntas }}" id="cantidad_preguntas">
-                <input type="hidden" value="{{ $encuesta->nombre }}" id="nombre_encuesta">
-                <div class="form-check form-switch ms-5 pt-3 col-5">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
-                    <label class="form-check-label" for="flexSwitchCheckChecked">Vista PDF</label>
-                </div>
+                    <button type="button" class="btn btn-dark btn-link text-start" id="downloadPdf">
+                        PDF <i class="material-icons">picture_as_pdf</i>
+                    </button>
+                    <input type="hidden" value="{{ $cantidad_reportes }}" id="cantidad_reportes">
+                    <input type="hidden" value="{{ $cantidad_preguntas }}" id="cantidad_preguntas">
+                    <input type="hidden" value="{{ $encuestados }}" id="encuestados">
+                    <input type="hidden" value="{{ $encuesta->nombre }}" id="nombre_encuesta">
+                    <div class="form-check form-switch ms-5 pt-3 col-5">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
+                        <label class="form-check-label" for="flexSwitchCheckChecked">Vista PDF</label>
+                    </div>
                 @endif
             </div>
         </div>

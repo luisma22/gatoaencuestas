@@ -20,12 +20,13 @@ class Encuestas extends Component
     public $preguntas_id = [];
     public $tipos = [1 => "Si/No", 2 => "Multiple Seleccion", 3 => "Completado"];
     public $encuesta_ver;
-    protected $listeners = ["add" => "add", "quitar_vox" => "quitar_vox"];
+    protected $listeners = ["add" => "add", "quitar_vox" => "quitar_vox", "confirmar_eliminacion" => "confirmar_eliminacion"];
     public $vozactivada = false;
     public $estilo_microfono = "-dark";
     public $seleccionado = "";
     public $canvasoff = false;
     public $texto_modal_off = "Modo Desplegable";
+    public $encuesta_a_eliminar;
     public function mount() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
     }
@@ -229,5 +230,14 @@ class Encuestas extends Component
         } else {
             $this->texto_modal_off = "Modo Desplegable";
         }
+    }
+
+    public function eliminarEncuestados(Encuesta $encuesta) {
+        $this->encuesta_a_eliminar = $encuesta;
+        $this->dispatchBrowserEvent('eliminar_encuestados'); 
+    }
+
+    public function confirmar_eliminacion() {
+        $this->encuesta_a_eliminar->encuestados()->delete();
     }
 }

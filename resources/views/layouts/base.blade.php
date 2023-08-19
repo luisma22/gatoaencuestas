@@ -168,6 +168,22 @@ $(document).ready(function() {
         });
     });
 
+    window.addEventListener('eliminar_encuestados', function (event) {
+        Swal.fire({
+            title: 'Segura que quieres eliminar las encuestas hechas?',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: 'Aceptar',
+            denyButtonText: 'Cancelar',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.Livewire.emit('confirmar_eliminacion');
+                } else if (result.isDenied) {
+                    Swal.fire('Se cancelo la eliminacion de tus encuestas', '', 'info')
+                }
+            })
+    });
+
     recognition.onresult = function (event) {
         finalResult = '';
         for (var i = event.resultIndex; i < event.results.length; ++i) {

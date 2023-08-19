@@ -92,6 +92,11 @@
                         <button type="button" class="btn btn-dark btn-link mb-1" wire:click="estadisticas({{ $encuesta }})">
                             <i class="material-icons">stacked_bar_chart</i>
                         </button>
+                        @if ($encuesta->encuestados->count() > 0)
+                            <button type="button" class="btn btn-danger btn-link mb-1" wire:click="eliminarEncuestados({{ $encuesta }})">
+                                <i class="material-icons">delete_sweep</i>
+                            </button>
+                        @endif
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">
                             <i class="material-icons">restore</i>

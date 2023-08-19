@@ -179,7 +179,12 @@ $(document).ready(function() {
                 if (result.isConfirmed) {
                     window.Livewire.emit('confirmar_eliminacion');
                 } else if (result.isDenied) {
-                    Swal.fire('Se cancelo la eliminacion de tus encuestas', '', 'info')
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Se cancelo la eliminacion de tus encuestas',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 }
             })
     });

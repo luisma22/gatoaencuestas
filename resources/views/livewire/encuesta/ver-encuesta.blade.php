@@ -1,4 +1,7 @@
 <div wire:loading.remove>
+    <div class="text-center mb-3 text-uppercase"">
+        <b>{{ $encuesta_ver->nombre ?? '' }}</b>
+    </div>
     <ul class="list-group">
         @foreach ($encuesta_ver->preguntas ?? [] as $key => $todaspregunta)
             <li class="list-group-item justify-content-between align-items-start">

@@ -1,5 +1,8 @@
 <div wire:ignore.self class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample1" aria-labelledby="veroffcanvasExampleLabel">
-    <div class="offcanvas-header">
+    <div wire:loading class="offcanvas-header">
+        <h1 class="modal-title fs-5" ><i class="material-icons md-48">hourglass_top</i>Cargando...</h1>
+      </div>
+    <div class="offcanvas-header" wire:loading.remove>
         <h1 class="modal-title fs-5" id="offcanvasExample1">{{ $texto_modal }}</h1>
         <div>
           <button type="button" class="btn btn-danger mb-0" wire:click="cancelar" data-bs-dismiss="offcanvas">Cancelar</button>

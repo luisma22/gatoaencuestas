@@ -186,7 +186,7 @@ class Encuestas extends Component
     }
 
     public function verEncuesta(Encuesta $encuesta) {
-        $this->texto_modal = "Ver Encuesta";
+        $this->texto_modal = "Diseño de la Encuesta";
         $this->encuesta_ver = $encuesta;
     }
 

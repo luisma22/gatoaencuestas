@@ -170,7 +170,7 @@ $(document).ready(function() {
 
     window.addEventListener('eliminar_encuestados', function (event) {
         Swal.fire({
-            title: 'Segura que quieres eliminar las encuestas hechas?',
+            title: 'Segur@ que quieres eliminar las encuestas hechas?',
             showDenyButton: true,
             showCancelButton: false,
             confirmButtonText: 'Aceptar',
@@ -179,12 +179,6 @@ $(document).ready(function() {
                 if (result.isConfirmed) {
                     window.Livewire.emit('confirmar_eliminacion');
                 } else if (result.isDenied) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Se cancelo la eliminacion de tus encuestas',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
                 }
             })
     });

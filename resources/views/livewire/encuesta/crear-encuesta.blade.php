@@ -19,13 +19,13 @@
         </div>
         <div class="form-floating mt-1">
             <div class="row">
-                <div class="col-7">
+                <div class="col-xl-7 col-md-7 col-sm-12">
                     <textarea rows="5" wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" placeholder="Descripcion" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
                     @error('descripcion')
                     <p class='text-danger inputerror'>{{ $message }} </p>
                     @enderror
                 </div>
-                <div class="col-5">
+                <div class="col-xl-5 col-md-5 col-sm-12">
                     @include('livewire.encuesta.colores')
                 </div>
             </div>

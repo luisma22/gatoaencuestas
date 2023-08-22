@@ -5,7 +5,7 @@
     <div class="offcanvas-header" wire:loading.remove>
         <h1 class="modal-title fs-5" id="offcanvasExample1">{{ $texto_modal }}</h1>
         <div>
-          <button type="button" class="btn btn-danger mb-0" wire:click="cancelar" data-bs-dismiss="offcanvas">Cancelar</button>
+          <button type="button" class="btn btn-success mb-0" wire:click="cancelar" data-bs-dismiss="offcanvas">Cerrar</button>
         </div>
     </div>
     <div class="offcanvas-body">

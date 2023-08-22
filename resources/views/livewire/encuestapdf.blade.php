@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
 h1, .h1, .h1, h2, .h2, .h2, h3, .h3, .h3, h4, .h4, .h4 {
    letter-spacing: -0.05rem;
@@ -9,7 +10,7 @@ p {
     color: #7b809a;
 }
 p, .p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #7b809a;
 }
 p.texto-llenado {
@@ -33,31 +34,17 @@ p.texto-llenado {
 .form-check {
     display: block;
     min-height: auto;
-    padding-left: 1.73em;
+    padding-left: 3rem;
     margin-bottom: 0;
     color: #7b809a;
 }
-.form-check:not(.form-switch) .form-check-input[type="checkbox"]:after {
-    transition: opacity 0.25s ease-in-out;
-    width: 100%;
-    height: 100%;
-    color: #fff;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.67rem;
-    opacity: 0;
-    border: 2px solid black;
-    border-radius: 3px;
-}
 .form-check-label {
-    font-weight: 400;
+   font-weight: 400;
+   margin-top: -0.2rem;
+   padding-top: -0.2rem;
 }
 label, .form-label {;
     color: #7b809a;
-    padding-top: -2px;
-    margin-left: 0.25rem;
 }
 .text-justify {
    margin-left: 28px;
@@ -93,6 +80,7 @@ label, .form-label {;
 .nombre-dani {
    -webkit-transform: rotate(90deg); 
    -moz-transform: rotate(90deg);
+   font-weight: 100;
 }
 .nombre-instituto {
    position: absolute;
@@ -101,6 +89,17 @@ label, .form-label {;
    color: #7b809a;
    -webkit-transform: rotate(-90deg); 
    -moz-transform: rotate(-90deg);
+   font-weight: 100;
+}
+
+.form-check-input {
+   margin-top: -10px;
+   padding-top: -10px;
+}
+
+.form-check-label {
+   font-size: .8rem;
+   color: #7b809a;
 }
 
 </style>
@@ -110,8 +109,8 @@ label, .form-label {;
    </div>
    <div class="nombre-dani nombre">Daniela Miranda Rocha</div>
    <div class="nombre-instituto">Instituto Tecnologico INFOCAL</div>
-   <div class="text-center">
-      <h2>{{ $encuesta->nombre }}</h2>
+   <div class="text-center ">
+      <h2>{{ strtoupper($encuesta->nombre) }}</h2>
    </div>
    <div class="text-justify">
       <p>{{ $encuesta->descripcion }}</p>
@@ -119,9 +118,9 @@ label, .form-label {;
    @foreach ($preguntas as $key => $pregunta)
          <div class="row">
             <div class="col-12 pb-0">
-               <p>Pregunta {{ ($key+1) }}  - {{ $pregunta->pregunta }}</p>
+               <p class="">Pregunta {{ ($key+1) }}  - {{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
-                  <div class="form-check ps-0">
+                  <div class="form-check pb-0">
                      <input class="form-check-input btn-check" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>
                      <label class="form-check-label" for="opcion{{ $pregunta->id }}">
                         Si

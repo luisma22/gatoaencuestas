@@ -17,5 +17,5 @@ class Encuesta extends Model
     public function encuestados() {
         return $this->hasMany(Encuestados::class);
     }
-    protected $fillable = ['nombre', 'descripcion','habilitado', 'user_id'];
+    protected $fillable = ['nombre', 'descripcion','habilitado', 'user_id', 'opciones', 'forma'];
 }

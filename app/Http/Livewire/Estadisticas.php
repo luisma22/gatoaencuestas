@@ -21,6 +21,8 @@ class Estadisticas extends Component
     public $is_pdf = false;
     public $valor_col_grid_pdf = 1;
     public $cantidad_reportes = 0;
+    public $colores_encuesta;
+    public $forma = 'pie';
     public function mount($id) {
         $this->iniciarDatos($id);
     }
@@ -90,6 +92,8 @@ class Estadisticas extends Component
             $this->encuestados = count($this->todas_las_respuestas);
             $this->llenarResultadosEncuesta();
             $this->cantidad_reportes = ceil($this->cantidad_preguntas/3);
+            $this->colores_encuesta = $this->encuesta->opciones;
+            $this->forma = $this->encuesta->forma;
         }
     }
 

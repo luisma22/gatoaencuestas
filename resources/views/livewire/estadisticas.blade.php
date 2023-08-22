@@ -97,6 +97,8 @@
     function encuestas(){
         var preguntasj = @json($respuestas_preguntas);
         var todaslasrespuestas = @json($todas_las_respuestas);
+        var colores = JSON.parse(@json($colores_encuesta));
+        var forma = @json($forma);
         if (todaslasrespuestas.length > 0) {
             var options = {
                 tooltips: {
@@ -136,17 +138,11 @@
                 }
                 var data = [{
                     data: valores,
-                    backgroundColor: [
-                        "#4b77a9",
-                        "#5f255f",
-                        "#5cd55f",
-                        "#5ab55f"
-                    ],
+                    backgroundColor: colores,
                     borderColor: "#fff"
                 }];
                 new Chart(ctx, {
-                    type: "pie",
-                    
+                    type: forma, 
                     data: {
                         labels: labels,
                         datasets: data,

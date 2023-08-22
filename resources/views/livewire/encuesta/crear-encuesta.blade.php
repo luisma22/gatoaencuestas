@@ -10,10 +10,17 @@
             @enderror
         </div>
         <div class="form-floating mt-1">
-        <textarea wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
-            @error('descripcion')
-            <p class='text-danger inputerror'>{{ $message }} </p>
-            @enderror
+            <div class="row">
+                <div class="col-6">
+                    <textarea rows="5" wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" placeholder="Descripcion" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
+                    @error('descripcion')
+                    <p class='text-danger inputerror'>{{ $message }} </p>
+                    @enderror
+                </div>
+                <div class="col-6">
+                    @include('livewire.encuesta.colores')
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-2">

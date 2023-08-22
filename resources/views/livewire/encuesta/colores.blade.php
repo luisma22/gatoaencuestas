@@ -1,5 +1,5 @@
 <div class="container-fluid" wire:loading.remove wire:target="editar">
-    <div class="text-center">Colores Estadisticas</div>
+    <div>Colores para las Estadisticas</div>
     @foreach ($colores_seleccionados as $key => $color)
         <input wire:model.defer="colores_seleccionados.{{ $key }}" type="color" value="{{ $color }}" />
     @endforeach

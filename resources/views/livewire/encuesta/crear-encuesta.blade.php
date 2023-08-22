@@ -1,32 +1,35 @@
 <div wire:loading.remove wire:target="editar">
 <form>
     <div class="row">
-    <div class="col-10">
-        <div class="form-floating mb-3">
-        <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput" wire:click = "seleccionar('nombre')" name="floatingInput">
-        <label for="floatingInput">Nombre</label>
-            @error('nombre')
-            <p class='text-danger inputerror'>{{ $message }} </p>
-            @enderror
+    <div class="col-12">
+        <div class="row">
+            <div class="col-10">
+                <div class="form-floating mb-3">
+                <input wire:model.defer="nombre" type="text" class="form-control border border-2 p-2" id="floatingInput" wire:click = "seleccionar('nombre')" name="floatingInput">
+                <label for="floatingInput">Nombre</label>
+                    @error('nombre')
+                    <p class='text-danger inputerror'>{{ $message }} </p>
+                    @enderror
+                </div></div>
+            <div class="col-2">
+                <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz()">
+                    <i class="material-icons text-sm">mic</i>
+                </button>
+            </div>
         </div>
         <div class="form-floating mt-1">
             <div class="row">
-                <div class="col-6">
+                <div class="col-7">
                     <textarea rows="5" wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" placeholder="Descripcion" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
                     @error('descripcion')
                     <p class='text-danger inputerror'>{{ $message }} </p>
                     @enderror
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     @include('livewire.encuesta.colores')
                 </div>
             </div>
         </div>
-    </div>
-    <div class="col-2">
-        <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz()">
-        <i class="material-icons text-sm">mic</i>
-        </button>
     </div>
     </div>
 </form>

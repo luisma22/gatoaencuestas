@@ -47,12 +47,17 @@ label, .form-label {;
     color: #7b809a;
 }
 .text-justify {
-   margin-left: 28px;
+   margin-left: 25px;
+   margin-right: 55px;
+   font-size: 1rem;
    text-align: justify !important;
+   font-weight: 0;
+}
+.text2 {
+   font-size: .85rem;
 }
 .text-center {
-   margin-left: 28px;
-   margin-top: 35px;
+   margin-top: 65px;
    text-align: center !important;
 }
 .text-end {
@@ -80,7 +85,7 @@ label, .form-label {;
 .nombre-dani {
    -webkit-transform: rotate(90deg); 
    -moz-transform: rotate(90deg);
-   font-weight: 100;
+   font-size: .9rem;
 }
 .nombre-instituto {
    position: absolute;
@@ -89,7 +94,7 @@ label, .form-label {;
    color: #7b809a;
    -webkit-transform: rotate(-90deg); 
    -moz-transform: rotate(-90deg);
-   font-weight: 100;
+   font-size: .9rem;
 }
 
 .form-check-input {
@@ -102,6 +107,12 @@ label, .form-label {;
    color: #7b809a;
 }
 
+.tamano {
+   font-size: 1rem;
+}
+.radio2 {
+   margin-top: -13px !important;
+}
 </style>
 <div>
    <div class="text-end imagen">
@@ -109,8 +120,8 @@ label, .form-label {;
    </div>
    <div class="nombre-dani nombre">Daniela Miranda Rocha</div>
    <div class="nombre-instituto">Instituto Tecnologico INFOCAL</div>
-   <div class="text-center ">
-      <h2>{{ strtoupper($encuesta->nombre) }}</h2>
+   <div class="text-center tamano">
+      <h4>{{ strtoupper($encuesta->nombre) }}</h4>
    </div>
    <div class="text-justify">
       <p>{{ $encuesta->descripcion }}</p>
@@ -121,19 +132,19 @@ label, .form-label {;
                <p class="">Pregunta {{ ($key+1) }}  - {{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
                   <div class="form-check pb-0">
-                     <input class="form-check-input btn-check" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>
+                     <input class="form-check-input btn-check radio2" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>
                      <label class="form-check-label" for="opcion{{ $pregunta->id }}">
                         Si
                      </label>
                   </div>
                   <div class="form-check ps-0">
-                     <input class="form-check-input" type="radio" value="No" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "No") checked @endif>
+                     <input class="form-check-input radio2" type="radio" value="No" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "No") checked @endif>
                      <label class="form-check-label" for="opcion_{{ $pregunta->id }}">
                         No
                      </label>
                   </div>
                   @elseif ($pregunta->tipo == 2)
-                     <p class="texto-llenado pb-0 text-justify">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
+                     <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
                   @else
                      @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
                         <div class="form-check pb-0">

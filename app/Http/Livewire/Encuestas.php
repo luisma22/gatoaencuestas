@@ -51,7 +51,8 @@ class Encuestas extends Component
             'habilitado' => 1,
             'user_id' => auth()->user()->id,
             'opciones' => json_encode($this->colores_seleccionados),
-            'forma' => $this->forma
+            'forma' => $this->forma,
+            'habilitar' => false
         ]);
         if (count($this->preguntas_id) > 0) {
             $encuesta->preguntas()->attach(
@@ -261,5 +262,10 @@ class Encuestas extends Component
         } else {
             $this->forma = 'pie';
         }
+    }
+
+    public function habilitar(Encuesta $encuesta) {
+        $encuesta->habilitar = !$encuesta->habilitar;
+        $encuesta->save();
     }
 }

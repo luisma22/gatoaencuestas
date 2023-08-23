@@ -29,7 +29,7 @@
                     </div>
                     <div lass="col-xl-12 col-lg-12 col-md-12">
                         <div class="row">
-                            <div class="col-5">
+                            <div class="col-xl-12 col-lg-12 col-md-12">
                                 <div class="form-check form-switch ms-3 mt-3 me-4">
                                     <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
                                     <label class="form-check-label" for="flexSwitchCheckChecked">Ver todas las encuestas</label>
@@ -45,7 +45,7 @@
         @foreach ($encuestas as $pos => $encuesta)
         <div class="col-xl-4 col-sm-6 mb-xl-4 mb-4">
             <div class="card">
-                <div class="card-header p-3 pt-2">
+                <div class="card-header p-3 pt-2 pb-1">
                     <div
                         class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
                         <i class="material-icons opacity-10">assignment</i>
@@ -58,6 +58,16 @@
                         <h6 class="mb-0">{{ $encuesta->created_at }}</h6>
                         <h6 class="mb-0">{{ $encuesta->descripcion }}</h6>
                     </div>
+                    @if ($encuesta->habilitado)
+                        <div class="row justify-content-md-end">
+                            <div class="col-xl-4 col-md-4 col-sm-12">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="habilitar({{ $encuesta }})" @checked($encuesta->habilitar)>
+                                    <label class="form-check-label pt-0" for="flexSwitchCheckChecked">Habilitar</label>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer pt-1">

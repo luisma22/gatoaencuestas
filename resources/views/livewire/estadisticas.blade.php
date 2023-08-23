@@ -116,7 +116,7 @@
                             if (sum > 0) {
                                 percentage = (value*100 / sum).toFixed(0);
                             }
-                            return percentage+"%";
+                            return percentage+"% \ntotal: "+value;
                         },
                         color: '#fff',
                     }

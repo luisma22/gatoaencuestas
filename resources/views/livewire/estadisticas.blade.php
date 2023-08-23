@@ -112,8 +112,11 @@
                             dataArr.map(data => {
                                 sum += data;
                             });
-                            let percentage = (value*100 / sum).toFixed(0)+"%";
-                            return percentage;
+                            let percentage = 0;
+                            if (sum > 0) {
+                                percentage = (value*100 / sum).toFixed(0);
+                            }
+                            return percentage+"%";
                         },
                         color: '#fff',
                     }

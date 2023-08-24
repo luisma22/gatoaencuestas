@@ -77,7 +77,14 @@ $(document).ready(function() {
     var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
+    });
+    
+    $(".linkencuesta").click(async function(e) {
+        e.preventDefault();
+        await navigator.clipboard.writeText($(this).text());
+        $("#toast").toast('show');
     })
+
     window.addEventListener('encuestas', event => {
         if ($(".modal-backdrop").length) {
             $(".modal-backdrop")[0].remove();

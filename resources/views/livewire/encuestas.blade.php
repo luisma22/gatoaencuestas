@@ -7,6 +7,15 @@
         @include('livewire.canvasoff.canvasoff-ver-encuestas')
     @endif
     <div class="row">
+        <div class="position-fixed top-0 end-0" style="z-index: 11">
+            <div class="toast hide" role="alert" aria-live="assertive" id="toast" aria-atomic="true" data-bs-autohide="true" data-bs-delay="1500">
+                <div class="d-flex">
+                    <div class="toast-body">
+                        URL de la encuesta copiada
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col-12">
             <div class="card my-4">
                 <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
@@ -68,6 +77,9 @@
                             </div>
                         </div>
                     @endif
+                    <div>
+                        <p class="text-sm text-end mb-0 linkencuesta">{{ URL::to('encuestarinfo') }}/{{ $encuesta->id }}</p>
+                    </div>
                 </div>
                 <hr class="dark horizontal my-0">
                 <div class="card-footer pt-1">
@@ -84,21 +96,23 @@
                         <button type="button" class="btn btn-danger btn-link mb-1" wire:click="eliminar({{ $encuesta }})">
                             <i class="material-icons">delete</i>
                         </button>
-                        @if ($canvasoff)
-                            <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
-                                <i class="material-icons">format_list_numbered</i>
-                            </button>
-                        @else
-                            <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample1" wire:click="verEncuesta({{ $encuesta }})" data-original-title="" title="">
-                                <i class="material-icons">format_list_numbered</i>
+                        @if ($encuesta->preguntas->count() > 0)
+                            @if ($canvasoff)
+                                <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="modal" data-bs-target="#verEncuesta" wire:click="verEncuesta({{ $encuesta }})">
+                                    <i class="material-icons">format_list_numbered</i>
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-info btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample1" wire:click="verEncuesta({{ $encuesta }})" data-original-title="" title="">
+                                    <i class="material-icons">format_list_numbered</i>
+                                </button>
+                            @endif
+                            <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
+                                <i class="material-icons">rule</i>
+                                <span class="position-absolute top-5 start-85 badge rounded-pill bg-info zindex-tooltip">
+                                    {{ $encuesta->encuestados->count() }}
+                                </span>
                             </button>
                         @endif
-                        <button type="button" class="btn btn-dark btn-link mb-1" wire:click="iniciarEncuesta({{ $encuesta }})">
-                            <i class="material-icons">rule</i>
-                            <span class="position-absolute top-5 start-85 badge rounded-pill bg-info zindex-tooltip">
-                                {{ $encuesta->encuestados->count() }}
-                             </span>
-                        </button>
                         @if ($encuesta->encuestados->count() > 0)
                             <button type="button" class="btn btn-dark btn-link mb-1" wire:click="estadisticas({{ $encuesta }})">
                                 <i class="material-icons">stacked_bar_chart</i>

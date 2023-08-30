@@ -116,7 +116,7 @@
                             if (sum > 0) {
                                 percentage = (value*100 / sum).toFixed(0);
                             }
-                            return percentage+"% \ntotal: "+value;
+                            return percentage+"%\n"+value+ " de "+ todaslasrespuestas.length;
                         },
                         color: '#fff',
                     }
@@ -125,6 +125,7 @@
             var labels = [];
             var valores = [];
             var ctx = "";
+            var cantidad_total = 0;
             for (var preguntaj in preguntasj) {
                 ctx = document.getElementById("chart-canvas" + preguntaj).getContext("2d");
                 for(var key in preguntasj[preguntaj]) {
@@ -136,13 +137,15 @@
                         } else {
                             labels.push(key);
                         }
+                        cantidad_total++;
                         valores.push(preguntasj[preguntaj][key]);
                     }
                 }
                 var data = [{
                     data: valores,
                     backgroundColor: colores,
-                    borderColor: "#fff"
+                    borderColor: "#fff",
+                    total: cantidad_total
                 }];
                 new Chart(ctx, {
                     type: forma, 

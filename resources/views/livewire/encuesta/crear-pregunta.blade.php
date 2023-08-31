@@ -43,15 +43,15 @@
         @foreach ($preguntas_opciones as $key => $pregunta)
           <li class="list-group-item justify-content-between align-items-start" wire:sortable.item="{{ $key }}" wire:key="task-{{ $key }}">
             <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <button type="button" class="btn btn-danger " wire:click="quitar({{ $key }})">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <button type="button" class="btn btn-danger mb-1" wire:click="quitar({{ $key }})">
                         <i class="material-icons text-sm">delete</i>
                     </button>
                 </div>   
-                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-12">
                   <div class="row">
-                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-xs-12 text-center" wire:sortable.handle><h3><i class="material-icons text-lg text-middle text-center text-4xl border-2">touch_app</i></h3></div>
-                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-8 col-xs-12"><input type="text" wire:model.defer = 'preguntas_opciones.{{ $key }}' wire:click ="seleccionar('preguntas_opciones.{{ $key }}')" class="form-control border border-2 p-2"></div>
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-8 col-10"><input type="text" wire:model.defer = 'preguntas_opciones.{{ $key }}' wire:click ="seleccionar('preguntas_opciones.{{ $key }}')" class="form-control border border-2 p-2"></div>
+                    <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 text-center" wire:sortable.handle><h3><i class="material-icons text-lg text-middle text-center text-4xl border-2">touch_app</i></h3></div>
                   </div>
                 </div>
             </div>

@@ -27,7 +27,9 @@ class Encuestas extends Component
     public $canvasoff = false;
     public $texto_modal_off = "Modo Desplegable";
     public $encuesta_a_eliminar;
-    public $colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653"];
+    public $colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 
+    5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653",
+    12 => "#2B39D9", 13 => "#D94100", 14 => "#8C2F07", 15 => "#7F7FDB", 16 => "#8F593D", 17 => "#368E8F", 18=> "#DBC653", 19=> "#5ab55f"];
     public $forma = "pie";
     public function mount() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
@@ -74,7 +76,9 @@ class Encuestas extends Component
         $this->estilo_microfono = "-dark";
         $this->vozactivada = false;
         $this->forma = 'pie';
-        $this->colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653"];
+        $this->colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 
+        5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653",
+        12 => "#2B39D9", 13 => "#D94100", 14 => "#8C2F07", 15 => "#7F7FDB", 16 => "#8F593D", 17 => "#368E8F", 18=> "#DBC653", 19=> "#5ab55f"];
     }
 
     public function cancelar() {
@@ -92,7 +96,9 @@ class Encuestas extends Component
         $this->preguntas_encuesta = $encuesta->preguntas;
         $this->preguntas_id = [];
         $this->forma = $encuesta->forma;
-        $this->colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653"];
+        $this->colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 
+        5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653",
+        12 => "#2B39D9", 13 => "#D94100", 14 => "#8C2F07", 15 => "#7F7FDB", 16 => "#8F593D", 17 => "#368E8F", 18=> "#DBC653", 19=> "#5ab55f"];
         if ($encuesta->opciones) {
             $this->colores_seleccionados = json_decode($encuesta->opciones);
         }

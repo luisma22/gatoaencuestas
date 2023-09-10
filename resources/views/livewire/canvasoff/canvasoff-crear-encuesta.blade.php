@@ -24,4 +24,5 @@
     <div class="offcanvas-body">
         @include('livewire.encuesta.crear-encuesta')
     </div>
+  </div>
 </div>

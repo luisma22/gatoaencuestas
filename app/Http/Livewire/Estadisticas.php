@@ -55,6 +55,9 @@ class Estadisticas extends Component
     private function llenarResultadosEncuesta() {
         foreach ($this->todas_las_respuestas as $respuesta) {
             foreach (json_decode($respuesta->respuestas) as $key => $resp) {
+                if (!($this->respuestas_preguntas[$key] ?? '')) {
+                    continue;
+                }
                 $convertido=(array)$resp;
                 if ($resp->tipo == "1") {
                     $this->respuestas_preguntas[$key][$convertido[0]]++; 

@@ -16,15 +16,25 @@ p, .p {
 p.texto-llenado {
    padding-left: .3rem;
 }
-.row {
+.row , .row2{
    display: flex;
    flex-wrap: wrap;
    color: #7b809a;
-   margin-left: 28px; 
+   width: 100%;
+   margin-left: 28px;
 }
+
+.row2 {
+   margin-left: 0px;
+}
+
 .col-12 {
+   flex: 0 0 auto;
+   width: 98%;
+}
+.col-3, .col-sm-3 ,.col-md-3{
     flex: 0 0 auto;
-    width: 98%;
+    width: 25%;
 }
 
 .pb-0 {
@@ -33,6 +43,14 @@ p.texto-llenado {
 
 .form-check {
     display: block;
+    min-height: auto;
+    padding-left: 3rem;
+    margin-bottom: 0;
+    color: #7b809a;
+}
+
+.form-check2 {
+   display: flex;
     min-height: auto;
     padding-left: 3rem;
     margin-bottom: 0;
@@ -113,6 +131,7 @@ label, .form-label {;
 .radio2 {
    margin-top: -13px !important;
 }
+
 </style>
 <div>
    <div class="text-end imagen">
@@ -128,7 +147,7 @@ label, .form-label {;
    </div>
    @foreach ($preguntas as $key => $pregunta)
          <div class="row">
-            <div class="col-12 pb-0">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-0">
                <p class="">Pregunta {{ ($key+1) }}  - {{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
                   <div class="form-check pb-0">
@@ -146,14 +165,25 @@ label, .form-label {;
                   @elseif ($pregunta->tipo == 2)
                      <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
                   @else
-                     @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
-                        <div class="form-check pb-0">
-                              <input class="form-check-input" type="checkbox" value="{{ $opcion }}" id="check_{{ $pregunta->id }}_{{ $key2 }}" @if ($respuestas[$pregunta->id][$key2] != "" || $respuestas[$pregunta->id][$key2] != false) checked @endif>
-                              <label class="form-check-label" for="check_{{ $pregunta->id }}_{{ $key2 }}">
-                                 {{ $opcion }}
-                              </label>
-                        </div>
-                     @endforeach
+                     <table style="width: 100%">
+                        @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
+                           @if ($key2%4 == 0)
+                              <tr>
+                           @endif
+                           <td>
+                              <div class="form-check pb-0">
+                                 <input class="form-check-input" type="checkbox" value="{{ $opcion }}" id="check_{{ $pregunta->id }}_{{ $key2 }}" @if ($respuestas[$pregunta->id][$key2] != "" || $respuestas[$pregunta->id][$key2] != false) checked @endif>
+                                 <label class="form-check-label" for="check_{{ $pregunta->id }}_{{ $key2 }}">
+                                    {{ $opcion }}
+                                 </label>
+                              </div>
+                              </td>
+                           @if (($key2+1)%4 == 0 || (($key2+1) == count(json_decode($pregunta->opciones))))
+                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                              </tr>
+                           @endif
+                        @endforeach
+                     </table>
                   @endif
             </div>
          </div>

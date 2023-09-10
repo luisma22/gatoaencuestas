@@ -147,8 +147,9 @@ label, .form-label {;
    </div>
    @foreach ($preguntas as $key => $pregunta)
          <div class="row">
+            @if ($respuestas[$pregunta->id] ?? '')
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-0">
-               <p class="">Pregunta {{ ($key+1) }}  - {{ $pregunta->pregunta }}</p>
+               <p class="">{{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
                   <div class="form-check pb-0">
                      <input class="form-check-input btn-check radio2" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>
@@ -184,8 +185,9 @@ label, .form-label {;
                            @endif
                         @endforeach
                      </table>
-                  @endif
-            </div>
+                     @endif
+               </div>
+            @endif
          </div>
       </div>
    @endforeach

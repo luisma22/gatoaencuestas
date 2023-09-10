@@ -22,7 +22,7 @@
             <div class="carousel-item">
             @endif
             <div class="pb-4">&nbsp;</div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-3 me-0"></div>
                     <div class="col-7 pb-10">
                         @if ($pregunta->tipo == 1)

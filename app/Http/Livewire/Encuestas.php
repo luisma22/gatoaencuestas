@@ -274,4 +274,8 @@ class Encuestas extends Component
         $encuesta->habilitar = !$encuesta->habilitar;
         $encuesta->save();
     }
+
+    public function listar(Encuesta $encuesta) {
+        return redirect()->route('encuestados', [$encuesta]);
+    }
 }

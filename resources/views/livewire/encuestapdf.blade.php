@@ -132,6 +132,10 @@ label, .form-label {;
    margin-top: -13px !important;
 }
 
+.page-break {
+    page-break-after: always;
+}
+
 </style>
 <div>
    <div class="text-end imagen">

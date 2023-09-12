@@ -123,6 +123,14 @@ $(document).ready(function() {
         });
     });
 
+    window.addEventListener('tomara_tiempo', event => {
+        Swal.fire({
+            icon: 'info',
+            title: 'Esto podria tardar un poco porfavor sea paciente y espere hasta que se complete el proceso, no realice otra accion',
+            showConfirmButton: true
+        });
+    });
+
     window.addEventListener('eliminar', event => {
         Swal.fire({
             icon: 'success',

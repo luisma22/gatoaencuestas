@@ -23,8 +23,19 @@ class Encuestapdf extends Component
         if ($position) {
             $encuestados = $position;
         }
-        $respuestas = json_decode(Encuestados::find($id2)->respuestas, true);
-        $pdf = PDF::loadView('livewire.encuestapdf', ['preguntas' => $preguntas, 'respuestas' => $respuestas, 'encuesta' => $encuesta]);
+        $html = '';
+        if ($id2 == 0) {
+            $encuestados = 'todas';
+            foreach ($encuesta->encuestados as $encuestado) {
+                $view = view('livewire.encuestapdf', ['preguntas' => $preguntas, 'respuestas' => json_decode($encuestado->respuestas, true), 'encuesta' => $encuesta]);
+                $html .= $view->render()."<div class='page-break'></div>";
+            }
+            $pdf = PDF::loadHTML($html);
+        } else {
+            $respuestas = json_decode(Encuestados::find($id2)->respuestas, true);
+            $pdf = PDF::loadView('livewire.encuestapdf', ['preguntas' => $preguntas, 'respuestas' => $respuestas, 'encuesta' => $encuesta]) ;
+        }
         return $pdf->download($encuesta->nombre.'_encuesta_'.$encuestados.'.pdf');
+        
     }
 }

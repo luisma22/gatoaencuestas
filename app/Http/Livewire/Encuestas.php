@@ -278,4 +278,9 @@ class Encuestas extends Component
     public function listar(Encuesta $encuesta) {
         return redirect()->route('encuestados', [$encuesta]);
     }
+
+    public function descargartodo(Encuesta $encuesta) {
+        $this->dispatchBrowserEvent('tomara_tiempo'); 
+        return redirect()->route('encuestapdf.pdf', [$encuesta, 0, 0]);
+    }
 }

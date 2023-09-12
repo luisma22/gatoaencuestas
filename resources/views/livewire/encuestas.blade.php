@@ -123,6 +123,9 @@
                             <button type="button" class="btn btn-info btn-link mb-1" wire:click="listar({{ $encuesta }})">
                                 <i class="material-icons">picture_as_pdf</i>
                             </button>
+                            <button type="button" class="btn btn-dark btn-link mb-1" wire:click="descargartodo({{ $encuesta }})">
+                                <i class="material-icons">picture_as_pdf</i>
+                            </button>
                         @endif
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">

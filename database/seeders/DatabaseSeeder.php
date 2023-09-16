@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->create([
+        $this->call(EncuestadosSeeder::class);
+        /*User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@material.com',
             'password' => ('secret')
@@ -26,6 +27,7 @@ class DatabaseSeeder extends Seeder
             $pregunta->encuestas()->sync(
                 Encuesta::all()->random(3)
             );
-        });
+        });*/
+
     }
 }

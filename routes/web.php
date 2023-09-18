@@ -48,7 +48,7 @@ Route::get('reset-password/{id}', ResetPassword::class)->middleware('signed')->n
 Route::get('sign-up', Register::class)->middleware('guest')->name('register');
 Route::get('sign-in', Login::class)->middleware('guest')->name('login');
 Route::get('encuestarinfo/{id}', Encuestar::class)->middleware('guest')->name('encuestar');
-Route::get('encuestapdfinfo/{id}/{id2}/{position}', [Encuestapdf::class, 'pdf'])->middleware('guest')->name('encuestapdfinfo.pdf');
+Route::get('encuestapdfinfo/{id}/{id2}/{position}/{indice}', [Encuestapdf::class, 'pdf'])->middleware('guest')->name('encuestapdfinfo.pdf');
 Route::get('user-profile', UserProfile::class)->middleware('auth')->name('user-profile');
 Route::get('gracias', Gracias::class)->name('gracias');
 Route::get('user-management', UserManagement::class)->middleware('auth')->name('user-management');
@@ -67,5 +67,5 @@ Route::get('preguntas', Preguntas::class)->name('preguntas');
 Route::get('encuestar/{id}', Encuestar::class)->name('encuestar');
 Route::get('encuestados/{id}', Encuestados::class)->name('encuestados');
 Route::get('estadisticas/{id}', Estadisticas::class)->name('estadisticas');
-Route::get('encuestapdf/{id}/{id2}/{position}', [Encuestapdf::class, 'pdf'])->name('encuestapdf.pdf');
+Route::get('encuestapdf/{id}/{id2}/{position}/{indice}', [Encuestapdf::class, 'pdf'])->name('encuestapdf.pdf');
 });

@@ -92,9 +92,9 @@ class Encuestar extends Component
             $this->dispatchBrowserEvent('finalizar_encuesta');
             $this->llenarEncuestaParametros();
             if (auth()->user() != null) {
-                return redirect()->route('encuestapdf.pdf', [$this->encuesta, $encuestados, 0]);
+                return redirect()->route('encuestapdf.pdf', [$this->encuesta, $encuestados, 0,0]);
             } else {
-                return redirect()->route('encuestapdfinfo.pdf', [$this->encuesta, $encuestados, 0]);
+                return redirect()->route('encuestapdfinfo.pdf', [$this->encuesta, $encuestados, 0,0]);
             }
         } else {
             $this->dispatchBrowserEvent('terminar_encuesta');

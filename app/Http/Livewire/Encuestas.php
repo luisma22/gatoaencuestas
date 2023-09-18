@@ -287,8 +287,18 @@ class Encuestas extends Component
 
     public function llenartodo(Encuesta $encuesta) {
         $preguntas = Encuesta::find($encuesta->id)->preguntas;
-        for ($i=1; $i <= 100; $i++) { 
-            $encuesta_completa = $this->llenarEncuestaParametros($preguntas);
+        $excepciones = [
+            5 => [0,1],
+            15 => [4],
+            9 => [0,4,5,8,10,14,15]
+        ];
+        $desde = rand(40, 80);
+        for ($i=1; $i <= 100; $i++) {
+            if ($i < $desde) {
+                $encuesta_completa = $this->llenarEncuestaParametros($preguntas, true);
+            } else {
+                $encuesta_completa = $this->llenarEncuestaParametros($preguntas, false);
+            }
             $id = Encuestados::create([
                 'respuestas' => json_encode($encuesta_completa),
                 'encuesta_id' => $encuesta->id
@@ -296,16 +306,28 @@ class Encuestas extends Component
         }
     }
 
-    function llenarEncuestaParametros($preguntas) {
+    function llenarEncuestaParametros($preguntas, $excepciones) {
         $encuesta_completa = [];
         $sino = ['Si', 'No'];
         $preg = [4,5,10];
         foreach ($preguntas as $pregunta) {
             if ($pregunta->tipo == 1) {
-                if ($pregunta->id == 12 || $pregunta->id == 14 || $pregunta->id == 16) {
+                if ($pregunta->id == 12 || $pregunta->id == 16) {
                     $encuesta_completa[$pregunta->id] = ["Si", "tipo" => $pregunta->tipo];
                 } else {
-                    $encuesta_completa[$pregunta->id] = [$sino[rand(0,1)], "tipo" => $pregunta->tipo];
+                    if($excepciones && $pregunta->id == 6) {
+                        $encuesta_completa[$pregunta->id] = ["Si", "tipo" => $pregunta->tipo];
+                    } else {
+                        if($pregunta->id == 11) {
+                            $encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];
+                        } else {
+                            if ($excepciones && $pregunta->id == 14) {
+                                $encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];    
+                            } else {
+                                $encuesta_completa[$pregunta->id] = [$sino[rand(0,1)], "tipo" => $pregunta->tipo];
+                            }
+                        }
+                    }
                 }
             } else {
                 $encuesta_completa[$pregunta->id] = [];
@@ -318,15 +340,35 @@ class Encuestas extends Component
                 }
                 if (in_array($pregunta->id, $preg)) {
                     $seleccion = rand(0,$cantidad);
-                    $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                    if ($excepciones && $pregunta->id == 5) {
+                        if (in_array($seleccion, [0,1])){
+                            $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                        } else {
+                            $r = rand(0,1);
+                            $encuesta_completa[$pregunta->id][$r] = $pregunta_decode[$r];
+                        }
+                    } else {
+                        $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                    }
                 } else {
                     $existe = [];
                     $seleccion = 0;
-                    $repeticiones = rand(7,$cantidad);
+                    $repeticiones = rand(1,3);
+                    if ($cantidad > 4) {
+                        $repeticiones = rand(7,10);
+                    }
                     for ($i=1; $i <= $repeticiones; $i++) { 
                         $seleccion = rand(0, $cantidad);
                         if (!in_array($seleccion, $existe)) {
-                            $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                            if($excepciones && $pregunta->id == 9) {
+                                if (!in_array($seleccion, [0,4,5,8,10,14,15])) {
+                                    $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                                } else {
+                                    $i--;
+                                }
+                            } else {
+                                $encuesta_completa[$pregunta->id][$seleccion] = $pregunta_decode[$seleccion];
+                            }
                         } else {
                             $i--;
                         }

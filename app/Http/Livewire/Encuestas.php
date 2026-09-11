@@ -329,6 +329,8 @@ class Encuestas extends Component
                         }
                     }
                 }
+            } else if ($pregunta->tipo == 2) {
+                $encuesta_completa[$pregunta->id] = ["Hay que llenar esto de alguna manera", "tipo" => $pregunta->tipo];
             } else {
                 $encuesta_completa[$pregunta->id] = [];
                 $random = 1;

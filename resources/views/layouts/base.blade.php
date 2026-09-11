@@ -262,7 +262,7 @@ $(document).ready(function() {
                     } else {
                         objeto.addImage(img,'PNG',8 ,0 , 200, 130);
                     }
-                    objeto.text(8, 55, "Daniela Miranda Rocha", null, 90);
+                    //objeto.text(8, 55, "Daniela Miranda Rocha", null, 90);
                     objeto.text(205, 210, "Universidad Mayor de San Simon", null, -90);
                     if ((control_inicio + 1) < cantidad) {
                         objeto.addPage("letter");

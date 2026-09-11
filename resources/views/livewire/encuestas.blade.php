@@ -125,14 +125,21 @@
                             </button>
                             
                         @endif
+                        <button type="button" class="btn btn-danger btn-link mb-1" wire:click="llenartodo({{ $encuesta }})"
+                            data-bs-trigger="hover" 
+                            data-bs-toggle="popover" 
+                            data-bs-html="true" 
+                            data-bs-title="AUTOMATICO" 
+                            data-bs-container="body"
+                            data-bs-content="<b>Llenar Encuestas Automaticamente</b></div>">
+                            <i class="material-icons">star</i>
+                        </button>
                     @else
                         <button type="button" class="btn btn-danger btn-link m-0" wire:click="restaurar({{ $encuesta }})">
                             <i class="material-icons">restore</i>
                         </button>
                     @endif
-                    <button type="button" class="btn btn-danger btn-link mb-1" wire:click="llenartodo({{ $encuesta }})">
-                                <i class="material-icons">star</i>
-                            </button>
+                    
                 </div>
             </div>
         </div>

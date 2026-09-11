@@ -38,7 +38,7 @@ RUN composer install \
     --no-interaction
 
 # Dependencias frontend y build
-RUN npm install
+RUN npm ci
 RUN npm run production
 
 # Permisos Laravel

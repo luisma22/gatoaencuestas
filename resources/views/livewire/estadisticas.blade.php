@@ -79,7 +79,7 @@
         @else
             <div class="col-12 text-center">
                 <div class="alert alert-dark">
-                    <strong class="text-light"><i class="material-icons">info</i> No hay Estadisticas porque esta encuesta no existe.</strong>
+                    <strong class="text-light"><i class="material-icons">info</i> No hay Estadisticas porque no hay encuestas disponibles.</strong>
                 </div>
             </div>
         @endif

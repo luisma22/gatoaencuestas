@@ -17,6 +17,14 @@ class ForgotPassword extends Component
         'email' => 'required|email',
     ];
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El campo email debe ser un correo electrónico válido.',
+        ];
+    }
+
     public function render()
     {
         return view('livewire.auth.forgot-password');

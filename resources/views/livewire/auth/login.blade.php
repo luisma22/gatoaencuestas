@@ -66,11 +66,11 @@
                                         <a href="{{ route('register') }}"
                                             class="text-primary text-gradient font-weight-bold">Registrate</a>
                                     </p>
-                                    <p class="text-sm text-center">
+                                    <!--<p class="text-sm text-center">
                                         olvidaste tu password?
                                         <a href="{{ route('password.forgot') }}"
                                             class="text-primary text-gradient font-weight-bold">aqui</a>
-                                    </p>
+                                    </p>-->
                                 </form>
                             </div>
                         </div>

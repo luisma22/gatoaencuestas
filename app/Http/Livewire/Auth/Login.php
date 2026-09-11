@@ -17,6 +17,15 @@ class Login extends Component
 
     ];
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El campo email debe ser un correo electrónico válido.',
+            'password.required' => 'El campo contraseña es obligatorio.',
+        ];
+    }
+
     public function render()
     {
         return view('livewire.auth.login');

@@ -19,6 +19,17 @@ class ResetPassword extends Component
         'password' => 'required|min:8|same:passwordConfirmation',
     ];
 
+    public function messages()
+    {
+        return [
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El campo email debe ser un correo electrónico válido.',
+            'password.required' => 'El campo contraseña es obligatorio.',
+            'password.min' => 'El campo contraseña debe tener al menos 8 caracteres.',
+            'password.same' => 'La confirmación de la contraseña no coincide.',
+        ];
+    }
+
     public function render()
     {
         return view('livewire.auth.reset-password');

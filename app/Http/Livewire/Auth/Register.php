@@ -17,6 +17,18 @@ class Register extends Component
     'email' => 'required|email|unique:users,email',
     'password' => 'required|min:5',];
 
+    public function messages()
+    {
+        return [
+            'name.required' => 'El campo nombre es obligatorio.',
+            'name.min' => 'El campo nombre debe tener al menos 3 caracteres.',
+            'email.required' => 'El campo email es obligatorio.',
+            'email.email' => 'El campo email debe ser un correo electrónico válido.',
+            'email.unique' => 'El correo electrónico ya está en uso.',
+            'password.required' => 'El campo contraseña es obligatorio.',
+            'password.min' => 'El campo contraseña debe tener al menos 5 caracteres.',
+        ];
+    }
 
     public function store(){
 
@@ -26,7 +38,7 @@ class Register extends Component
 
         auth()->login($user);
         
-        return redirect('/dashboard');
+        return redirect('/principal');
     } 
 
     public function render()

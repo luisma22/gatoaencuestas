@@ -78,7 +78,7 @@
                         </div>
                     @endif
                     <div>
-                        <p class="text-sm text-end mb-0 linkencuesta">{{ URL::to('encuestarinfo') }}/{{ $encuesta->id }}</p>
+                        <p class="text-sm text-end mb-0 linkencuesta">{{ URL::to('encuestardiseniografico') }}/{{ $encuesta->id }}</p>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0">
@@ -121,9 +121,6 @@
                                 <i class="material-icons">delete_sweep</i>
                             </button>
                             <button type="button" class="btn btn-info btn-link mb-1" wire:click="listar({{ $encuesta }})">
-                                <i class="material-icons">picture_as_pdf</i>
-                            </button>
-                            <button type="button" class="btn btn-dark btn-link mb-1" wire:click="descargartodo({{ $encuesta }})">
                                 <i class="material-icons">picture_as_pdf</i>
                             </button>
                             

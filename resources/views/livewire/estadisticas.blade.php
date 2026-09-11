@@ -45,17 +45,17 @@
                         @else
                             <div class="col-xl-{{ (3 * pow(2,$valor_col_grid_pdf)) }} col-sm-{{(6 * $valor_col_grid_pdf) }} mb-xl-0 mb-5">
                         @endif
-                            <div class="card z-index-2 ">
-                                <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
+                            <div class="card z-index-2 mt-2 pb-2">
+                                <div class="card-body pb-0 pt-1">
+                                    <h6 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
+                                    <p class="text-sm ">{{ $respuesta->pregunta}}</p>
+                                </div>
+                                <div class="card-header p-0 position-relative mx-3 z-index-2 bg-transparent">
                                     <div class="bg-gradient-success border-radius-lg py-3 pe-1">
                                         <div class="chart">
                                             <canvas id = "chart-canvas{{ $respuesta->id }}" class="chart-canvas{{ $respuesta->id }}" height="150"></canvas>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="card-body pb-0 pt-1">
-                                    <h6 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
-                                    <p class="text-sm ">{{ $respuesta->pregunta}}</p>
                                 </div>
                             </div>
                         </div>

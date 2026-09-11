@@ -32,7 +32,7 @@
                                 <label class="form-check-label" for="flexSwitchCheckChecked">Ver todas las preguntas</label>
                             </div>
                             <div class="col-xl-5 col-sm-5 col-md-5 col-10 align-end ms-3 mb-3">
-                                <input wire:model="search" type="text" placeholder="Buscar" class="form-control border border-2">
+                                <input wire:model="search" type="text" placeholder="  Buscar" class="form-control border border-2">
                             </div>
                         </div>
                     </div>

@@ -112,7 +112,15 @@ class Preguntas extends Component
     public function rules()
     { 
         return [
-            'pregunta' => 'required|min:12'
+            'pregunta' => 'required|min:3'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'pregunta.required' => 'El campo pregunta es obligatorio.',
+            'pregunta.min' => 'El campo pregunta debe tener al menos 3 caracteres.',
         ];
     }
 

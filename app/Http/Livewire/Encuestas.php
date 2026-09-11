@@ -126,8 +126,18 @@ class Encuestas extends Component
     public function rules()
     { 
         return [
-            'nombre' => 'required|min:12',
-            'descripcion' => 'required|min:12'
+            'nombre' => 'required|min:5',
+            'descripcion' => 'required|min:5'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El campo nombre es obligatorio.',
+            'nombre.min' => 'El campo nombre debe tener al menos 5 caracteres.',
+            'descripcion.required' => 'El campo descripcion es obligatorio.',
+            'descripcion.min' => 'El campo descripcion debe tener al menos 5 caracteres.',
         ];
     }
 

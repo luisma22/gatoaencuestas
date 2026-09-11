@@ -11,7 +11,7 @@ class Principal extends Component
     public function render()
     {
         $encuesta = Encuesta::orderBy('id', 'desc')->where('user_id', auth()->user()->id)->get();
-        $this->eid = $encuesta[0]->id;
+        $this->eid = count($encuesta) > 0 ? $encuesta[0]->id : 0;
         return view('livewire.principal');
     }
 }

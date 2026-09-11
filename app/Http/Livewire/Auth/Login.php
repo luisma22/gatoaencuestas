@@ -33,7 +33,7 @@ class Login extends Component
 
         if (! auth()->attempt($attributes)) {
             throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified.'
+                'email' => 'No podemos verificar sus credenciales.'
             ]);
         }
 

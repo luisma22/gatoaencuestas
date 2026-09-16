@@ -110,11 +110,6 @@
                         formatter: (value, ctx) => {
                             let sum = 0;
                             let dataArr = ctx.chart.data.datasets[0].data;
-                            console.log(
-                                "DATALABEL:",
-                                value,
-                                ctx.chart.data.datasets[0].data
-                            );
                             dataArr.map(data => {
                                 sum += data;
                             });
@@ -133,7 +128,7 @@
             var cantidad_total = 0;
             for (var preguntaj in preguntasj) {
                 var labels = [];
-            var valores = [];
+                var valores = [];
                 ctx = document.getElementById("chart-canvas" + preguntaj).getContext("2d");
                 for(var key in preguntasj[preguntaj]) {
                     if (key != "tipo") {
@@ -154,9 +149,6 @@
                     borderColor: "#fff",
                     total: cantidad_total
                 }];
-                console.log("FORMA:", forma);
-                console.log("PREGUNTAS:", preguntasj);
-                console.log("VALORES:", valores);
                 new Chart(ctx, {
                     type: forma, 
                     data: {

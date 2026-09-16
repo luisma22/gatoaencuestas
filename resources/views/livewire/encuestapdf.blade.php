@@ -149,11 +149,13 @@ label, .form-label {;
    <div class="text-justify">
       <p>{{ $encuesta->descripcion }}</p>
    </div>
+   @php($i = 0)
    @foreach ($preguntas as $key => $pregunta)
+      @php($i++)
          <div class="row">
             @if ($respuestas[$pregunta->id] ?? '')
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-0">
-               <p class="">{{ $pregunta->pregunta }}</p>
+               <p class="">{{ $i }}. {{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
                   <div class="form-check pb-0">
                      <input class="form-check-input btn-check radio2" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>

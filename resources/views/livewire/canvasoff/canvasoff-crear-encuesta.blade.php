@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="col-1 m-0 p-0"></div>
-    <div class="offcanvas-body">
+    <div class="offcanvas-body" style="height: 800px; overflow-y: auto;">
         @include('livewire.encuesta.crear-encuesta')
     </div>
   </div>

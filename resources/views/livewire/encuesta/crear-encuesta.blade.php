@@ -1,4 +1,4 @@
-<div wire:loading.remove wire:target="editar">
+<div wire:loading.remove wire:target="editar" >
 <form>
     <div class="row">
     <div class="col-12">
@@ -49,7 +49,9 @@
         </li>
     @endforeach
     </ul>
-    </div>
-    @livewire('encuesta.preguntas')
+</div>
+</div>
+<div class="row" style="height: 1500px;">
+@livewire('encuesta.preguntas')
 </div>
 </div>

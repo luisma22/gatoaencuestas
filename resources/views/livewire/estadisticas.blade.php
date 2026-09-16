@@ -100,6 +100,7 @@
         var colores = JSON.parse(@json($colores_encuesta));
         var forma = @json($forma);
         if (todaslasrespuestas.length > 0) {
+            console.log(todaslasrespuestas);
             var options = {
                 tooltips: {
                     enabled: true
@@ -109,6 +110,11 @@
                         formatter: (value, ctx) => {
                             let sum = 0;
                             let dataArr = ctx.chart.data.datasets[0].data;
+                            console.log(
+                                "DATALABEL:",
+                                value,
+                                ctx.chart.data.datasets[0].data
+                            );
                             dataArr.map(data => {
                                 sum += data;
                             });
@@ -122,11 +128,12 @@
                     }
                   },
               };
-            var labels = [];
-            var valores = [];
+            
             var ctx = "";
             var cantidad_total = 0;
             for (var preguntaj in preguntasj) {
+                var labels = [];
+            var valores = [];
                 ctx = document.getElementById("chart-canvas" + preguntaj).getContext("2d");
                 for(var key in preguntasj[preguntaj]) {
                     if (key != "tipo") {
@@ -147,6 +154,9 @@
                     borderColor: "#fff",
                     total: cantidad_total
                 }];
+                console.log("FORMA:", forma);
+                console.log("PREGUNTAS:", preguntasj);
+                console.log("VALORES:", valores);
                 new Chart(ctx, {
                     type: forma, 
                     data: {

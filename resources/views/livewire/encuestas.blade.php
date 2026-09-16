@@ -63,7 +63,7 @@
                         </span>
                     </div>
                     <div class="text-end pt-1">
-                        <p class="text-sm mb-0 text-capitalize">{{ $encuesta->nombre }}</p>
+                        <p class="text-sm ms-6 mb-0 text-capitalize">{{ $encuesta->nombre }}</p>
                         <h6 class="mb-0">{{ $encuesta->created_at }}</h6>
                         <h6 class="mb-0">{{ $encuesta->descripcion }}</h6>
                     </div>

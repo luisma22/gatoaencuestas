@@ -13,9 +13,9 @@ class Preguntas extends Component
     public function render()
     {
         if ($this->encuesta_preguntas_ids) {
-            $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->whereNotIn('id', $this->encuesta_preguntas_ids)->get();
+            $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->whereNotIn('id', $this->encuesta_preguntas_ids)->where('habilitado', 1)->get();
         } else {
-            $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->get();        
+            $this->todaslaspreguntas = Pregunta::orderBy('id', 'desc')->where('pregunta','LIKE', '%'. $this->search.'%')->where('user_id', auth()->user()->id)->where('habilitado', 1)->get();        
         }
         $this->dispatchBrowserEvent('popoverremove'); 
         return view('livewire.encuesta.preguntas');

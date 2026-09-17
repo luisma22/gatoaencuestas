@@ -207,6 +207,8 @@ $(document).ready(function() {
                     $(boton).removeClass("btn-danger").addClass("btn-dark");
                     $("#textarea"+pregunta_id).val(finalResult);
                     $("#textarea"+pregunta_id).focus();
+                    window.Livewire.emit('quitar_vox', finalResult);
+                   
                 } else {
                     window.Livewire.emit('quitar_vox', finalResult);
                 }

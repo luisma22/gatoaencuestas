@@ -40,7 +40,7 @@
                         </div>
                         @elseif ($pregunta->tipo == 2)
                             <div class="form-check ps-0">
-                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id = {{ $pregunta->id }} id="voz_opciones">
+                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" id="voz_opciones" wire:click="voz({{ $pregunta->id }})">
                                     <i class="material-icons text-sm">mic</i>
                                 </button>
                                 <textarea wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>

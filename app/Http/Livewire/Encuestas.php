@@ -239,7 +239,7 @@ class Encuestas extends Component
         } else {
             $opciones = explode(".", $this->seleccionado);
             $variable = $opciones[0];
-            $this->$variable[intval($opciones[1])] = $texto;
+            $this->$variable[intval($opciones[1])][intval($opciones[2])] = $texto;
         }
     }
 

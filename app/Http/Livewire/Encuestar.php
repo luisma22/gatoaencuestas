@@ -15,6 +15,7 @@ class Encuestar extends Component
     public $todas_las_preguntas = [];
     public $vozactivada = false;
     public $estilo_microfono = "-dark";
+    protected $listeners = [ "quitar_vox" => "quitar_vox"];
     public $id_opcion = '';
     public $cantidad_preguntas = 0;
     public $ip = '';
@@ -46,6 +47,7 @@ class Encuestar extends Component
                 $this->encuesta_completa[$pregunta->id]['tipo'] = $pregunta->tipo;
             }
         }
+        
     }
 
     public function ver() {
@@ -53,10 +55,11 @@ class Encuestar extends Component
     }
 
     public function voz($id_opcion) {
+        $this->vozactivada = false;
         $this->id_opcion = $id_opcion;
         if (!$this->vozactivada) {
             $this->estilo_microfono = "-danger";
-            $this->dispatchBrowserEvent('voz');
+            //$this->dispatchBrowserEvent('voz');
             $this->vozactivada = true;
         }
     }

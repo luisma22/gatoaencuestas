@@ -215,6 +215,7 @@ class Encuestas extends Component
                 });
             }
         }
+        $this->emit('quitaritem', $id);
     }
 
     public function verEncuesta(Encuesta $encuesta) {

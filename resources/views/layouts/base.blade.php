@@ -181,6 +181,10 @@ $(document).ready(function() {
         showConfirmButton: false,
         timer: 1500
         });
+        const carousel = bootstrap.Carousel.getInstance(
+        document.getElementById('carouselExampleCaptions')
+        );
+        carousel.to(0);
     });
 
     window.addEventListener('eliminar_encuestados', function (event) {
@@ -205,10 +209,9 @@ $(document).ready(function() {
                 finalResult = event.results[i][0].transcript;
                 if (pregunta_id != -1) {
                     $(boton).removeClass("btn-danger").addClass("btn-dark");
+                    window.Livewire.emit('quitar_vox', finalResult, pregunta_id);
                     $("#textarea"+pregunta_id).val(finalResult);
                     $("#textarea"+pregunta_id).focus();
-                    window.Livewire.emit('quitar_vox', finalResult);
-                   
                 } else {
                     window.Livewire.emit('quitar_vox', finalResult);
                 }

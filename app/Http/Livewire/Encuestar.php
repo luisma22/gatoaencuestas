@@ -64,10 +64,10 @@ class Encuestar extends Component
         }
     }
 
-    public function quitar_vox($texto) {
+    public function quitar_vox($texto, $id_opcion) {
         $this->estilo_microfono = "-dark";
         $this->vozactivada = false;
-        $this->encuesta_completa[intval($this->id_opcion)][0] = $texto;
+        $this->encuesta_completa[intval($id_opcion)][0] = $texto;
     }
 
     public function finalizarEncuesta() {

@@ -4,7 +4,7 @@
     </h6>
 </div>
 @if ($cantidad_preguntas > 0)
-<div id="carouselExampleCaptions" class="carousel slide h-70" data-bs-ride="carousel" data-bs-interval="false">
+<div wire:ignore id="carouselExampleCaptions" class="carousel slide h-70" data-bs-ride="carousel" data-bs-interval="false">
     <div class="carousel-indicators">
       @foreach ($todas_las_preguntas as $key => $pregunta)
         @if ($key == 0)
@@ -40,7 +40,7 @@
                         </div>
                         @elseif ($pregunta->tipo == 2)
                             <div class="form-check ps-0">
-                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" id="voz_opciones" wire:click="voz({{ $pregunta->id }})">
+                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" id="voz_opciones">
                                     <i class="material-icons text-sm">mic</i>
                                 </button>
                                 <textarea wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>

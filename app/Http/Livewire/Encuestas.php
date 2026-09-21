@@ -304,12 +304,17 @@ class Encuestas extends Component
             9 => [0,4,5,8,10,14,15]
         ];
         $desde = rand(40, 80);
-        for ($i=1; $i <= 100; $i++) {
-            if ($i < $desde) {
-                $encuesta_completa = $this->llenarEncuestaParametros($preguntas, true);
-            } else {
-                $encuesta_completa = $this->llenarEncuestaParametros($preguntas, false);
-            }
+        $preguntasopciones = [
+            23 => [220 ,0],
+            24 => [220, 0],
+            25 => [0, 220],
+            26 => [51, 169],
+            27 => [185, 35],
+            28 => [152, 68]
+        ];
+        
+        for ($i=1; $i <= 220; $i++) {
+            $encuesta_completa = $this->llenarEncuestaParametrosSansimon($preguntas, $preguntasopciones);
             $id = Encuestados::create([
                 'respuestas' => json_encode($encuesta_completa),
                 'encuesta_id' => $encuesta->id
@@ -317,6 +322,35 @@ class Encuestas extends Component
         }
     }
 
+    function llenarEncuestaParametrosSansimon($preguntas, &$preguntasopciones) {
+        $encuesta_completa = [];
+        $sino = ['Si', 'No'];
+        foreach ($preguntas as $pregunta) {
+            $sinoopcion = rand(0,1);
+            if ($preguntasopciones[$pregunta->id][$sinoopcion] > 0) {
+                $preguntasopciones[$pregunta->id][$sinoopcion]--;
+                if ($sino[$sinoopcion] == 'Si') {
+                    $encuesta_completa[$pregunta->id] = ["Si", "tipo" => $pregunta->tipo];
+                } else {
+                    $encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];
+                }
+            } else {
+                if ($sinoopcion == 0) {
+                    if ($preguntasopciones[$pregunta->id][1] > 0) {
+                        $encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];
+                        $preguntasopciones[$pregunta->id][1]--;
+                    }
+                } else {
+                    if ($preguntasopciones[$pregunta->id][0] > 0) {
+                        $encuesta_completa[$pregunta->id] = ["Si", "tipo" => $pregunta->tipo];
+                        $preguntasopciones[$pregunta->id][0]--;
+                    }
+                }
+                
+            }
+        }
+        return $encuesta_completa;
+    }
     function llenarEncuestaParametros($preguntas, $excepciones) {
         $encuesta_completa = [];
         $sino = ['Si', 'No'];

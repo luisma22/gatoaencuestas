@@ -32,6 +32,7 @@ class Encuestas extends Component
     5 => "#2B39D9", 6 => "#D94100", 7 => "#8C2F07", 8 => "#7F7FDB", 9 => "#8F593D", 10 => "#368E8F", 11=> "#DBC653",
     12 => "#2B39D9", 13 => "#D94100", 14 => "#8C2F07", 15 => "#7F7FDB", 16 => "#8F593D", 17 => "#368E8F", 18=> "#DBC653", 19=> "#5ab55f"];
     public $forma = "pie";
+    public $preguntas_aniadidas_ids = [123];
     public function mount() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
     }
@@ -70,6 +71,7 @@ class Encuestas extends Component
     public function limpiar() {
         $this->preguntas_encuesta = new \Illuminate\Database\Eloquent\Collection;
         $this->preguntas_id= [];
+        $this->preguntas_aniadidas_ids = [];
         $this->nombre = '';
         $this->descripcion = '';
         $this->texto_modal = "Crear Encuesta";
@@ -95,6 +97,7 @@ class Encuestas extends Component
         $this->nombre = $encuesta->nombre;
         $this->descripcion = $encuesta->descripcion;
         $this->preguntas_encuesta = $encuesta->preguntas;
+        $this->preguntas_aniadidas_ids = $encuesta->preguntas->pluck('id')->toArray();
         $this->preguntas_id = [];
         $this->forma = $encuesta->forma;
         $this->colores_seleccionados = [0 => "#4b77a9", 1 => "#5f255f", 2 => "#5cd55f", 3 => "#5ab55f", 4 => "#2F8C00", 
@@ -180,11 +183,18 @@ class Encuestas extends Component
 
     public function add($id) {
         if ($this->editar) {
+            if (in_array($id, $this->preguntas_aniadidas_ids)) {
+                return;
+            }
             $this->encuestaEditable->preguntas()->attach(
                 [$id]
             );
             $this->preguntas_encuesta = Encuesta::find($this->encuestaEditable->id)->preguntas;
+            $this->preguntas_aniadidas_ids = $this->preguntas_encuesta->pluck('id')->toArray();
         } else {
+            if (in_array($id, $this->preguntas_id)) {
+                return;
+            }
             $this->preguntas_encuesta->add(Pregunta::find($id));
             $this->preguntas_id[] = $id;
         }
@@ -200,6 +210,7 @@ class Encuestas extends Component
                 [$id]
             );
             $this->preguntas_encuesta = Encuesta::find($this->encuestaEditable->id)->preguntas;
+            $this->preguntas_aniadidas_ids = $this->preguntas_encuesta->pluck('id')->toArray();
         } else {
             $indice = -1;
             foreach ($this->preguntas_encuesta as $key => $pregunta) {

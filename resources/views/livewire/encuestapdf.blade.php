@@ -157,19 +157,30 @@ label, .form-label {;
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pb-0">
                <p class="">{{ $i }}. {{ $pregunta->pregunta }}</p>
                   @if ($pregunta->tipo == 1)
-                  <div class="form-check pb-0">
-                     <input class="form-check-input btn-check radio2" type="radio" value="Si" name="opcion{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "Si") checked @endif>
-                     <label class="form-check-label" for="opcion{{ $pregunta->id }}">
-                        Si
-                     </label>
-                  </div>
-                  <div class="form-check ps-0">
-                     <input class="form-check-input radio2" type="radio" value="No" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}" @if ($respuestas[$pregunta->id][0] == "No") checked @endif>
-                     <label class="form-check-label" for="opcion_{{ $pregunta->id }}">
-                        No
-                     </label>
-                  </div>
-                  <span>Texto Adicional:</span>
+                  <table style="width: 100%">
+                        @foreach (json_decode($pregunta->opciones) as $key3 => $opcion)
+                           @if ($key3%4 == 0)
+                              <tr>
+                           @endif
+                           <td>
+                              <div class="form-check pb-0">
+                                 @if ($respuestas[$pregunta->id][0] == $opcion)
+                                    <input class="form-check-input btn-check radio2" type="radio" value="{{ $opcion }}" name="opcion{{ $pregunta->id }}" checked>
+                                 @else
+                                    <input class="form-check-input btn-check radio2" type="radio" value="{{ $opcion }}" name="opcion{{ $pregunta->id }}">
+                                 @endif
+                                 <label class="form-check-label" for="opcion{{ $pregunta->id }}">
+                                    {{ $opcion }}
+                                 </label>
+                              </div>
+                              </td>
+                           @if (($key3+1)%4 == 0 || (($key3+1) == count(json_decode($pregunta->opciones))))
+                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                              </tr>
+                           @endif
+                        @endforeach
+                     </table>
+                  <span class="form-label">Texto Adicional:</span>
                    <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id]['extratexto'] != "") {{ $respuestas[$pregunta->id]['extratexto'] }} @else N/A @endif</p>
                   @elseif ($pregunta->tipo == 2)
                      <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>

@@ -9,7 +9,11 @@ class Preguntas extends Component
     public $todaslaspreguntas = [];
     public $search = '';
     public $encuesta_preguntas_ids = [];
+    public $preguntas_aniadidas_ids = "";
     protected $listeners = ['quitaritem' => 'quitaritem'];
+    public function mount($preguntas_aniadidas_ids = []) {
+        $this->preguntas_aniadidas_ids = $preguntas_aniadidas_ids;
+    }
     public function render()
     {
         if ($this->encuesta_preguntas_ids) {

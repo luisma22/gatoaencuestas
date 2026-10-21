@@ -38,14 +38,14 @@
                             <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" data-posicion="extratexto" id="voz_opciones_{{ $pregunta->id }}">
                                 <i class="material-icons text-sm">mic</i>
                             </button>
-                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" type="text" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
+                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
                         </div>
                         @elseif ($pregunta->tipo == 2)
                             <div class="form-check ps-0">
                                 <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" data-posicion="0" id="voz_opciones">
                                     <i class="material-icons text-sm">mic</i>
                                 </button>
-                                <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>
+                                <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>
                             </div>
                         @else
                             <div class="form-check ps-0 pe-0">
@@ -61,7 +61,7 @@
                             id="voz_opciones_{{ $pregunta->id }}">
                                 <i class="material-icons text-sm">mic</i>
                             </button>
-                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" type="text" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
+                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
                             </div>
                         @endif
                     </div>

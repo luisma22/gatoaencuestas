@@ -52,6 +52,6 @@
 </div>
 </div>
 <div class="row" style="height: 1500px;">
-@livewire('encuesta.preguntas')
+@livewire('encuesta.preguntas', ['preguntas_aniadidas_ids' =>[]])
 </div>
 </div>

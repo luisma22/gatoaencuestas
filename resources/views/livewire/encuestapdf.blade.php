@@ -13,8 +13,13 @@ p, .p {
     font-size: 1.1rem;
     color: #7b809a;
 }
-p.texto-llenado {
+p.texto-llenado{
    padding-left: .3rem;
+}
+
+hr {
+   width: 95%;
+   margin-left: -10px;
 }
 .row , .row2{
    display: flex;
@@ -181,8 +186,10 @@ label, .form-label {;
                         @endforeach
                      </table>
                   <span class="form-label">Texto Adicional:</span>
+                  <hr class="pb-0">
                    <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id]['extratexto'] != "") {{ $respuestas[$pregunta->id]['extratexto'] }} @else N/A @endif</p>
-                  @elseif ($pregunta->tipo == 2)
+                  <hr class="pb-0">
+                   @elseif ($pregunta->tipo == 2)
                      <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
                   @else
                      <table style="width: 100%">
@@ -205,7 +212,9 @@ label, .form-label {;
                         @endforeach
                      </table>
                      <span>Texto Adicional:</span>
+                     <hr class="pb-0">
                      <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id]['extratexto'] != "") {{ $respuestas[$pregunta->id]['extratexto'] }} @else N/A @endif</p>
+                     <hr class="pb-0">
                      @endif
                </div>
             @endif

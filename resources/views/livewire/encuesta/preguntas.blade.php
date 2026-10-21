@@ -14,10 +14,17 @@
             $i=1;
             @endphp
             @if ($todaspregunta->tipo == 1)
+            @foreach (json_decode($todaspregunta->opciones) as $key => $value) 
             @php
-                $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_checked</i><span class='ps-2'>Si</span></div>";
-                $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_unchecked</i><span class='ps-2'>No</span></div>";
+                if($i==1) {
+                    $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_checked</i><span class='ps-2'>".$value."</span></div>";
+
+                } else {
+                    $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_unchecked</i><span class='ps-2'>".$value."</span></div>";
+                }
+                $i++;
             @endphp
+            @endforeach
             @elseif ($todaspregunta->tipo == 2)
             @php
                 $cuerpo.= "<div><i class='material-icons text-sm md-dark'>message</i><span class='ps-2'>Esta es una pregunta para completar</span></div>";  

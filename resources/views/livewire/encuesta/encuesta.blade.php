@@ -26,24 +26,26 @@
                     <div class="col-3 me-0"></div>
                     <div class="col-7 pb-10">
                         @if ($pregunta->tipo == 1)
-                        <div class="form-check ps-0">
-                            <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="radio" value="Si" name="opcion{{ $pregunta->id }}" id="opcion{{ $pregunta->id }}">
-                            <label class="form-check-label" for="opcion{{ $pregunta->id }}">
-                            Si
-                            </label>
+                        <div class="form-check ps-0 pe-0">
+                            @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
+                            <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="radio" value="{{ $opcion }}" name="opcion{{ $pregunta->id }}" id="opcion{{ $pregunta->id }}{{ $key2 }}">
+                            <label class="form-check-label" for="opcion{{ $pregunta->id }}{{ $key2 }}">
+                                {{ $opcion }}
+                            </label><br>
+                            @endforeach
                         </div>
-                        <div class="form-check ps-0">
-                            <input class="form-check-input" type="radio" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" value="No" name="opcion{{ $pregunta->id }}" id="opcion_{{ $pregunta->id }}">
-                            <label class="form-check-label" for="opcion_{{ $pregunta->id }}">
-                            No
-                        </label>
+                        <div>
+                            <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" data-posicion="extratexto" id="voz_opciones_{{ $pregunta->id }}">
+                                <i class="material-icons text-sm">mic</i>
+                            </button>
+                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" type="text" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
                         </div>
                         @elseif ($pregunta->tipo == 2)
                             <div class="form-check ps-0">
-                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" id="voz_opciones">
+                                <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" data-posicion="0" id="voz_opciones">
                                     <i class="material-icons text-sm">mic</i>
                                 </button>
-                                <textarea wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>
+                                <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="text" class="form-control border border-2 p-2" id="textarea{{ $pregunta->id }}"></textarea>
                             </div>
                         @else
                             <div class="form-check ps-0 pe-0">
@@ -53,6 +55,13 @@
                                         {{ $opcion }}
                                     </label><br>
                                 @endforeach
+                            </div>
+                            <div>
+                            <button type="button" class="btn btn{{ $estilo_microfono }} mb-2 speech" data-id ="{{ $pregunta->id }}" data-posicion="extratexto"
+                            id="voz_opciones_{{ $pregunta->id }}">
+                                <i class="material-icons text-sm">mic</i>
+                            </button>
+                            <textarea rows="5" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.extratexto" type="text" class="form-control border border-2 p-2 mt-2" placeholder="Comentario (opcional)" id="textarea{{ $pregunta->id }}"></textarea>
                             </div>
                         @endif
                     </div>

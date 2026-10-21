@@ -169,6 +169,8 @@ label, .form-label {;
                         No
                      </label>
                   </div>
+                  <span>Texto Adicional:</span>
+                   <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id]['extratexto'] != "") {{ $respuestas[$pregunta->id]['extratexto'] }} @else N/A @endif</p>
                   @elseif ($pregunta->tipo == 2)
                      <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id][0] != "") {{ $respuestas[$pregunta->id][0] }} @else N/A @endif</p>
                   @else
@@ -191,6 +193,8 @@ label, .form-label {;
                            @endif
                         @endforeach
                      </table>
+                     <span>Texto Adicional:</span>
+                     <p class="texto-llenado pb-0 text-justify text2">@if ($respuestas[$pregunta->id]['extratexto'] != "") {{ $respuestas[$pregunta->id]['extratexto'] }} @else N/A @endif</p>
                      @endif
                </div>
             @endif

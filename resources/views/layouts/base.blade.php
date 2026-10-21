@@ -162,6 +162,7 @@ $(document).ready(function() {
     var pregunta_id = -1;
     var recognition = new webkitSpeechRecognition();
     var boton = 1;
+    var posicion = 0;
     recognition.continuous = true;
     recognition.lang = "es";
     recognition.interimResults = false;
@@ -209,9 +210,9 @@ $(document).ready(function() {
                 finalResult = event.results[i][0].transcript;
                 if (pregunta_id != -1) {
                     $(boton).removeClass("btn-danger").addClass("btn-dark");
-                    window.Livewire.emit('quitar_vox', finalResult, pregunta_id);
                     $("#textarea"+pregunta_id).val(finalResult);
                     $("#textarea"+pregunta_id).focus();
+                    window.Livewire.emit('quitar_vox', finalResult, pregunta_id, posicion);
                 } else {
                     window.Livewire.emit('quitar_vox', finalResult);
                 }
@@ -221,6 +222,7 @@ $(document).ready(function() {
     };
     $(".speech").click(function() {
         pregunta_id = parseInt($(this).attr('data-id'));
+        posicion = $(this).attr('data-posicion');
         $(this).removeClass("btn-dark").addClass("btn-danger");
         boton = this;
         recognition.start();

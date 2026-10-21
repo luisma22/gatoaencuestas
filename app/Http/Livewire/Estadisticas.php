@@ -35,18 +35,14 @@ class Estadisticas extends Component
     function llenarEncuestaParametrosEstadistica() {
         foreach ($this->todas_las_preguntas as $pregunta) {
             $this->nombre_pregunta[$pregunta->id] = $pregunta->pregunta;
-            if ($pregunta->tipo == 1) {
-                $this->respuestas_preguntas[$pregunta->id]['Si'] = 0;
-                $this->respuestas_preguntas[$pregunta->id]['No'] = 0;
+            if ($pregunta->tipo == 1 || $pregunta->tipo == 3) {
+                foreach (json_decode($pregunta->opciones) as $key => $valor) {
+                    $this->respuestas_preguntas[$pregunta->id][$valor] = 0;
+                }
                 $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
             } elseif ($pregunta->tipo == 2) {
                 $this->respuestas_preguntas[$pregunta->id]['vacio'] = 0;
                 $this->respuestas_preguntas[$pregunta->id]['lleno'] = 0;
-                $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
-            } else {
-                foreach (json_decode($pregunta->opciones) as $key => $valor) {
-                    $this->respuestas_preguntas[$pregunta->id][$valor] = 0;
-                }
                 $this->respuestas_preguntas[$pregunta->id]['tipo'] = $pregunta->tipo;
             }
         }
@@ -60,7 +56,13 @@ class Estadisticas extends Component
                 }
                 $convertido=(array)$resp;
                 if ($resp->tipo == "1") {
-                    $this->respuestas_preguntas[$key][$convertido[0]]++; 
+                    foreach($convertido as $key2 => $res) {
+                        if ($res == false || $res == "" || $key2 == "tipo" || !array_key_exists($res, $this->respuestas_preguntas[$key])) {
+                            continue;
+                        } else {
+                            $this->respuestas_preguntas[$key][$res]++;
+                        }
+                    }
                 } elseif ($resp->tipo == "2") {
                     if ($convertido[0] == "") {
                         $this->respuestas_preguntas[$key]['vacio']++; 

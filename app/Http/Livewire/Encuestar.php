@@ -37,6 +37,10 @@ class Encuestar extends Component
         foreach ($this->todas_las_preguntas as $pregunta) {
             if ($pregunta->tipo == 1) {
                 $this->encuesta_completa[$pregunta->id] = ["No", "tipo" => $pregunta->tipo];
+                foreach (json_decode($pregunta->opciones) as $key => $valor) {
+                    $this->encuesta_completa[$pregunta->id][0] = $valor;
+                    break;
+                }
             } elseif ($pregunta->tipo == 2) {
                 $this->encuesta_completa[$pregunta->id] = ["", "tipo" => $pregunta->tipo];
             } else {
@@ -64,10 +68,10 @@ class Encuestar extends Component
         }
     }
 
-    public function quitar_vox($texto, $id_opcion) {
+    public function quitar_vox($texto, $id_opcion, $posicion) {
         $this->estilo_microfono = "-dark";
         $this->vozactivada = false;
-        $this->encuesta_completa[intval($id_opcion)][0] = $texto;
+        $this->encuesta_completa[intval($id_opcion)][$posicion] = $texto;
     }
 
     public function finalizarEncuesta() {

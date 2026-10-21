@@ -13,7 +13,7 @@
     </div>
     <div class="form-check form-check-inline pt-2">
         <input class="form-check-input" type="radio" wire:model="tipo" id="tipo1" value="1">
-        <label class="form-check-label" for="tipo1">Si/No</label>
+        <label class="form-check-label" for="tipo1">Seleccion unica</label>
       </div>
       <div class="form-check form-check-inline">
         <input class="form-check-input" type="radio" wire:model="tipo" id="tipo2" value="2">
@@ -26,13 +26,23 @@
 </form>
 <hr>
 <div class="row">
+  @php
+    $opcion = '_unica';
+    $opciones_op = $preguntas_opciones_unica;
+    if ($tipo == 3) {
+      $opcion = '';
+      $opciones_op = $preguntas_opciones;
+    }
+  @endphp
   <div class="col-xl-12 col-sm-12 mb-xl-12 mb-12">
-    @if ($tipo == 1)
-    <div class="text-center" role="alert"><span>Esta es una pregunta de Si o No</span></div>
-    @elseif ($tipo == 2)
+    @if ($tipo == 2)
     <div class="text-center" role="alert"><span>Esta es una pregunta de completado en el que usted tendra un campo de texto donde debe llenar su respuesta</span></div>
-    @else
-    <div class="text-center" role="alert"> Pregunta de seleccion multiple llene sus opciones</div>
+    @elseif ($tipo == 1 || $tipo == 3)
+      @if ($tipo == 1)
+        <div class="text-center" role="alert"><span>Esta es una pregunta de seleccion unica que puede tenr multiples opciones</span></div>
+      @else
+      <div class="text-center" role="alert"> Pregunta de seleccion multiple llene sus opciones</div>
+      @endif
     <button type="button" class="btn btn-success btn-sm me-2 mb-2" wire:click="add()">
       <i class="material-icons text-sm">add</i> Añadir opcion
     </button>
@@ -40,7 +50,7 @@
       <i class="material-icons text-sm">mic</i>
     </button>
     <ul class="list-group" wire:sortable="updateTaskOrder">
-        @foreach ($preguntas_opciones as $key => $pregunta)
+        @foreach ($opciones_op as $key => $pregunta)
           <li class="list-group-item justify-content-between align-items-start" wire:sortable.item="{{ $key }}" wire:key="task-{{ $key }}">
             <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
@@ -50,7 +60,7 @@
                 </div>   
                 <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-12">
                   <div class="row">
-                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-8 col-10"><input type="text" wire:model.defer = 'preguntas_opciones.{{ $key }}' wire:click ="seleccionar('preguntas_opciones.{{ $key }}')" class="form-control border border-2 p-2"></div>
+                    <div class="col-xl-11 col-lg-11 col-md-11 col-sm-8 col-10"><input type="text" wire:model.defer = 'preguntas_opciones{{ $opcion }}.{{ $key }}' wire:click ="seleccionar('preguntas_opciones{{ $opcion }}.{{ $key }}')" class="form-control border border-2 p-2"></div>
                     <div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-2 text-center" wire:sortable.handle><h3><i class="material-icons text-lg text-middle text-center text-4xl border-2">touch_app</i></h3></div>
                   </div>
                 </div>

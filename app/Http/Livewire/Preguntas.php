@@ -17,6 +17,7 @@ class Preguntas extends Component
     public $preguntaEditable;
     public $vertodo = false;
     public $preguntas_opciones = ['', '',''];
+    public $preguntas_opciones_unica = ['', '',''];
     public $todaslaspreguntas = [];
     public $opciones_id = [];
     protected $listeners = ["quitar_vox" => "quitar_vox"];
@@ -38,14 +39,22 @@ class Preguntas extends Component
 
     public function crear() {
         $this->validate();
-        if ($this->tipo == 1 || $this->tipo == 2) {
+        if ($this->tipo == 2) {
             $this->preguntas_opciones = [];
+            $this->preguntas_opciones_unica = [];
+        }
+        if ($this->tipo == 1) {
+            $preguntas_op = $this->preguntas_opciones_unica;
+        } elseif ($this->tipo == 3) {
+            $preguntas_op = $this->preguntas_opciones;
+        } else {
+            $preguntas_op = [];
         }
         $pregunta = Pregunta::create([
             'pregunta' => $this->pregunta,
             'tipo' => $this->tipo,
             'habilitado' => 1,
-            'opciones' => json_encode($this->preguntas_opciones),
+            'opciones' => json_encode($preguntas_op),
             'user_id' => auth()->user()->id
         ]);
         $this->limpiar();
@@ -54,6 +63,7 @@ class Preguntas extends Component
 
     public function limpiar() {
         $this->preguntas_opciones = ['', '',''];
+        $this->preguntas_opciones_unica = ['', '',''];
         $this->opciones_id= [];
         $this->pregunta = '';
         $this->tipo = 1;
@@ -74,7 +84,11 @@ class Preguntas extends Component
         $this->preguntaEditable = $pregunta;
         $this->pregunta = $pregunta->pregunta;
         $this->tipo = $pregunta->tipo;
-        $this->preguntas_opciones = json_decode($pregunta->opciones);
+        if ( $this->tipo == 1) {
+            $this->preguntas_opciones_unica = json_decode($pregunta->opciones);
+        } elseif ($this->tipo == 3) {
+            $this->preguntas_opciones = json_decode($pregunta->opciones);
+        }
         $this->opciones_id = [];
     }
 
@@ -82,7 +96,11 @@ class Preguntas extends Component
         $this->validate();
         $this->preguntaEditable->pregunta = $this->pregunta;
         $this->preguntaEditable->tipo = $this->tipo;
-        $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones);
+        if ( $this->tipo == 1) {
+            $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones_unica);
+        } elseif ($this->tipo == 3) {
+            $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones);
+        }
         $this->preguntaEditable->save();
         $this->cancelar();
         $this->limpiar();
@@ -97,16 +115,25 @@ class Preguntas extends Component
 
     public function updateTaskOrder($lists) {
         $auxiliar_collection = [];
+        if ( $this->tipo == 1) {
+            $preguntas_op = $this->preguntas_opciones_unica;
+        } elseif ($this->tipo == 3) {
+            $preguntas_op = $this->preguntas_opciones;
+        }
         foreach($lists as $list) {
             $id = (int)$list["value"];
-            foreach ($this->preguntas_opciones as $key => $pregunta) {
+            foreach ($preguntas_op as $key => $pregunta) {
                 if ($id == $key) {
                     $auxiliar_collection[] = $pregunta;
                     break;
                 }
             }
         }
-        $this->preguntas_opciones = $auxiliar_collection;
+        if ( $this->tipo == 1) {
+            $this->preguntas_opciones_unica = $auxiliar_collection;
+        } elseif ($this->tipo == 3) {
+            $this->preguntas_opciones = $auxiliar_collection;
+        }
     }
 
     public function rules()
@@ -126,6 +153,7 @@ class Preguntas extends Component
 
     public function add() {
         $this->preguntas_opciones[] = "";
+        $this->preguntas_opciones_unica[] = "";
     }
 
     public function eliminar(Pregunta $pregunta) {

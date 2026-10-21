@@ -11,18 +11,14 @@
             </span>
                 <div class="fw-bold text-break" >{{ $todaspregunta->pregunta }}</div>
                 @if ($todaspregunta->tipo == 1)
+                @foreach (json_decode($todaspregunta->opciones) as $key => $value) 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault{{ $todaspregunta->id }}" id="flexRadioDefault1{{ $todaspregunta->id }}" disabled>
+                    <input class="form-check-input" type="radio" name="flexRadioDefault{{ $todaspregunta->id }}" id="flexRadioDefault1{{ $todaspregunta->id }}" disabled checked>
                     <label class="form-check-label" for="flexRadioDefault1{{ $todaspregunta->id }}">
-                    Si
+                        {{ $value }}
                     </label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault{{ $todaspregunta->id }}" id="flexRadioDefault2{{ $todaspregunta->id }}" disabled checked>
-                    <label class="form-check-label" for="flexRadioDefault2{{ $todaspregunta->id }}">
-                    No
-                    </label>
-                </div>
+                @endforeach
                 @elseif ($todaspregunta->tipo == 2)
                 <textarea class="form-control border border-2 p-2" id="floatingInput{{ $todaspregunta->id }}" disabled></textarea>
                 @else

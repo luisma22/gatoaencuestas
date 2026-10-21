@@ -50,7 +50,7 @@
                         <i class="material-icons opacity-10">edit_note</i>
                         @if ($pregunta->tipo == 1)
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
-                                Si/No
+                                Seleccion unica {{ count(json_decode($pregunta->opciones)) }}
                             </span>
                         @elseif ($pregunta->tipo == 2)
                             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info">
@@ -71,11 +71,11 @@
                 <div class="card-footer pt-1">
                     @if ($pregunta->habilitado)
                         @if ($canvasoff)
-                        <button type="button" class="btn btn-success btn-link m-0" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
+                        <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
                             <i class="material-icons">edit_note</i>
                         </button>
                         @else
-                            <button type="button" class="btn btn-success btn-link mb-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
+                            <button type="button" class="btn btn-success btn-link mb-0" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" wire:click="editar({{ $pregunta }})" data-original-title="" title="">
                                 <i class="material-icons">edit_note</i>
                             </button>
                         @endif
@@ -92,10 +92,17 @@
                     $i=1;
                     @endphp
                     @if ($pregunta->tipo == 1)
+                    @foreach (json_decode($pregunta->opciones) as $key => $value) 
                     @php
-                        $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_checked</i><span class='ps-2'>Si</span></div>";
-                        $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_unchecked</i><span class='ps-2'>No</span></div>";
+                        if($i==1) {
+                            $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_checked</i><span class='ps-2'>".$value."</span></div>";
+
+                        } else {
+                            $cuerpo.= "<div><i class='material-icons text-sm md-dark'>radio_button_unchecked</i><span class='ps-2'>".$value."</span></div>";
+                        }
+                        $i++;
                     @endphp
+                    @endforeach
                     @elseif ($pregunta->tipo == 2)
                     @php
                         $cuerpo.= "<div><i class='material-icons text-sm md-dark'>message</i><span class='ps-2'>Esta es una pregunta para completar</span></div>";  

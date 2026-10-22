@@ -41,7 +41,7 @@
       @if ($tipo == 1)
         <div class="text-center" role="alert"><span>Esta es una pregunta de seleccion unica que puede tenr multiples opciones</span></div>
       @else
-      <div class="text-center" role="alert"> Pregunta de seleccion multiple llene sus opciones</div>
+      <div class="text-center" role="alert"> <span>Pregunta de seleccion multiple llene sus opciones</span></div>
       @endif
     <button type="button" class="btn btn-success btn-sm me-2 mb-2" wire:click="add()">
       <i class="material-icons text-sm">add</i> Añadir opcion

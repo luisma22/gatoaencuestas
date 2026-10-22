@@ -89,7 +89,68 @@ $(document).ready(function() {
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
     });
-    
+
+    Livewire.hook('message.processed', function (message, component) {
+        var getDarkMode = localStorage.getItem('dark-version');
+        $(".form-control").toggleClass("text-white", getDarkMode === "true");
+        if (getDarkMode === "true") {
+            $(".list-group-item").css("border-color", "rgba(255,255,255,0.9)");
+            $(".offcanvas span, .offcanvas label").css("color", "rgba(255,255,255,0.9)");
+        } else {
+            $(".list-group-item").css("border-color", "rgba(0, 0, 0, 0.125)");
+            $(".offcanvas span, .offcanvas label").css("color", "#7b809a");
+        }
+    });
+    $("#dark-version").click(function(extra) {
+        if (extra.isTrigger == undefined) {
+            let getDarkMode = localStorage.getItem('dark-version', "false");
+            let mode = getDarkMode === "true" ? "false" : "true";
+            localStorage.setItem('dark-version', mode);
+            if (mode == "true") {
+                $(".offcanvas .form-control").css({"color": "#FFFFFF"});
+                $(".form-control input").addClass("text-white");
+                $(".sidenav").addClass("dark-version");
+                $(".offcanvas").addClass("dark-version");
+                $(".sidenav-header a span").removeClass("text-white");
+                $(".sidenav-header a span").css("color", "#495057");
+                $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#495057");
+                $(".navbar-vertical .navbar-nav > .nav-item .nav-link.active, .sidenav .collapse .nav-item .nav-link.active .nav-link-text").css("color", "#fff");
+                $(".sidenav hr").css("background-image", "linear-gradient(to right, rgba(22, 20, 20, 0), white, rgba(255, 255, 255, 0))");
+            } else {
+                $(".offcanvas").removeClass("dark-version");
+                $(".offcanvas .form-control").css({"color": "#495057"});
+                $(".sidenav-header a span").addClass("text-white");
+                $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#fff");
+                $(".sidenav hr").css("border-color", "gray");
+                $(".sidenav hr").css("background-image", "linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0))");
+            }
+        } else {
+            let getDarkMode = localStorage.getItem('dark-version', "false");
+            if (getDarkMode == "true") {
+                $(".offcanvas .form-control").css({"color": "#FFFFFF"});
+                $(".form-control input").addClass("text-white");
+                $(".sidenav").addClass("dark-version");
+                $(".offcanvas").addClass("dark-version");
+                $(".sidenav-header a span").removeClass("text-white");
+                $(".sidenav-header a span").css("color", "#495057");
+                $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#495057");
+                $(".navbar-vertical .navbar-nav > .nav-item .nav-link.active, .sidenav .collapse .nav-item .nav-link.active .nav-link-text").css("color", "#fff");
+                $(".sidenav-header hr").css("background-image", "linear-gradient(to right, rgba(22, 20, 20, 0), white, rgba(255, 255, 255, 0))");
+                
+            } else {
+                $(".offcanvas").removeClass("dark-version");
+                $(".offcanvas .form-control").css({"color": "#495057"});
+                $(".sidenav-header a span").addClass("text-white");
+                $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#fff");
+                $(".sidenav-header hr").css("border-color", "gray");
+                $(".sidenav-header hr").css("background-image", "linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0))");
+            }
+        }
+    });
+    let getDarkMode = localStorage.getItem('dark-version', "false");
+    if (getDarkMode == "true") {
+        $("#dark-version").click();
+    } 
     $(".linkencuesta").click(async function(e) {
         e.preventDefault();
         await navigator.clipboard.writeText($(this).text());
@@ -296,5 +357,6 @@ $(document).ready(function() {
 }); 
 
 </script>
+ @yield('scripts')
 </body>
 </html>

@@ -61,11 +61,11 @@
                                         <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Ingresar
                                         </button>
                                     </div>
-                                    <p class="mt-4 text-sm text-center">
+                                    <!--<p class="mt-4 text-sm text-center">
                                         No tienes cuenta?
                                         <a href="{{ route('register') }}"
                                             class="text-primary text-gradient font-weight-bold">Registrate</a>
-                                    </p>
+                                    </p>-->
                                     <!--<p class="text-sm text-center">
                                         olvidaste tu password?
                                         <a href="{{ route('password.forgot') }}"

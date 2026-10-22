@@ -9,8 +9,8 @@ p {
     font-weight: 300;
     color: #000;
 }
-p, .p {
-    font-size: 1.1rem;
+p, .p, span {
+    font-size: 1.2rem;
     color: #000;
 }
 p.texto-llenado{
@@ -63,6 +63,7 @@ hr {
     color: #000;
 }
 .form-check-label {
+   font-size: .9rem;
    font-weight: 400;
    margin-top: -0.2rem;
    padding-top: -0.2rem;
@@ -78,7 +79,7 @@ label, .form-label {;
    font-weight: 0;
 }
 .text2 {
-   font-size: .85rem;
+   font-size: .9rem;
 }
 .text-center {
    margin-top: 10px;
@@ -113,8 +114,8 @@ label, .form-label {;
 }
 .nombre-instituto {
    position: fixed;
-   top: 850px;
-   left: -115px;
+   top: 800px;
+   left: -130px;
    color: #000;
    opacity: 0.5;
    -webkit-transform: rotate(-90deg); 
@@ -152,7 +153,8 @@ label, .form-label {;
 }
 
 @page {
-    margin-top: 80px;
+   size: Letter portrait;
+   margin-top: 80px;
 }
 .marca-agua {
    position: fixed;
@@ -166,6 +168,10 @@ label, .form-label {;
 .marca-agua img {
     width: 100%;
     height: auto;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    transform: scale(1.5);
 }
 </style>
    <div class="marca-agua">

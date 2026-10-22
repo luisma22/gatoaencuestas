@@ -116,13 +116,23 @@ $(document).ready(function() {
                 $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#495057");
                 $(".navbar-vertical .navbar-nav > .nav-item .nav-link.active, .sidenav .collapse .nav-item .nav-link.active .nav-link-text").css("color", "#fff");
                 $(".sidenav hr").css("background-image", "linear-gradient(to right, rgba(22, 20, 20, 0), white, rgba(255, 255, 255, 0))");
+                $(".sidenav-header a span").css("color", "#495057");
+                $(".carousel-inner textarea.form-control").css("color", "#fff");
+                $(".carousel-item label").css("color", "#fff");
+                $(".carousel-caption p").addClass("text-white");
+                $(".carousel-caption p").removeClass("text-dark");
             } else {
                 $(".offcanvas").removeClass("dark-version");
                 $(".offcanvas .form-control").css({"color": "#495057"});
                 $(".sidenav-header a span").addClass("text-white");
                 $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#fff");
                 $(".sidenav hr").css("border-color", "gray");
-                $(".sidenav hr").css("background-image", "linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0))");
+                $(".carousel-inner textarea.form-control").css("color", "#000");
+                $(".carousel-item label").css("color", "#3e4256");
+                $(".offcanvas").addClass("dark-version");
+                $(".carousel-caption p").addClass("text-dark");
+                $(".carousel-caption p").removeClass("text-white");
+                
             }
         } else {
             let getDarkMode = localStorage.getItem('dark-version', "false");
@@ -136,21 +146,30 @@ $(document).ready(function() {
                 $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#495057");
                 $(".navbar-vertical .navbar-nav > .nav-item .nav-link.active, .sidenav .collapse .nav-item .nav-link.active .nav-link-text").css("color", "#fff");
                 $(".sidenav-header hr").css("background-image", "linear-gradient(to right, rgba(22, 20, 20, 0), white, rgba(255, 255, 255, 0))");
+                $(".carousel-inner textarea.form-control").css("color", "#fff");
+                $(".carousel-item label").css("color", "#fff");
+                $(".carousel-caption p").addClass("text-white");
+                $(".carousel-caption p").removeClass("text-dark");
                 
             } else {
                 $(".offcanvas").removeClass("dark-version");
                 $(".offcanvas .form-control").css({"color": "#495057"});
                 $(".sidenav-header a span").addClass("text-white");
                 $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#fff");
-                $(".sidenav-header hr").css("border-color", "gray");
                 $(".sidenav-header hr").css("background-image", "linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0))");
+                $(".carousel-inner textarea.form-control").css("color", "#000");
+                $(".carousel-item label").css("color", "#3e4256");
+                $(".carousel-caption p").addClass("text-dark");
+                $(".carousel-caption p").removeClass("text-white");
             }
         }
     });
     let getDarkMode = localStorage.getItem('dark-version', "false");
     if (getDarkMode == "true") {
         $("#dark-version").click();
-    } 
+    } else {
+        $(".carousel-item label").css("color", "#3e4256");
+    }
     $(".linkencuesta").click(async function(e) {
         e.preventDefault();
         await navigator.clipboard.writeText($(this).text());

@@ -107,10 +107,16 @@ class Preguntas extends Component
         $this->dispatchBrowserEvent('preguntas', 'actualizada'); 
     }
 
-    public function quitar($id) {
-        $this->preguntas_opciones = array_filter($this->preguntas_opciones, function($valor) use ($id) {
-            return $valor != $id;
-        }, ARRAY_FILTER_USE_KEY);
+    public function quitar($id, $tipo = 1) {
+        if ($tipo = 1) {
+            $this->preguntas_opciones_unica = array_filter($this->preguntas_opciones_unica, function($valor) use ($id) {
+                return $valor != $id;
+            }, ARRAY_FILTER_USE_KEY);
+        } else {
+            $this->preguntas_opciones = array_filter($this->preguntas_opciones, function($valor) use ($id) {
+                return $valor != $id;
+            }, ARRAY_FILTER_USE_KEY);
+        }
     }
 
     public function updateTaskOrder($lists) {
@@ -151,9 +157,12 @@ class Preguntas extends Component
         ];
     }
 
-    public function add() {
-        $this->preguntas_opciones[] = "";
-        $this->preguntas_opciones_unica[] = "";
+    public function add($tipo) {
+        if ($tipo == 1) {
+            $this->preguntas_opciones_unica[] = "";
+        } else {
+            $this->preguntas_opciones[] = "";
+        }
     }
 
     public function eliminar(Pregunta $pregunta) {

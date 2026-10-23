@@ -43,7 +43,7 @@
       @else
       <div class="text-center" role="alert"> <span>Pregunta de seleccion multiple llene sus opciones</span></div>
       @endif
-    <button type="button" class="btn btn-success btn-sm me-2 mb-2" wire:click="add()">
+    <button type="button" class="btn btn-success btn-sm me-2 mb-2" wire:click="add({{$tipo}})">
       <i class="material-icons text-sm">add</i> Añadir opcion
     </button>
     <button type="button" class="btn btn{{ $estilo_microfono }} btn-sm mb-2" wire:click="voz()">
@@ -54,7 +54,7 @@
           <li class="list-group-item justify-content-between align-items-start" wire:sortable.item="{{ $key }}" wire:key="task-{{ $key }}">
             <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
-                    <button type="button" class="btn btn-danger mb-1" wire:click="quitar({{ $key }})">
+                    <button type="button" class="btn btn-danger mb-1" wire:click="quitar({{ $key }}, {{$tipo}})">
                         <i class="material-icons text-sm">delete</i>
                     </button>
                 </div>   

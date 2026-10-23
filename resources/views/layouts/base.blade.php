@@ -90,6 +90,16 @@ $(document).ready(function() {
     return new bootstrap.Popover(popoverTriggerEl)
     });
 
+    
+    $('[data-bs-toggle="popover"]').hover(function(e) {
+        let getDarkMode = localStorage.getItem('dark-version', "false");
+        if (getDarkMode === "true") {
+            document.querySelector("h3.popover-header").style.setProperty("background-color", "#1a2035");
+        } else {
+            document.querySelector("h3.popover-header").style.setProperty("background-color", "#f0f2f5");
+        }
+    });
+
     Livewire.hook('message.processed', function (message, component) {
         var getDarkMode = localStorage.getItem('dark-version');
         $(".form-control").toggleClass("text-white", getDarkMode === "true");
@@ -129,7 +139,6 @@ $(document).ready(function() {
                 $(".sidenav hr").css("border-color", "gray");
                 $(".carousel-inner textarea.form-control").css("color", "#000");
                 $(".carousel-item label").css("color", "#3e4256");
-                $(".offcanvas").addClass("dark-version");
                 $(".carousel-caption p").addClass("text-dark");
                 $(".carousel-caption p").removeClass("text-white");
                 

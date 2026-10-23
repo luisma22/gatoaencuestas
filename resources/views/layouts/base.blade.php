@@ -101,20 +101,21 @@ $(document).ready(function() {
     });
 
     Livewire.hook('message.processed', function (message, component) {
-        var getDarkMode = localStorage.getItem('dark-version');
-        $(".form-control").toggleClass("text-white", getDarkMode === "true");
-        if (getDarkMode === "true") {
+        let getDarkModeLive = localStorage.getItem('dark-version');
+        if (getDarkModeLive === "true") {
+            $(".form-control").addClass("text-white");
             $(".list-group-item").css("border-color", "rgba(255,255,255,0.9)");
             $(".offcanvas span, .offcanvas label").css("color", "rgba(255,255,255,0.9)");
         } else {
+            $(".form-control").removeClass("text-white");
             $(".list-group-item").css("border-color", "rgba(0, 0, 0, 0.125)");
             $(".offcanvas span, .offcanvas label").css("color", "#7b809a");
         }
     });
     $("#dark-version").click(function(extra) {
+        let getDarkModeClick = localStorage.getItem('dark-version', "false");
         if (extra.isTrigger == undefined) {
-            let getDarkMode = localStorage.getItem('dark-version', "false");
-            let mode = getDarkMode === "true" ? "false" : "true";
+            let mode = getDarkModeClick === "true" ? "false" : "true";
             localStorage.setItem('dark-version', mode);
             if (mode == "true") {
                 $(".offcanvas .form-control").css({"color": "#FFFFFF"});
@@ -136,16 +137,16 @@ $(document).ready(function() {
                 $(".offcanvas .form-control").css({"color": "#495057"});
                 $(".sidenav-header a span").addClass("text-white");
                 $(".navbar-collapse ul li a div, .navbar-collapse ul li a div + span").css("color", "#fff");
-                $(".sidenav hr").css("border-color", "gray");
+                $(".sidenav-header hr").css("background-image", "linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0))");
                 $(".carousel-inner textarea.form-control").css("color", "#000");
                 $(".carousel-item label").css("color", "#3e4256");
                 $(".carousel-caption p").addClass("text-dark");
                 $(".carousel-caption p").removeClass("text-white");
                 
             }
+            //$(".offcanvas-body input[type='text']").click()
         } else {
-            let getDarkMode = localStorage.getItem('dark-version', "false");
-            if (getDarkMode == "true") {
+            if (getDarkModeClick == "true") {
                 $(".offcanvas .form-control").css({"color": "#FFFFFF"});
                 $(".form-control input").addClass("text-white");
                 $(".sidenav").addClass("dark-version");

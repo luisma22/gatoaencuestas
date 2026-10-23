@@ -12,7 +12,7 @@
                     @enderror
                 </div></div>
             <div class="col-2">
-                <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz()">
+                <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz('nombre')">
                     <i class="material-icons text-sm">mic</i>
                 </button>
             </div>
@@ -20,10 +20,19 @@
         <div class="form-floating mt-1">
             <div class="row">
                 <div class="col-xl-7 col-md-7 col-sm-12">
-                    <textarea rows="5" wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" placeholder="Descripcion" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
-                    @error('descripcion')
-                    <p class='text-danger inputerror'>{{ $message }} </p>
-                    @enderror
+                    <div class="row d-flex align-items-center">
+                        <div class="col-10">
+                            <textarea rows="5" wire:model.defer="descripcion" type="text" class="form-control border border-2 p-2" placeholder="Descripcion" id="floatingText" wire:click = "seleccionar('descripcion')"></textarea>
+                            @error('descripcion')
+                            <p class='text-danger inputerror'>{{ $message }} </p>
+                            @enderror
+                        </div>
+                        <div class="col-2">
+                            <button type="button" class="btn btn{{ $estilo_microfono }} mb-0" wire:click="voz('descripcion')">
+                                <i class="material-icons text-sm">mic</i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xl-5 col-md-5 col-sm-12">
                     @include('livewire.encuesta.colores')

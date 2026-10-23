@@ -181,11 +181,12 @@ class Preguntas extends Component
         $this->vertodo = !$this->vertodo;
     }
 
-    public function voz() {
+    public function voz($seleccionado) {
         if (!$this->vozactivada) {
             $this->estilo_microfono = "-danger";
             $this->dispatchBrowserEvent('voz');
             $this->vozactivada = true;
+            $this->seleccionado = $seleccionado;
         }
     }
 

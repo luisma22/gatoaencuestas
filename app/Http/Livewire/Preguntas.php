@@ -97,9 +97,9 @@ class Preguntas extends Component
         $this->preguntaEditable->pregunta = $this->pregunta;
         $this->preguntaEditable->tipo = $this->tipo;
         if ( $this->tipo == 1) {
-            $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones_unica);
+            $this->preguntaEditable->opciones = json_encode(array_values($this->preguntas_opciones_unica));
         } elseif ($this->tipo == 3) {
-            $this->preguntaEditable->opciones = json_encode($this->preguntas_opciones);
+            $this->preguntaEditable->opciones = json_encode(array_values($this->preguntas_opciones));
         }
         $this->preguntaEditable->save();
         $this->cancelar();
@@ -108,14 +108,14 @@ class Preguntas extends Component
     }
 
     public function quitar($id, $tipo = 1) {
-        if ($tipo = 1) {
+        if ($tipo == 1) {
             $this->preguntas_opciones_unica = array_filter($this->preguntas_opciones_unica, function($valor) use ($id) {
                 return $valor != $id;
             }, ARRAY_FILTER_USE_KEY);
         } else {
             $this->preguntas_opciones = array_filter($this->preguntas_opciones, function($valor) use ($id) {
                 return $valor != $id;
-            }, ARRAY_FILTER_USE_KEY);
+                }, ARRAY_FILTER_USE_KEY);
         }
     }
 

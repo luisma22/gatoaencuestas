@@ -83,7 +83,7 @@
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm mb-0 text-capitalize texto-oscuro">{{ $pregunta->pregunta }}</p>
-                        <h6 class="mb-0 texto-oscuro">{{ $pregunta->created_at }}</h6>
+                        <h6 class="mb-0 texto-oscuro">{{ $pregunta->created_at->setTimezone('America/La_Paz') }}</h6>
                     </div>
                 </div>
                 <hr class="dark horizontal my-0 linea">

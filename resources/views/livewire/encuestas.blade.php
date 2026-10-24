@@ -83,7 +83,7 @@
                     </div>
                     <div class="text-end pt-1">
                         <p class="text-sm ms-6 mb-0 text-capitalize texto-oscuro">{{ $encuesta->nombre }}</p>
-                        <h6 class="mb-0 texto-oscuro">{{ $encuesta->created_at }}</h6>
+                        <h6 class="mb-0 texto-oscuro">{{ $encuesta->created_at->setTimezone('America/La_Paz') }}</h6>
                         <h6 class="mb-0 texto-oscuro">{{ $encuesta->descripcion }}</h6>
                     </div>
                     @if ($encuesta->habilitado)

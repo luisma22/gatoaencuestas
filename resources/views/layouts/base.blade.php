@@ -279,9 +279,9 @@ $(document).ready(function() {
     window.addEventListener('finalizar_encuesta', function (event) {
         Swal.fire({
         icon: 'success',
-        title: 'La encuesta termino exitosamente',
+        title: 'La encuesta termino exitosamente y se generara el pdf respectivo porfavor espere unos segundos a que se descargue',
         showConfirmButton: false,
-        timer: 1500
+        timer: 3000
         });
         const carousel = bootstrap.Carousel.getInstance(
         document.getElementById('carouselExampleCaptions')

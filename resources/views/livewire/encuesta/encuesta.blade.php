@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-2 me-0"></div>
                 </div>
-                <div class="carousel-caption d-md-block pt-0 pb-0" style="bottom:4rem !important;">
+                <div class="carousel-caption d-md-block pt-0 pb-0" style="bottom:3.8rem !important;">
                     <h5>Pregunta {{ ($key + 1) }}</h5>
                     <p class="text-dark">{{ $pregunta->pregunta }}</p>
                     @if ($cantidad_preguntas == ($key + 1))

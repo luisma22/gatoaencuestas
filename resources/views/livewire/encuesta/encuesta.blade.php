@@ -32,7 +32,7 @@
                         <div class="form-check ps-0 pe-0">
                             @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
                             <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.0" type="radio" value="{{ $opcion }}" name="opcion{{ $pregunta->id }}" id="opcion{{ $pregunta->id }}{{ $key2 }}">
-                            <label class="form-check-label fw-bold" for="opcion{{ $pregunta->id }}{{ $key2 }}">
+                            <label class="form-check-label fw-bold d-inline" for="opcion{{ $pregunta->id }}{{ $key2 }}">
                                 {{ $opcion }}
                             </label><br>
                             @endforeach
@@ -54,7 +54,7 @@
                             <div class="form-check ps-0 pe-0">
                                 @foreach (json_decode($pregunta->opciones) as $key2 => $opcion)
                                     <input class="form-check-input" wire:model.defer="encuesta_completa.{{ $pregunta->id }}.{{ $key2 }}" type="checkbox" value="{{ $opcion }}" id="check_{{ $pregunta->id }}_{{ $key2 }}" >
-                                    <label class="form-check-label fw-bold" for="check_{{ $pregunta->id }}_{{ $key2 }}">
+                                    <label class="form-check-label fw-bold d-inline" for="check_{{ $pregunta->id }}_{{ $key2 }}">
                                         {{ $opcion }}
                                     </label><br>
                                 @endforeach

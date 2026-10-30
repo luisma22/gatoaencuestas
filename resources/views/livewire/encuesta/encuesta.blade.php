@@ -1,3 +1,9 @@
+
+<style>
+    .form-check:not(.form-switch) .form-check-input[type="radio"] {
+        border: 1px solid #6c5757 !important;
+    }
+</style>
 <div class="mt-3 text-center text-uppercase">
     <h6>
         {{ $encuesta->nombre }}

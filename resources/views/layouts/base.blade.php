@@ -374,14 +374,14 @@ $(document).ready(function() {
                     if (cantidad_preguntas >= 2 || cantidad_preguntas == 2) {
                         objeto.addImage(img,'PNG',8 ,0 , 200, 285);
                     } else {
-                        objeto.addImage(img,'PNG',8 ,0 , 200, 130);
+                        objeto.addImage(img,'PNG',8 ,0 , 200, 166.3);
                     }
                     //objeto.text(8, 55, "Daniela Miranda Rocha", null, 90);
                     objeto.text(205, 210, "Universidad Mayor de San Simon", null, -90);
                     if ((control_inicio + 1) < cantidad) {
                         objeto.addPage("letter");
                     }
-                    llenarEncuestasPDF(inicio + 1, cantidad, objeto, cantidad_preguntas -3, nombre)
+                    llenarEncuestasPDF(inicio + 1, cantidad, objeto, cantidad_preguntas -2, nombre)
                 });
             } else {
                 objeto.save(nombre+'_estadisticaPDF.pdf');

@@ -96,7 +96,7 @@ class Estadisticas extends Component
             $this->todas_las_respuestas = Encuestados::All()->where('encuesta_id', $this->encuesta_id);
             $this->encuestados = count($this->todas_las_respuestas);
             $this->llenarResultadosEncuesta();
-            $this->cantidad_reportes = ceil($this->cantidad_preguntas/3);
+            $this->cantidad_reportes = ceil($this->cantidad_preguntas/2);
             $this->colores_encuesta = $this->encuesta->opciones;
             $this->forma = $this->encuesta->forma;
         }

@@ -24,36 +24,37 @@
             @if (count($todas_las_respuestas) > 0)
                 <div class="row">
                     @foreach ($todas_las_preguntas as $key => $respuesta)
-                        @if ($key%3 == 0)
-                            <div id="reporte_{{ $key/3 }}">
+                        @if ($key%2 == 0)
+                            <div id="reporte_{{ $key/2 }}">
                                 <div class="row">
-                                <div class="mt-3 mb-4 text-center text-uppercase">
-                                    <h3>
-                                    Estadisticas {{ $encuesta->nombre }}
-                                    </h3>
-                                </div>
+                                    <div class="mt-3 mb-4 text-center text-uppercase">
+                                        <h3>
+                                        Estadisticas {{ $encuesta->nombre }} 
+                                        </h3>
+                                    </div>
                         @endif
-                        @if (count(json_decode($respuesta->opciones)) > 2)
-                            <div class="col-xl-12 col-sm-12 mb-xl-0 mb-5">
-                        @else
-                            <div class="col-xl-{{ (3 * pow(2,2)) }} col-sm-{{(6 * 2) }} mb-xl-0 mb-5">
-                        @endif
-                            <div class="card z-index-2 mt-2 pb-2">
-                                <div class="card-body pb-0 pt-1">
-                                    <h3 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
-                                    <p class="h4">{{ $respuesta->pregunta}}</p>
-                                </div>
-                                <div class="card-header p-0 position-relative mx-3 z-index-2 bg-transparent">
-                                    <div class="bg-gradient-success border-radius-lg py-3 pe-1">
-                                        <div class="chart">
-                                            <canvas id = "chart-canvas{{ $respuesta->id }}" class="chart-canvas{{ $respuesta->id }}" height="150"></canvas>
+                                @if (count(json_decode($respuesta->opciones)) > 2)
+                                    <div class="col-xl-12 col-sm-12 mb-xl-0 mb-5">
+                                @else
+                                    <div class="col-xl-{{ (3 * pow(2,2)) }} col-sm-{{(6 * 2) }} mb-xl-0 mb-5">
+                                @endif
+                                        <div class="card z-index-2 mt-2 pb-2">
+                                            <div class="card-body pb-0 pt-1">
+                                                <h3 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
+                                                <p class="h4">{{ $respuesta->pregunta}}</p>
+                                            </div>
+                                            <div class="card-header p-0 position-relative mx-3 z-index-2 bg-transparent">
+                                                <div class="bg-gradient-success border-radius-lg py-3 pe-1">
+                                                    <div class="chart">
+                                                        <canvas id = "chart-canvas{{ $respuesta->id }}" class="chart-canvas{{ $respuesta->id }}" height="150"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                        @if ((($key+1)%2 == 0 || ($key+1) == $cantidad_preguntas))
                             </div>
-                        </div>
-                        @if ((($key+4)%3 == 0 || ($key+1) == $cantidad_preguntas))
-                            </div></div> 
+                        </div> 
                         @endif
                     @endforeach
                 </div>

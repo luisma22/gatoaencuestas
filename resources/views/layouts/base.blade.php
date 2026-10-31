@@ -363,7 +363,13 @@ $(document).ready(function() {
         var control_inicio = inicio;
         try {
             if (inicio < cantidad) {
-                html2canvas(document.getElementById("reporte_" + inicio)).then(function(canvas) {
+                html2canvas(document.getElementById("reporte_" + inicio)
+                , {
+                    scale:3,
+                    useCORS: true,
+                    backgroundColor: '#ffffff',
+                    logging:false
+                }).then(function(canvas) {
                     var img = canvas.toDataURL("image/png");
                     if (cantidad_preguntas >= 2 || cantidad_preguntas == 2) {
                         objeto.addImage(img,'PNG',8 ,0 , 200, 285);

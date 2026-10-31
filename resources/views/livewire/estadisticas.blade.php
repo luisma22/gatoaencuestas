@@ -13,42 +13,35 @@
                     <input type="hidden" value="{{ $cantidad_preguntas }}" id="cantidad_preguntas">
                     <input type="hidden" value="{{ $encuestados }}" id="encuestados">
                     <input type="hidden" value="{{ $encuesta->nombre }}" id="nombre_encuesta">
-                    <div class="form-check form-switch ms-5 pt-3 col-5">
+                    <!--<div class="form-check form-switch ms-5 pt-3 col-5">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" wire:click="ver()">
                         <label class="form-check-label" for="flexSwitchCheckChecked">Vista PDF</label>
-                    </div>
+                    </div>-->
                 @endif
             </div>
         </div>
         @if ($encuesta != null)
             @if (count($todas_las_respuestas) > 0)
-                @if (!$is_pdf)
-                    <div class="mb-5 text-center text-uppercase">
-                        <h6>
-                            {{ $encuesta->nombre }}
-                        </h6>
-                    </div>
-                @endif
                 <div class="row">
                     @foreach ($todas_las_preguntas as $key => $respuesta)
-                        @if ($is_pdf && $key%3 == 0)
+                        @if ($key%3 == 0)
                             <div id="reporte_{{ $key/3 }}">
                                 <div class="row">
                                 <div class="mt-3 mb-4 text-center text-uppercase">
-                                    <h6>
+                                    <h3>
                                     Estadisticas {{ $encuesta->nombre }}
-                                    </h6>
+                                    </h3>
                                 </div>
                         @endif
                         @if (count(json_decode($respuesta->opciones)) > 2)
                             <div class="col-xl-12 col-sm-12 mb-xl-0 mb-5">
                         @else
-                            <div class="col-xl-{{ (3 * pow(2,$valor_col_grid_pdf)) }} col-sm-{{(6 * $valor_col_grid_pdf) }} mb-xl-0 mb-5">
+                            <div class="col-xl-{{ (3 * pow(2,2)) }} col-sm-{{(6 * 2) }} mb-xl-0 mb-5">
                         @endif
                             <div class="card z-index-2 mt-2 pb-2">
                                 <div class="card-body pb-0 pt-1">
-                                    <h6 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
-                                    <p class="text-sm ">{{ $respuesta->pregunta}}</p>
+                                    <h3 class="mb-0 ">Pregunta {{ ($key+1) }}</h6>
+                                    <p class="h4">{{ $respuesta->pregunta}}</p>
                                 </div>
                                 <div class="card-header p-0 position-relative mx-3 z-index-2 bg-transparent">
                                     <div class="bg-gradient-success border-radius-lg py-3 pe-1">
@@ -59,7 +52,7 @@
                                 </div>
                             </div>
                         </div>
-                        @if ($is_pdf && (($key+4)%3 == 0 || ($key+1) == $cantidad_preguntas))
+                        @if ((($key+4)%3 == 0 || ($key+1) == $cantidad_preguntas))
                             </div></div> 
                         @endif
                     @endforeach
@@ -90,7 +83,9 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.4.0/dist/chartjs-plugin-datalabels.min.js"></script> 
   
   <script type="text/javascript">
+    var ispdf = false;
     window.addEventListener('para_pdf', function (event) {
+        //ispdf=event.detail.ispdf;
         encuestas();
     });
   encuestas();
@@ -100,10 +95,21 @@
         var colores = JSON.parse(@json($colores_encuesta));
         var forma = @json($forma);
         if (todaslasrespuestas.length > 0) {
-            console.log(todaslasrespuestas);
             var options = {
+                devicePixelRatio: 3,
                 tooltips: {
                     enabled: true
+                },
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        fontSize: 20,
+                        fontStyle: 'bold',
+                        fontColor: '#333',
+                        boxWidth: 20,
+                        padding: 15
+                    }
                 },
                 plugins: {
                     datalabels: {
@@ -117,10 +123,18 @@
                             if (sum > 0) {
                                 percentage = (value*100 / sum).toFixed(0);
                             }
-                            return percentage+"%\n"+value+ " de "+ todaslasrespuestas.length;
+                            if (ispdf) {
+                                return percentage+"%";
+                            } else {
+                                return percentage+"%\n"+value+ " de "+ todaslasrespuestas.length;
+                            }
                         },
                         color: '#fff',
-                    }
+                        font: {
+                            size: 17,
+                            weight: 'bold'
+                        },
+                    },
                   },
               };
             

@@ -51,9 +51,27 @@ class Encuestapdf extends Component
             list($anchoOriginal, $altoOriginal) = getimagesize($rutaImagen);
 
             $altoImagen = ($altoOriginal / $anchoOriginal) * $anchoImagen;
-
+            $fuente = $fontMetrics->getFont("Roboto", "Helvetica");
             $x = ($anchoPagina - $anchoImagen) / 2;
             $y = ($altoPagina - $altoImagen) / 2;
+             
+            $texto = "Universidad Mayor de San Simón";
+
+            $fuente = $fontMetrics->getFont("sans-serif", "normal");
+
+            $canvas->set_opacity(0.5);
+
+            $canvas->text(
+                23,             // X
+                755,            // Y
+                $texto,
+                $fuente,
+                10.8,           // Tamaño
+                [0, 0, 0],      // Negro
+                0,              // Espaciado de palabras
+                0,              // Espaciado de caracteres
+                -90             // Rotación
+            );
 
             $canvas->set_opacity(0.12);
 

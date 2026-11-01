@@ -26,7 +26,7 @@ class Encuestapdf extends Component
         $html = '';
         if ($id2 == 0) {
             if ($indice) {
-                $encuetados_parte = Encuestados::orderBy('id', 'asc')->where('encuesta_id', $id)->limit(30)->offset(($indice - 1)*30)->get(); 
+                $encuetados_parte = Encuestados::orderBy('id', 'asc')->where('encuesta_id', $id)->limit(15)->offset(($indice - 1)*15)->get(); 
                 $encuestados = 'todas_parte_'.$indice;
                 foreach ($encuetados_parte as $encuestado) {
                     $view = view('livewire.encuestapdf', ['preguntas' => $preguntas, 'respuestas' => json_decode($encuestado->respuestas, true), 'encuesta' => $encuesta]);

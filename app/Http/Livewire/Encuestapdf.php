@@ -64,7 +64,7 @@ class Encuestapdf extends Component
 
             $canvas->set_opacity(0.7);
             $canvas->image($imagenUmss, 38, 0, 60, 70);
-            $canvas->image($imagenArqui, ($anchoPagina/2)-40, 0, 80, 70);
+            $canvas->image($imagenArqui, ($anchoPagina/2)-50, 0, 80, 70);
             $canvas->image($imagenDisenio, ($anchoPagina-120), 0, 80, 70);
 
             $canvas->text(

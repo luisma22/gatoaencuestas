@@ -16,7 +16,7 @@ class Encuestados extends Component
     public $final = 0;
     public function mount($id) {
        $this->encuesta_id = $id;
-       $this->cantidad = 15;
+       $this->cantidad = 10;
        $this->encuesta = Encuesta::orderBy('id', 'desc')->find($this->encuesta_id);
        if ($this->encuesta != null) {
            $this->encuestados = $this->encuesta->encuestados;
